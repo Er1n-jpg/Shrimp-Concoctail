@@ -64,11 +64,12 @@ stretch = 0
 
 [node name="Shrimp" type="Control" parent="World"]
 anchors_preset = 0
-offset_left = 1500.0
-offset_top = 110.0
-offset_right = 1860.0
-offset_bottom = 550.0
+offset_left = 1490.0
+offset_top = 260.0
+offset_right = 1874.0
+offset_bottom = 644.0
 mouse_filter = 2
+texture_filter = 1
 script = ExtResource("2_art")
 art_path = "res://assets/ui/shrimp"
 placeholder_color = Color(1, 0.55, 0.45, 1)

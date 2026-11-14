@@ -28,6 +28,11 @@ extends Control
 	set(value):
 		stretch = value
 		_refresh()
+## Mirror the image horizontally (e.g. to make a character face the other way).
+@export var flip_h: bool = false:
+	set(value):
+		flip_h = value
+		_refresh()
 
 ## The loaded image, or null while showing the placeholder.
 var texture: Texture2D
@@ -76,6 +81,7 @@ func _refresh() -> void:
 	texture = Art.load_texture(art_path)
 	_texture_rect.texture = texture
 	_texture_rect.stretch_mode = stretch
+	_texture_rect.flip_h = flip_h
 	_texture_rect.visible = texture != null
 	_placeholder.visible = texture == null
 	if texture != null:
