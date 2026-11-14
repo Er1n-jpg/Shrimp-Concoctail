@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IngredientData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ingredient_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "espresso"
+display_name = "Espresso"
+price = 4
+color = Color(0.22, 0.11, 0.05, 1)
+tags = PackedStringArray("caffeine")
+brew_time = 1.0

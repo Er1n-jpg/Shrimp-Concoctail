@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/cup.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/ui/art_slot.gd" id="2_art"]
+
+[node name="Cup" type="Control"]
+offset_right = 300.0
+offset_bottom = 300.0
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Liquid" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 260.0
+offset_bottom = 240.0
+mouse_filter = 2
+
+[node name="Art" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 250.0
+mouse_filter = 2
+script = ExtResource("2_art")
+art_path = "res://assets/ui/cup"
+placeholder_color = Color(0.85, 0.92, 1, 1)
+outline_only = true
+
+[node name="CostLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = 254.0
+offset_right = 320.0
+offset_bottom = 298.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1

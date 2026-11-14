@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CustomerData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/customer_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "dumped_guy"
+display_name = "Dumped Guy"
+order_lines = PackedStringArray("she left me. Ringtone Ball. Bud Darks. make it sweet. make me forget her name.", "pregaming the rest of my life. hit me with the strong stuff... and if i see ANYTHING green i'm leaving")
+required = PackedStringArray("ringtone_ball", "bud_darks")
+liked = PackedStringArray("ice_cream", "sugar")
+hated = PackedStringArray("matcha")
+rule = 2
+reviews = PackedStringArray("your drink had even fewer warning signs than our breakup... how could she do this to me?", "were we doomed from the start? was my love all a dream?", "plain. like my life after she's left me", "i should reach out to her. maybe she blocked me by accident.", "BRO BRO BRO BRO SHE TEXTED ME BACK nvm that's my mom")
+greyscale = true

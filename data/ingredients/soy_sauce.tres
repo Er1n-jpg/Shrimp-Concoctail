@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IngredientData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ingredient_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "soy_sauce"
+display_name = "Soy Sauce"
+price = 1
+color = Color(0.25, 0.12, 0.05, 1)
+tags = PackedStringArray("salty")
+brew_time = 0.0

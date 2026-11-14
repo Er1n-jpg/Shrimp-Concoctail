@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CustomerData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/customer_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "performative_guy"
+display_name = "Performative Guy"
+order_lines = PackedStringArray("matcha, but make it spicy. wasabi. only green things, obviously. my labubu is watching.", "could you make something green? like, everything green. i need more green in my life.")
+required = PackedStringArray("matcha", "wasabi")
+liked = PackedStringArray("pickle_juice")
+rule = 1
+reviews = PackedStringArray("i wish period cramps existed", "im going to get period cramps from this", "this drink doesn't belong in my tote bag", "oh man you definitely read feminist literature", "put more matcha! put more matcha! put more matcha!")

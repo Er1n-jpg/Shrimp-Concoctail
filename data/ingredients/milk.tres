@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IngredientData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ingredient_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "milk"
+display_name = "Milk"
+price = 2
+color = Color(0.98, 0.98, 0.94, 1)
+tags = PackedStringArray("dairy")
+brew_time = 0.0

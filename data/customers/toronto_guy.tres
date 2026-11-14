@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CustomerData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/customer_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "toronto_guy"
+display_name = "Toronto Guy"
+order_lines = PackedStringArray("ayo fam lemme get a diet coke wit cheetos in it, ya dun know", "crodie i'm mad thirsty. diet coke and cheetos fam. no wasabi ting")
+required = PackedStringArray("diet_coke", "cheetos")
+hated = PackedStringArray("wasabi")
+reviews = PackedStringArray("on my word fam you're such a WASTE YUTE my fam u got me mad cheesin with this you GERBERT", "nize this fam im telling my fam to NEVER come here u desops naun", "three threes my peepees", "two twos my word i'll come back fam", "ur welcome in the 6ix come to my crib anytime crodie")

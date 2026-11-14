@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CustomerData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/customer_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "project_not_working"
+display_name = "Project Not Working"
+order_lines = PackedStringArray("my code compiled once and never again. Monster. Bud Darks. NOW.", "it works on my machine but my machine is on fire. Monster and Bud Darks. extra shot of espresso if you love me")
+required = PackedStringArray("white_monster", "bud_darks")
+liked = PackedStringArray("espresso")
+reviews = PackedStringArray("maybe it's time to vibe code it all", "bomboclat", "ummmmmmm", "will you pray for my project thanks", "tyty i've just gained the energy to refactor my entire codebase and rewrite all of my functions one hour before the deadline.")

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IngredientData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ingredient_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "wasabi"
+display_name = "Wasabi"
+price = 3
+color = Color(0.55, 0.8, 0.25, 1)
+tags = PackedStringArray("green", "spicy")
+brew_time = 0.0
