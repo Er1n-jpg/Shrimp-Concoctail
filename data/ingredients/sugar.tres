@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IngredientData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ingredient_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "sugar"
+display_name = "Sugar"
+price = 1
+color = Color(0.97, 0.97, 0.97, 1)
+tags = PackedStringArray("sweet")
+brew_time = 0.0

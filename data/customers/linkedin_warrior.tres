@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CustomerData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/customer_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "linkedin_warrior"
+display_name = "LinkedIn Warrior"
+order_lines = PackedStringArray("I'm humbled to announce I ordered a flat white today. But here's the twist: soy sauce and ice cream. Agree?", "Unpopular opinion: espresso + milk is just a flat white. Add soy sauce and ice cream and it's a STARTUP. Thoughts?")
+required = PackedStringArray("espresso", "milk", "soy_sauce", "ice_cream")
+hated = PackedStringArray("bud_darks")
+reviews = PackedStringArray("This isn't getting me any coffee chats.", "you gotta use ai b2b saas way more this is terrible", "you're barely worth the amount of likes i got", "Connect with me please!", "Do you take internships? 🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌🙌")

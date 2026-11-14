@@ -1,0 +1,59 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/order_bubble.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/ui/art_slot.gd" id="2_art"]
+
+[node name="OrderBubble" type="Control"]
+offset_right = 860.0
+offset_bottom = 330.0
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_art")
+art_path = "res://assets/ui/speech_bubble"
+placeholder_color = Color(0.97, 0.95, 0.9, 1)
+stretch = 0
+
+[node name="Text" type="Label" parent="."]
+offset_left = 36.0
+offset_top = 22.0
+offset_right = 824.0
+offset_bottom = 204.0
+theme_override_colors/font_color = Color(0.1, 0.1, 0.12, 1)
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="TicketTitle" type="Label" parent="."]
+offset_left = 36.0
+offset_top = 218.0
+offset_right = 146.0
+offset_bottom = 298.0
+theme_override_colors/font_color = Color(0.35, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 22
+text = "Order:"
+vertical_alignment = 1
+
+[node name="Ticket" type="HBoxContainer" parent="."]
+offset_left = 146.0
+offset_top = 220.0
+offset_right = 640.0
+offset_bottom = 296.0
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="AskButton" type="Button" parent="."]
+offset_left = 650.0
+offset_top = 226.0
+offset_right = 824.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 22
+text = "Ask?  [Q]"
