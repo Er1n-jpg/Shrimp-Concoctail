@@ -6,7 +6,7 @@
 script = ExtResource("1_script")
 id = "dumped_guy"
 display_name = "Dumped Guy"
-required = PackedStringArray("ringtone_ball", "bud_darks", "sugar")
+required = PackedStringArray("ringtone_ball", "bud_darks")
 liked = PackedStringArray("ice_cream")
 hated = PackedStringArray("matcha")
 rule = 2
