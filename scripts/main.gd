@@ -16,6 +16,7 @@ var _last_customer_id := ""
 ## customer id -> GameState.served when they last showed up (for cooldowns)
 var _last_seen: Dictionary = {}
 var _toast_tween: Tween
+var _greyscale_tween: Tween
 
 @onready var _world: Control = $World
 @onready var _customer: CustomerView = $World/Customer
@@ -258,13 +259,17 @@ func _on_inflation_changed(level: int) -> void:
 
 
 func _set_greyscale(on: bool) -> void:
+	# Cancel any fade still running, or a finishing fade-out could hide the
+	# greyscale right after the next customer turned it on.
+	if _greyscale_tween != null:
+		_greyscale_tween.kill()
 	var mat := _greyscale.material as ShaderMaterial
 	if on:
 		_greyscale.visible = true
-	var tween := create_tween()
-	tween.tween_property(mat, "shader_parameter/amount", 1.0 if on else 0.0, 0.5)
+	_greyscale_tween = create_tween()
+	_greyscale_tween.tween_property(mat, "shader_parameter/amount", 1.0 if on else 0.0, 0.5)
 	if not on:
-		tween.tween_callback(func() -> void: _greyscale.visible = false)
+		_greyscale_tween.tween_callback(func() -> void: _greyscale.visible = false)
 
 
 func _show_toast(text: String) -> void:

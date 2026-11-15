@@ -38,7 +38,7 @@ func set_ticket(required: PackedStringArray, revealed: int, hidden: bool) -> voi
 	for i in required.size():
 		var slot := ArtSlot.new()
 		slot.custom_minimum_size = TICKET_ICON_SIZE
-		slot.placeholder_font_size = 18
+		slot.placeholder_font_size = 15
 		var ing := Database.ingredient(required[i])
 		if (hidden and i >= revealed) or ing == null:
 			slot.set_art("", HIDDEN_COLOR, "?")
