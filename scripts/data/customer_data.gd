@@ -19,11 +19,11 @@ enum Rule {
 @export_group("Recipe")
 ## Ingredient ids that must be in the drink (3). Each visit's conversation hints
 ## at 2 of them; the hint lines are in data/dialogue/<id>.txt.
-@export var required: PackedStringArray = []
+@export var required: PackedStringArray = PackedStringArray()
 ## Ingredient ids that give a small bonus.
-@export var liked: PackedStringArray = []
+@export var liked: PackedStringArray = PackedStringArray()
 ## Ingredient ids that cost a star.
-@export var hated: PackedStringArray = []
+@export var hated: PackedStringArray = PackedStringArray()
 @export var rule: Rule = Rule.NONE
 ## Vibecoder: the recipe is random and hidden until you ask.
 @export var hidden_recipe: bool = false
@@ -32,7 +32,7 @@ enum Rule {
 
 @export_group("Reviews")
 ## reviews[0] is the 1-star review ... reviews[4] is the 5-star review.
-@export var reviews: PackedStringArray = []
+@export var reviews: PackedStringArray = PackedStringArray()
 
 @export_group("Spawning")
 ## Higher = shows up more often.
