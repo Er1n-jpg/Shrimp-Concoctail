@@ -763,9 +763,11 @@ func _resolve(stars: int, timed_out: bool) -> void:
 
 	_phase = Phase.REVIEW
 	_customer.react(stars)
-	var detail := "Too slow!  (cup cost $%d)" % cup_cost if timed_out else \
-		"x%s rating   x%s streak   (cup cost $%d)" % [_fmt(result.star_mult), _fmt(result.streak_mult), cup_cost]
-	var review_text := _customer_data.reviews[stars - 1] if _customer_data.reviews.size() >= stars else ""
+	var review_text := ""
+	if not _customer_data.reviews.is_empty():
+		# Round to nearest whole star, convert to 0-based index, and clamp to valid array bounds
+		var index := clampi(roundi(stars) - 1, 0, _customer_data.reviews.size() - 1)
+		review_text = _customer_data.reviews[index]
 	_review.show_review(_customer_data.display_name, stars, review_text, payout, detail)
 	if payout > 0:
 		Sfx.play("cash")
