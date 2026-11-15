@@ -2,47 +2,57 @@
 
 [ext_resource type="Script" path="res://scripts/ui/dispenser.gd" id="1_script"]
 [ext_resource type="Script" path="res://scripts/ui/art_slot.gd" id="2_art"]
+[ext_resource type="Script" path="res://scripts/ui/soft_shadow.gd" id="3_shadow"]
 
 [node name="Dispenser" type="Button"]
-custom_minimum_size = Vector2(160, 200)
-offset_right = 160.0
-offset_bottom = 200.0
+custom_minimum_size = Vector2(240, 300)
+offset_right = 240.0
+offset_bottom = 300.0
 mouse_default_cursor_shape = 2
 script = ExtResource("1_script")
 
+[node name="Shadow" type="Control" parent="."]
+offset_left = 30.0
+offset_top = 194.0
+offset_right = 210.0
+offset_bottom = 236.0
+mouse_filter = 2
+script = ExtResource("3_shadow")
+shadow_color = Color(0.02, 0.01, 0.005, 0.52)
+
 [node name="Art" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 16.0
-offset_right = 144.0
-offset_bottom = 128.0
+offset_left = 8.0
+offset_right = 232.0
+offset_bottom = 224.0
 mouse_filter = 2
 script = ExtResource("2_art")
 
 [node name="NameLabel" type="Label" parent="."]
-offset_top = 127.0
-offset_right = 160.0
-offset_bottom = 156.0
+offset_top = 222.0
+offset_right = 240.0
+offset_bottom = 252.0
 theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 26
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PriceLabel" type="Label" parent="."]
-offset_top = 154.0
-offset_right = 160.0
-offset_bottom = 200.0
+offset_top = 252.0
+offset_right = 240.0
+offset_bottom = 292.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 44
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
 text = "$0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BrewBar" type="ProgressBar" parent="."]
-offset_left = 14.0
-offset_top = 52.0
-offset_right = 146.0
-offset_bottom = 76.0
+offset_left = 32.0
+offset_top = 30.0
+offset_right = 208.0
+offset_bottom = 54.0
 mouse_filter = 2
 show_percentage = false

@@ -1,6 +1,6 @@
 class_name PickupButton
 extends Button
-## A clickable thing on the bar that isn't a priced ingredient (the cup stack, the ice chest).
+## A clickable thing on the bar that isn't a priced ingredient (the cup stack).
 ## Shows its art (stacked `stack_count` times) with a label under it.
 
 @export var art_path: String = ""
@@ -40,12 +40,24 @@ func _ready() -> void:
 		slot.set_art(art_path, placeholder_color, placeholder_text)
 		move_child(slot, 0)  # lower cups drawn last so they sit in front
 
+	# Soft contact shadow under the bottom item.
+	var shadow := SoftShadow.new()
+	shadow.mouse_filter = MOUSE_FILTER_IGNORE
+	shadow.shadow_color = Color(0.02, 0.01, 0.005, 0.52)
+	add_child(shadow)
+	var shadow_size := Vector2(art_size.x * 0.72, 30.0)
+	shadow.size = shadow_size
+	shadow.position = Vector2(
+		(size.x - shadow_size.x) / 2.0,
+		size.y - label_h - art_size.y + art_size.y * 0.82)
+	move_child(shadow, 0)
+
 	_label = Label.new()
 	_label.text = label_text
 	_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_label.add_theme_font_size_override("font_size", 26)
+	_label.add_theme_font_size_override("font_size", 22)
 	_label.add_theme_color_override("font_outline_color", Palette.INK)
-	_label.add_theme_constant_override("outline_size", 6)
+	_label.add_theme_constant_override("outline_size", 5)
 	_label.mouse_filter = MOUSE_FILTER_IGNORE
 	add_child(_label)
 	_label.position = Vector2(0, size.y - label_h)

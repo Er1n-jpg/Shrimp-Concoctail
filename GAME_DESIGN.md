@@ -23,14 +23,14 @@ Pinned on screen while at the bar:
 - **Cup tray** (bottom-left): the cup, icons of what's in it, cup cost vs. 5★ payout, and Shake / Serve / Trash.
 
 Steps:
-1. **Grab a cup** from the stack (free, one per customer). Ingredients are locked until you do.
+1. **Drag a cup** out of the stack down to the holder (free, one per customer). Ingredients are locked until you do.
 2. **Pick ingredients.** Each click pours one (paid immediately); the item flies into the cup. Optional free **ice** from the ice chest (looks only, not scored).
 3. **Shake:** hold SHAKE (or S) for 1s. The cup wiggles with a shaker lid and splashes, then the liquid blends into the mix color. Adding anything after shaking means shaking again.
 4. **Serve.** Only allowed once shaken.
 
 The cup shows fill level (empty / 35% / 65% / full), ice, and a sugar rim (sugar in a full drink), with the liquid tinted to the last thing poured, then to the blended mix once shaken.
 
-**Keyboard:** Space/Enter = next line / serve / skip review, Tab = skip talk, C = grab cup, S (hold) = shake, X/Backspace = trash, Q = ask (Vibecoder), A/D or arrows = scroll.
+**Keyboard:** Space/Enter = next line / serve / skip review, Tab = skip talk, S (hold) = shake, X/Backspace = trash, Q = ask (Vibecoder), A/D or arrows = scroll.
 
 **Trash** dumps the cup's contents (the money is lost) but keeps the cup.
 
