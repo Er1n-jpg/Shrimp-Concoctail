@@ -166,9 +166,9 @@ func _input(event: InputEvent) -> void:
 			if cup.present and cup.get_global_rect().has_point(click.position):
 				_holding = true
 				_last_mouse = click.position
-				# Vibrate as soon as the cup is held; wiggling then fills the bar.
+				# Holding the cup shakes it over time. Mouse movement can speed it up.
 				if cup.has_drink() and not cup.shaken:
-					_begin_shake(false)
+					_begin_shake(true)
 				get_viewport().set_input_as_handled()
 		elif _holding:
 			_holding = false
@@ -179,10 +179,10 @@ func _input(event: InputEvent) -> void:
 
 	var motion := event as InputEventMouseMotion
 	if motion != null and _holding:
-		var dx := motion.position.x - _last_mouse.x
+		var movement := motion.position.distance_to(_last_mouse)
 		_last_mouse = motion.position
-		if absf(dx) > 0.35 and cup.present and cup.has_drink() and not cup.shaken:
-			_wiggle(absf(dx))
+		if movement > 0.35 and cup.present and cup.has_drink() and not cup.shaken:
+			_wiggle(movement)
 		get_viewport().set_input_as_handled()
 
 
