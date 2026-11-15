@@ -67,6 +67,7 @@ The same images show up at 64×64 in the cup tray (what you've poured).
 | `bar_counter.png` | Bar-view counter the ingredients stand on (stretched) | 3840×440 |
 | `shrimp.png` | The shrimp bartender | 512×512, right side, bottom behind the counter |
 | `coffee_machine.png` | Coffee & matcha maker, between the two spoons. Shown at 4×; if the art changes, the group head / screen / drip tray spots are constants at the top of `scripts/ui/coffee_machine.gd` | 64×64 |
+| `logo.png` | Game logo on the sign in the top-left of the talk view (replaces the neon "SHRIMP COCKTAIL" text). Drawn at the biggest whole-number scale that fits, currently 3× | 128×64 |
 | `speech_bubble.png` | Customer's dialogue bubble + review card. 9-sliced at 5× (corners + tail stay crisp, edges stretch); tail goes bottom-left toward the customer | 860×330 (172×66 art px) |
 | `shrimp_box.png` | Shrimp's dialogue box + the order ticket. 9-sliced at 5× | 860×240 and 470×215 |
 | `hud_bar.png` | Top stats bar background (stretched) | 1920×64 |
