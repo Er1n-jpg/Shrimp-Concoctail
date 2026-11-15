@@ -11,7 +11,8 @@ extends Resource
 @export var color: Color = Color.WHITE
 ## Used by customer rules: green, alcohol, caffeine, dairy, sweet, salty, spicy.
 @export var tags: PackedStringArray = []
-## Seconds it takes to brew before it lands in the cup (0 = instant).
+## Above 0 = it has to be dragged into the coffee machine, which takes this many
+## seconds to brew it before it lands in the cup (0 = click to pour, instant).
 @export var brew_time: float = 0.0
 
 

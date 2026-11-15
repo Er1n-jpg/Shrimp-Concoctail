@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c0r4bhukfbwkl"]
+[gd_scene load_steps=33 format=3 uid="uid://c0r4bhukfbwkl"]
 
 [ext_resource type="Script" uid="uid://c6ga5kbuh80wq" path="res://scripts/main.gd" id="1_main"]
 [ext_resource type="Script" uid="uid://ggjkq1f4r1v4" path="res://scripts/ui/art_slot.gd" id="2_art"]
@@ -30,6 +30,7 @@
 [ext_resource type="Resource" path="res://data/ingredients/sugar.tres" id="ing_sugar"]
 [ext_resource type="Resource" path="res://data/ingredients/wasabi.tres" id="ing_wasabi"]
 [ext_resource type="Resource" path="res://data/ingredients/white_monster.tres" id="ing_white_monster"]
+[ext_resource type="Script" path="res://scripts/ui/coffee_machine.gd" id="21_machine"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_greyscale"]
 shader = ExtResource("10_greyscale")
@@ -223,35 +224,18 @@ offset_top = 384.0
 offset_right = 2434.0
 offset_bottom = 640.0
 mouse_filter = 2
-script = ExtResource("2_art")
-art_path = "res://assets/ui/coffee_machine"
-placeholder_color = Color(0.369, 0.325, 0.294, 1)
-placeholder_border_color = Color(0.051, 0.016, 0.008, 1)
-placeholder_corner_radius = 20
-placeholder_shadow = 10
+script = ExtResource("21_machine")
 
 [node name="CupStack" type="Button" parent="World/BarView"]
 layout_mode = 0
-offset_left = 60.0
+offset_left = 175.0
 offset_top = 410.0
-offset_right = 270.0
+offset_right = 385.0
 offset_bottom = 640.0
 script = ExtResource("15_pickup")
 art_path = "res://assets/cup/stack"
 label_text = "Cups (free)"
 outline_color = Color(1, 1, 1, 1)
-
-[node name="IceChest" type="Button" parent="World/BarView"]
-layout_mode = 0
-offset_left = 300.0
-offset_top = 440.0
-offset_right = 480.0
-offset_bottom = 640.0
-script = ExtResource("15_pickup")
-art_path = "res://assets/ui/ice_chest"
-placeholder_color = Color(0.973, 0.843, 0.843, 1)
-placeholder_text = "ICE"
-label_text = "Ice (free)"
 
 [node name="Shelf" type="Control" parent="World/BarView"]
 layout_mode = 1
