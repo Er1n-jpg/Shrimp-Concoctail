@@ -6,7 +6,7 @@
 script = ExtResource("1_script")
 id = "toronto_guy"
 display_name = "Toronto Guy"
-conversations = PackedStringArray("ayo fam\nshrimp: hi! what can i get you?\nlemme get the sugar-free cola wit them orange cheesy puffs crushed in, ya dun know", "crodie i'm mad thirsty\nshrimp: say less. what'll it be?\nthe black zero-sugar soda ting. put the cheesy orange snacks in it. no green spicy ting or i'm gone")
-required = PackedStringArray("diet_coke", "cheetos")
+conversations = PackedStringArray("ayo fam\nshrimp: hi! what can i get you?\nlemme get the sugar-free cola wit a scoop of the frozen sweet ting floatin on top, ya dun know", "crodie i'm mad thirsty\nshrimp: say less. what'll it be?\nthe black zero-sugar soda ting. drop a cold creamy scoop in it, make it a float. no green spicy ting or i'm gone")
+required = PackedStringArray("diet_coke", "ice_cream")
 hated = PackedStringArray("wasabi")
 reviews = PackedStringArray("on my word fam you're such a WASTE YUTE my fam u got me mad cheesin with this you GERBERT", "nize this fam im telling my fam to NEVER come here u desops naun", "three threes my peepees", "two twos my word i'll come back fam", "ur welcome in the 6ix come to my crib anytime crodie")

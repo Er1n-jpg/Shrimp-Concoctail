@@ -18,7 +18,6 @@ Until a file exists, the game shows a colored placeholder box in its place.
 | `bud_darks.png` | Bud Darks |
 | `sugar.png` | Sugar |
 | `wasabi.png` | Wasabi |
-| `cheetos.png` | Cheetos |
 | `mayo.png` | Mayo |
 | `espresso.png` | Espresso (sits on the coffee machine) |
 | `matcha.png` | Matcha (sits on the coffee machine) |

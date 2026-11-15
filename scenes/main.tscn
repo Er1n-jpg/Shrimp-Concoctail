@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c0r4bhukfbwkl"]
+[gd_scene load_steps=32 format=3 uid="uid://c0r4bhukfbwkl"]
 
 [ext_resource type="Script" uid="uid://c6ga5kbuh80wq" path="res://scripts/main.gd" id="1_main"]
 [ext_resource type="Script" uid="uid://ggjkq1f4r1v4" path="res://scripts/ui/art_slot.gd" id="2_art"]
@@ -17,7 +17,6 @@
 [ext_resource type="Script" uid="uid://b1bip84evftjm" path="res://scripts/ui/pickup_button.gd" id="15_pickup"]
 [ext_resource type="Script" uid="uid://do62epcpdywva" path="res://scripts/ui/bar_scroller.gd" id="16_scroller"]
 [ext_resource type="Resource" path="res://data/ingredients/bud_darks.tres" id="ing_bud_darks"]
-[ext_resource type="Resource" path="res://data/ingredients/cheetos.tres" id="ing_cheetos"]
 [ext_resource type="Resource" path="res://data/ingredients/diet_coke.tres" id="ing_diet_coke"]
 [ext_resource type="Resource" path="res://data/ingredients/espresso.tres" id="ing_espresso"]
 [ext_resource type="Resource" path="res://data/ingredients/ice_cream.tres" id="ing_ice_cream"]
@@ -298,33 +297,25 @@ ingredient = ExtResource("ing_bud_darks")
 
 [node name="Sugar" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
 layout_mode = 0
-offset_left = 1360.0
+offset_left = 1450.0
 offset_top = 440.0
-offset_right = 1520.0
+offset_right = 1610.0
 offset_bottom = 640.0
 ingredient = ExtResource("ing_sugar")
 
 [node name="Wasabi" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
 layout_mode = 0
-offset_left = 1540.0
+offset_left = 1630.0
 offset_top = 440.0
-offset_right = 1700.0
+offset_right = 1790.0
 offset_bottom = 640.0
 ingredient = ExtResource("ing_wasabi")
 
-[node name="Cheetos" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-layout_mode = 0
-offset_left = 1720.0
-offset_top = 440.0
-offset_right = 1880.0
-offset_bottom = 640.0
-ingredient = ExtResource("ing_cheetos")
-
 [node name="Mayo" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
 layout_mode = 0
-offset_left = 1900.0
+offset_left = 1810.0
 offset_top = 440.0
-offset_right = 2060.0
+offset_right = 1970.0
 offset_bottom = 640.0
 ingredient = ExtResource("ing_mayo")
 

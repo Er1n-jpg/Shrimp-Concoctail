@@ -96,7 +96,6 @@ Every **5 customers served**:
 | Diet Coke | $2 | caffeine |
 | Milk | $2 | dairy |
 | Mayo | $2 | salty |
-| Cheetos | $2 | salty |
 | Bud Darks | $3 | alcohol |
 | Ice cream | $3 | sweet, dairy |
 | Wasabi | $3 | green, spicy |
@@ -110,7 +109,7 @@ Every **5 customers served**:
 
 ### Counter layout (left → right, from the sketch)
 
-Cup → ice chest (cans: White Monster, Diet Coke, Ringtone Ball, Bud Darks) → jars (Sugar, Wasabi, Cheetos, Mayo) → Coffee & Matcha Maker → Milk, Protein Shake → Ice cream → Soy Sauce, Pickle Juice
+Cup → ice chest (cans: White Monster, Diet Coke, Ringtone Ball, Bud Darks) → jars (Sugar, Wasabi, Mayo) → Coffee & Matcha Maker → Milk, Protein Shake → Ice cream → Soy Sauce, Pickle Juice
 
 ## Scoring (`DrinkJudge`)
 
@@ -137,7 +136,7 @@ The star rating picks the review line and sets the multiplier.
 | **Performative Guy** (Matcha Labubu) | Matcha, Wasabi | Pickle Juice | — | **Green ingredients only**: −1 per non-green ingredient |
 | **LinkedIn Warrior** | Espresso, Milk, Soy Sauce, Ice cream | — | Bud Darks | Orders by reciting a LinkedIn post |
 | **Vibecoder** | 2–3 random (hidden) | — | — | Order: "Hey Claude what should I drink" → "what?" → "Give me a drink." The **Ask clarifying question** button reveals one ingredient and costs 3s of patience |
-| **Toronto Guy** | Diet Coke, Cheetos | — | Wasabi | Slang order |
+| **Toronto Guy** | Diet Coke, Ice cream | — | Wasabi | Slang order |
 | **Hensen Juang** | Espresso, Protein Shake, Soy Sauce | — | — | **Rare** (at most once every 10 customers). Base price ×2 |
 
 **Spawning:** weighted random, never the same customer twice in a row.
