@@ -1,6 +1,6 @@
 class_name PickupButton
 extends Button
-## A clickable thing on the bar that isn't a priced ingredient (the cup stack, the ice chest).
+## A clickable thing on the bar that isn't a priced ingredient (the cup stack).
 ## Shows its art (stacked `stack_count` times) with a label under it.
 
 @export var art_path: String = ""

@@ -8,6 +8,7 @@ extends Control
 ## Keys: Space/Enter = next line / serve / skip review, Tab = skip the talk,
 ## C = grab a cup, S (hold) = shake, X/Backspace = trash, Q = ask (Vibecoder),
 ## A/D or arrow keys = move along the bar.
+## Espresso and Matcha: drag the spoon into the coffee machine to brew a shot.
 
 enum Phase { ARRIVING, TALKING, TO_BAR, BAR, TO_TALK, REVIEW, LEAVING, OVER }
 
@@ -23,8 +24,6 @@ const REVIEW_MIN_TIME := 1.3
 const REVIEW_MAX_TIME := 3.5
 const REVIEW_TIME_PER_CHAR := 0.025
 const SHRIMP_NAME := "Shrimp"
-const ICE_LABEL_OFF := "Ice (free)"
-const ICE_LABEL_ON := "Ice: ON"
 
 var _phase := Phase.ARRIVING
 var _customer_data: CustomerData
@@ -37,6 +36,10 @@ var _line_index := 0
 var _what_they_said := ""
 var _scroll_x := 0.0
 var _dragging := false
+## The Espresso/Matcha spoon being dragged to the coffee machine, and its ghost.
+var _held: Dispenser = null
+var _held_ghost: Control
+var _held_from := Vector2.ZERO
 var _review_timer: SceneTreeTimer
 var _last_customer_id := ""
 ## customer id -> GameState.served when they last showed up (for cooldowns)
@@ -53,7 +56,7 @@ var _bar_ui_tween: Tween
 @onready var _review: ReviewPopup = $World/TalkView/ReviewPopup
 @onready var _talk_hint: Label = $World/TalkView/TalkHint
 @onready var _cup_stack: PickupButton = $World/BarView/CupStack
-@onready var _ice_chest: PickupButton = $World/BarView/IceChest
+@onready var _machine: CoffeeMachine = $World/BarView/CoffeeMachine
 @onready var _fx_world: Control = $World/FxWorld
 @onready var _bar_ui: Control = $UI/BarUI
 @onready var _ticket: OrderTicket = $UI/BarUI/Ticket
@@ -71,8 +74,9 @@ func _ready() -> void:
 		var dispenser := node as Dispenser
 		dispenser.pour_requested.connect(_on_pour_requested)
 		dispenser.poured.connect(_on_poured)
+		dispenser.drag_started.connect(_pick_up_spoon)
+	_machine.brewed.connect(_on_brewed)
 	_cup_stack.pressed.connect(_grab_cup)
-	_ice_chest.pressed.connect(_toggle_ice)
 	_tray.serve_pressed.connect(_serve)
 	_tray.trash_pressed.connect(_trash)
 	_tray.blocked.connect(_show_toast)
@@ -99,6 +103,14 @@ func _ready() -> void:
 # --- Input ---
 
 func _input(event: InputEvent) -> void:
+	# Carrying a spoon: it follows the mouse until you let go.
+	if _held != null:
+		if event is InputEventMouseMotion:
+			_move_held_spoon()
+		var release := event as InputEventMouseButton
+		if release != null and release.button_index == MOUSE_BUTTON_LEFT and not release.pressed:
+			_release_spoon()
+
 	# Mouse wheel scrolls the bar even when the pointer is over an ingredient.
 	var wheel := event as InputEventMouseButton
 	if wheel == null or not wheel.pressed or _phase != Phase.BAR:
@@ -183,6 +195,8 @@ func _process(delta: float) -> void:
 	_scroll_x = clampf(_scroll_x, 0.0, _max_scroll())
 	_camera.position = Vector2(_scroll_x, BAR_Y)
 	_scroller.ratio = _scroll_x / _max_scroll()
+	if _held != null:
+		_move_held_spoon()
 
 
 func _max_scroll() -> float:
@@ -207,7 +221,6 @@ func _next_customer() -> void:
 	_what_they_said = "  ".join(said)
 	_tray.reset()
 	_tray.max_payout = GameState.max_payout(_customer_data)
-	_ice_chest.set_label(ICE_LABEL_OFF)
 	_set_greyscale(_customer_data.greyscale)
 	Sfx.play("customer_in")
 
@@ -289,40 +302,38 @@ func _grab_cup() -> void:
 	_fly(Art.load_texture(Art.ROOT + "cup/empty"), Palette.BLUSH, _to_screen(_cup_stack.art_center()), 128.0)
 
 
-func _toggle_ice() -> void:
+func _on_pour_requested(dispenser: Dispenser) -> void:
 	if _phase != Phase.BAR:
 		return
-	if not _tray.cup.present:
-		_show_toast("Grab a cup first!  [C]")
+	var top := dispenser.global_position + Vector2(dispenser.size.x / 2.0, 0.0)
+	var price := _pay_for(dispenser, top)
+	if price < 0:
 		return
-	_tray.cup.set_ice(not _tray.cup.ice)
-	_ice_chest.set_label(ICE_LABEL_ON if _tray.cup.ice else ICE_LABEL_OFF)
-	Sfx.play("ice")
-
-
-func _on_pour_requested(dispenser: Dispenser) -> void:
-	if _phase != Phase.BAR or dispenser.is_brewing():
-		return
-	var cup := _tray.cup
-	if not cup.present:
-		dispenser.deny()
-		_show_toast("Grab a cup first!  [C]")
-		return
-	if cup.space_left() <= 0:
-		dispenser.deny()
-		_show_toast("Cup's full!")
-		return
-	var price := dispenser.price()
-	if not GameState.spend(price):
-		dispenser.deny()
-		_show_toast("Can't afford that!")
-		return
-	cup.reserve(price, dispenser.ingredient.brew_time > 0.0)
+	_tray.cup.reserve(price, false)
 	Sfx.play("pour")
-	_float_text(_fx_world, "-$%d" % price, dispenser.global_position + Vector2(dispenser.size.x / 2.0, 0.0), Palette.LOSS)
 	var art := Art.load_texture(Art.ingredient(dispenser.ingredient.id))
 	_fly(art, dispenser.ingredient.color, _to_screen(dispenser.global_position + Vector2(dispenser.size.x / 2.0, 64.0)), 72.0)
 	dispenser.dispense()
+
+
+## Checks there's a cup with room and enough money, then pays (with a "-$" pop at
+## `at`, world space). Returns the price paid, or -1 after telling the player why not.
+func _pay_for(dispenser: Dispenser, at: Vector2) -> int:
+	var cup := _tray.cup
+	var price := dispenser.price()
+	var problem := ""
+	if not cup.present:
+		problem = "Grab a cup first!  [C]"
+	elif cup.space_left() <= 0:
+		problem = "Cup's full!"
+	elif not GameState.spend(price):
+		problem = "Can't afford that!"
+	if problem != "":
+		dispenser.deny()
+		_show_toast(problem)
+		return -1
+	_float_text(_fx_world, "-$%d" % price, at, Palette.LOSS)
+	return price
 
 
 func _on_poured(ingredient: IngredientData) -> void:
@@ -336,7 +347,6 @@ func _trash() -> void:
 	if _tray.cup.cost > 0:
 		_float_text(_fx_ui, "Wasted $%d" % _tray.cup.cost, _tray_cup_center() + Vector2(0, -120), Palette.LOSS)
 	_tray.cup.clear()
-	_ice_chest.set_label(ICE_LABEL_OFF)
 	Sfx.play("trash")
 	# Nothing left to make a drink with: run's over.
 	if GameState.is_broke():
@@ -367,8 +377,93 @@ func _on_patience_ran_out() -> void:
 
 
 func _cancel_brews() -> void:
-	for node in get_tree().get_nodes_in_group("dispensers"):
-		(node as Dispenser).cancel_brew()
+	_drop_held_spoon()
+	var dispenser := _machine.brewing()
+	_machine.cancel()
+	if dispenser != null:
+		dispenser.set_away(false)
+
+
+# --- Coffee machine: drag the Espresso/Matcha spoon in to brew a shot ---
+
+func _pick_up_spoon(dispenser: Dispenser) -> void:
+	if _phase != Phase.BAR or _held != null:
+		return
+	if _machine.brewing() == dispenser:
+		dispenser.deny()
+		_show_toast("Still brewing!")
+		return
+	_held = dispenser
+	_held_from = _fx_world.get_global_mouse_position()
+	dispenser.set_away(true)
+	var art := Art.load_texture(Art.ingredient(dispenser.ingredient.id))
+	_held_ghost = _make_item(art, dispenser.ingredient.color, 128.0)
+	_held_ghost.rotation = -0.25
+	_fx_world.add_child(_held_ghost)
+	_move_held_spoon()
+	Sfx.play("spoon")
+
+
+func _move_held_spoon() -> void:
+	var mouse := _fx_world.get_global_mouse_position()
+	_held_ghost.global_position = mouse - _held_ghost.size / 2.0
+	_machine.set_drag_state(true, _machine.has_world_point(mouse))
+
+
+func _release_spoon() -> void:
+	var dispenser := _held
+	var ghost := _held_ghost
+	_held = null
+	_held_ghost = null
+	_machine.set_drag_state(false, false)
+	var mouse := _fx_world.get_global_mouse_position()
+	if _phase == Phase.BAR and _machine.has_world_point(mouse) and _start_brew(dispenser):
+		ghost.queue_free()
+		return
+	if _phase == Phase.BAR and mouse.distance_to(_held_from) < 12.0:
+		_show_toast("Drag it into the coffee machine!")
+	# Back on the counter it goes.
+	var home := dispenser.global_position + Vector2(dispenser.size.x / 2.0, 64.0) - ghost.size / 2.0
+	var tween := ghost.create_tween().set_parallel()
+	tween.tween_property(ghost, "global_position", home, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(ghost, "rotation", 0.0, 0.18)
+	tween.chain().tween_callback(func() -> void:
+		ghost.queue_free()
+		if _held != dispenser and _machine.brewing() != dispenser:
+			dispenser.set_away(false))
+
+
+## Let go of the spoon without brewing (the customer left mid-drag).
+func _drop_held_spoon() -> void:
+	if _held == null:
+		return
+	_held.set_away(false)
+	_held_ghost.queue_free()
+	_held = null
+	_held_ghost = null
+	_machine.set_drag_state(false, false)
+
+
+func _start_brew(dispenser: Dispenser) -> bool:
+	if _machine.is_busy():
+		_show_toast("The machine's busy!")
+		Sfx.play("denied")
+		return false
+	var price := _pay_for(dispenser, _machine.global_position + Vector2(_machine.size.x / 2.0, 0.0))
+	if price < 0:
+		return false
+	_tray.cup.reserve(price, true)
+	_machine.brew(dispenser)
+	return true
+
+
+func _on_brewed(dispenser: Dispenser) -> void:
+	dispenser.set_away(false)
+	if _phase != Phase.BAR:
+		return
+	var ingredient := dispenser.ingredient
+	_fly(null, ingredient.color, _to_screen(_machine.spout_global_position()), 44.0)
+	_tray.cup.add(ingredient, true)
 
 
 # --- Review ---
@@ -423,6 +518,7 @@ func _skip_review() -> void:
 
 func _end_run() -> void:
 	_phase = Phase.OVER
+	_cancel_brews()
 	_ticket.stop()
 	_tray.active = false
 	_set_bar_ui(false)
@@ -529,6 +625,18 @@ func _tray_cup_center() -> Vector2:
 
 ## A picked-up item flies from `from` (screen space) into the cup.
 func _fly(texture: Texture2D, color: Color, from: Vector2, item_size: float) -> void:
+	var item := _make_item(texture, color, item_size)
+	_fx_ui.add_child(item)
+	item.position = from - item.size / 2.0
+	var target := _tray_cup_center() - item.size / 2.0
+	var tween := item.create_tween().set_parallel()
+	tween.tween_property(item, "position", target, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_property(item, "scale", Vector2(0.5, 0.5), 0.35)
+	tween.chain().tween_callback(item.queue_free)
+
+
+## An ingredient image (or a block of its color if there's no art yet) for effects.
+func _make_item(texture: Texture2D, color: Color, item_size: float) -> Control:
 	var item: Control
 	if texture != null:
 		var rect := TextureRect.new()
@@ -543,13 +651,7 @@ func _fly(texture: Texture2D, color: Color, from: Vector2, item_size: float) -> 
 	item.size = Vector2(item_size, item_size)
 	item.pivot_offset = item.size / 2.0
 	item.mouse_filter = MOUSE_FILTER_IGNORE
-	_fx_ui.add_child(item)
-	item.position = from - item.size / 2.0
-	var target := _tray_cup_center() - item.size / 2.0
-	var tween := item.create_tween().set_parallel()
-	tween.tween_property(item, "position", target, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	tween.tween_property(item, "scale", Vector2(0.5, 0.5), 0.35)
-	tween.chain().tween_callback(item.queue_free)
+	return item
 
 
 func _float_text(parent: Control, text: String, at: Vector2, color: Color) -> void:

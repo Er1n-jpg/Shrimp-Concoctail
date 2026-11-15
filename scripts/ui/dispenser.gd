@@ -1,11 +1,15 @@
 class_name Dispenser
 extends Button
 ## One ingredient on the counter. Click to pour.
+## Ingredients that brew (brew_time > 0: Espresso, Matcha) can't be clicked: you
+## pick up the spoon and drag it into the coffee machine instead.
 ## Set `ingredient` in the inspector; art comes from res://assets/ingredients/<id>.png
 
 signal pour_requested(dispenser: Dispenser)
-## Emitted when the ingredient actually lands in the cup (after brewing, if it brews).
+## Emitted when the ingredient lands in the cup.
 signal poured(ingredient: IngredientData)
+## Brewed ingredients only: the spoon was grabbed (mouse down).
+signal drag_started(dispenser: Dispenser)
 
 const AFFORDABLE_COLOR := Palette.MONEY
 const BROKE_COLOR := Palette.LOSS
@@ -16,23 +20,24 @@ const BROKE_COLOR := Palette.LOSS
 		_refresh()
 
 var _built := false
-var _brewing := false
-var _brew_tween: Tween
 
 @onready var _art: ArtSlot = $Art
 @onready var _name_label: Label = $NameLabel
 @onready var _price_label: Label = $PriceLabel
-@onready var _brew_bar: ProgressBar = $BrewBar
 
 
 func _ready() -> void:
 	add_to_group("dispensers")
 	focus_mode = FOCUS_NONE
 	_apply_styles()
-	pressed.connect(func() -> void: pour_requested.emit(self))
+	pressed.connect(func() -> void:
+		if not needs_machine():
+			pour_requested.emit(self))
+	button_down.connect(func() -> void:
+		if needs_machine():
+			drag_started.emit(self))
 	GameState.money_changed.connect(func(_money: int) -> void: _update_price())
 	GameState.inflation_changed.connect(_on_inflation_changed)
-	_brew_bar.visible = false
 	_built = true
 	_refresh()
 
@@ -41,29 +46,22 @@ func price() -> int:
 	return GameState.ingredient_price(ingredient)
 
 
-func is_brewing() -> bool:
-	return _brewing
+## Brewed ingredients go through the coffee machine (drag the spoon in).
+func needs_machine() -> bool:
+	return ingredient != null and ingredient.brew_time > 0.0
 
 
 ## Called by Main once the pour is paid for.
 func dispense() -> void:
 	_bounce()
-	if ingredient.brew_time <= 0.0:
-		poured.emit(ingredient)
-		return
-	_brewing = true
-	_brew_bar.value = 0.0
-	_brew_bar.visible = true
-	_brew_tween = create_tween()
-	_brew_tween.tween_property(_brew_bar, "value", 100.0, ingredient.brew_time)
-	_brew_tween.tween_callback(_finish_brew)
+	poured.emit(ingredient)
 
 
-func cancel_brew() -> void:
-	if _brew_tween != null:
-		_brew_tween.kill()
-	_brewing = false
-	_brew_bar.visible = false
+## The spoon is off the counter (being dragged, or in the machine): fade the art.
+func set_away(away: bool) -> void:
+	_art.modulate.a = 0.25 if away else 1.0
+	if not away:
+		_bounce()
 
 
 ## Can't pour (broke or cup full): little shake.
@@ -74,13 +72,6 @@ func deny() -> void:
 		tween.tween_property(_art, "position:x", _art_home_x() + offset, 0.035)
 
 
-func _finish_brew() -> void:
-	_brewing = false
-	_brew_bar.visible = false
-	Sfx.play("brew_done")
-	poured.emit(ingredient)
-
-
 func _refresh() -> void:
 	if not _built or ingredient == null:
 		return
@@ -88,6 +79,7 @@ func _refresh() -> void:
 	_art.placeholder_border_color = Palette.TAUPE
 	_art.placeholder_shadow = 6
 	_name_label.text = ingredient.display_name
+	mouse_default_cursor_shape = CURSOR_DRAG if needs_machine() else CURSOR_POINTING_HAND
 	tooltip_text = "%s (%s)" % [ingredient.display_name, ", ".join(ingredient.tags)]
 	_update_price()
 

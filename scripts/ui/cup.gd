@@ -1,7 +1,7 @@
 class_name Cup
 extends Control
 ## The drink in the cup tray, drawn with the cup sprites in res://assets/cup/:
-##   empty, 35, 65, full  (+ optional _ice and _sugar_rim variants, e.g. full_ice_sugar_rim)
+##   empty, 35, 65, full  (+ optional _sugar_rim variants, e.g. full_sugar_rim)
 ## Missing variants fall back to the closest one. The grey liquid in the art is tinted
 ## to the drink's color by shaders/liquid_tint.gdshader: the last thing poured until
 ## it's shaken, then the blended mix.
@@ -23,7 +23,6 @@ var layers: Array[IngredientData] = []
 var cost: int = 0
 ## Pours that are paid for but still brewing.
 var pending: int = 0
-var ice: bool = false
 var shaken: bool = false
 
 var _tint_tween: Tween
@@ -81,13 +80,7 @@ func clear() -> void:
 	layers.clear()
 	cost = 0
 	pending = 0
-	ice = false
 	shaken = false
-	_changed()
-
-
-func set_ice(on: bool) -> void:
-	ice = on
 	_changed()
 
 
@@ -186,12 +179,8 @@ func _pick_texture() -> Texture2D:
 	var has_sugar := contents().has("sugar")
 	var candidates: Array[String] = []
 	if level != "empty":
-		if ice and has_sugar:
-			candidates.append(level + "_ice_sugar_rim")
 		if has_sugar:
 			candidates.append(level + "_sugar_rim")
-		if ice:
-			candidates.append(level + "_ice")
 	candidates.append(level)
 	for name in candidates:
 		var tex := Art.load_texture(Art.ROOT + "cup/" + name)
