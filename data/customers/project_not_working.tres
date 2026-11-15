@@ -6,7 +6,7 @@
 script = ExtResource("1_script")
 id = "project_not_working"
 display_name = "Project Not Working"
-order_lines = PackedStringArray("my code compiled once and never again. Monster. Bud Darks. NOW.", "it works on my machine but my machine is on fire. Monster and Bud Darks. extra shot of espresso if you love me")
+conversations = PackedStringArray("my code compiled once and never again.\nshrimp: have you tried turning it off and on again?\nI HAVE. Monster. Bud Darks. NOW.", "it works on my machine but my machine is on fire.\nshrimp: that sounds like a hardware problem.\nMonster and Bud Darks. extra shot of espresso if you love me.")
 required = PackedStringArray("white_monster", "bud_darks")
 liked = PackedStringArray("espresso")
 reviews = PackedStringArray("maybe it's time to vibe code it all", "bomboclat", "ummmmmmm", "will you pray for my project thanks", "tyty i've just gained the energy to refactor my entire codebase and rewrite all of my functions one hour before the deadline.")

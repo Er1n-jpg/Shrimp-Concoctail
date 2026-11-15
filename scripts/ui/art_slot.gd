@@ -50,6 +50,17 @@ extends Control
 	set(value):
 		flip_h = value
 		_refresh()
+## Outline drawn around the image (fully transparent = no outline). Handy for
+## dark-outlined sprites sitting on a dark background.
+@export var outline_color: Color = Color(0, 0, 0, 0):
+	set(value):
+		outline_color = value
+		_refresh()
+## Outline thickness in the image's own pixels.
+@export var outline_width: float = 1.0:
+	set(value):
+		outline_width = value
+		_refresh()
 ## 9-slice the image (for boxes/bubbles): border sizes in source pixels as
 ## (left, top, right, bottom). Corners stay intact, edges and middle stretch.
 ## All zero = off (image is just stretched/fit using `stretch`).
@@ -62,6 +73,8 @@ extends Control
 	set(value):
 		pixel_scale = value
 		_refresh()
+
+const OUTLINE_SHADER := preload("res://shaders/outline.gdshader")
 
 ## The loaded image, or null while showing the placeholder.
 var texture: Texture2D
@@ -105,6 +118,14 @@ func _ready() -> void:
 	_refresh()
 
 
+func _outline_material() -> ShaderMaterial:
+	var mat := ShaderMaterial.new()
+	mat.shader = OUTLINE_SHADER
+	mat.set_shader_parameter("outline_color", outline_color)
+	mat.set_shader_parameter("width", outline_width)
+	return mat
+
+
 func _layout_nine_patch() -> void:
 	if not _built:
 		return
@@ -127,6 +148,7 @@ func _refresh() -> void:
 	_texture_rect.texture = texture
 	_texture_rect.stretch_mode = stretch
 	_texture_rect.flip_h = flip_h
+	_texture_rect.material = _outline_material() if outline_color.a > 0.0 else null
 	_texture_rect.visible = texture != null and not sliced
 	_nine_patch.texture = texture
 	_nine_patch.patch_margin_left = nine_patch_margins.x

@@ -1,0 +1,76 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/order_ticket.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/ui/art_slot.gd" id="2_art"]
+
+[node name="OrderTicket" type="Control"]
+offset_right = 470.0
+offset_bottom = 215.0
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_art")
+art_path = "res://assets/ui/shrimp_box"
+placeholder_color = Color(1, 0.973, 0.847, 1)
+placeholder_border_color = Color(0.176, 0.059, 0.016, 1)
+placeholder_border_width = 5
+placeholder_corner_radius = 18
+placeholder_shadow = 10
+stretch = 0
+nine_patch_margins = Vector4i(5, 5, 5, 5)
+pixel_scale = 5
+
+[node name="Title" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 12.0
+offset_right = 446.0
+offset_bottom = 50.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.176, 0.059, 0.016, 1)
+theme_override_font_sizes/font_size = 31
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Icons" type="HBoxContainer" parent="."]
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 320.0
+offset_bottom = 120.0
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="AskButton" type="Button" parent="."]
+offset_left = 326.0
+offset_top = 58.0
+offset_right = 446.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 26
+text = "Ask [Q]"
+
+[node name="PatienceLabel" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 128.0
+offset_right = 446.0
+offset_bottom = 158.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.369, 0.325, 0.294, 1)
+theme_override_font_sizes/font_size = 24
+text = "Patience"
+vertical_alignment = 1
+
+[node name="Patience" type="ProgressBar" parent="."]
+offset_left = 24.0
+offset_top = 160.0
+offset_right = 446.0
+offset_bottom = 186.0
+mouse_filter = 2
+value = 100.0
+show_percentage = false

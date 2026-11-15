@@ -6,7 +6,7 @@
 script = ExtResource("1_script")
 id = "hensen_juang"
 display_name = "Hensen Juang"
-order_lines = PackedStringArray("One drink. Espresso, protein shake, soy sauce. Accelerated.", "The more you buy, the more you save. Espresso. Protein shake. Soy sauce.")
+conversations = PackedStringArray("One drink.\nshrimp: what kind?\nEspresso, protein shake, soy sauce. Accelerated.", "The more you buy, the more you save.\nshrimp: that's not how a bar works.\nEspresso. Protein shake. Soy sauce.")
 required = PackedStringArray("espresso", "protein_shake", "soy_sauce")
 reviews = PackedStringArray("this drink is like the nvidia stock", "why couldn't my wife be a bit more open?", "not bad, fellow employee", "man your government sends great spies", "You should be my 5th affair ;)")
 spawn_weight = 0.4

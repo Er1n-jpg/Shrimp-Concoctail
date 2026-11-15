@@ -6,7 +6,7 @@
 script = ExtResource("1_script")
 id = "performative_guy"
 display_name = "Performative Guy"
-order_lines = PackedStringArray("matcha, but make it spicy. wasabi. only green things, obviously. my labubu is watching.", "could you make something green? like, everything green. i need more green in my life.")
+conversations = PackedStringArray("matcha, but make it spicy.\nshrimp: spicy... matcha?\nwasabi. only green things, obviously. my labubu is watching.", "i need more green in my life.\nshrimp: have you considered touching grass?\nmatcha and wasabi. everything green. it's for my letterboxd.")
 required = PackedStringArray("matcha", "wasabi")
 liked = PackedStringArray("pickle_juice")
 rule = 1

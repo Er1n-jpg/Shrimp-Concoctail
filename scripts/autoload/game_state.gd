@@ -20,9 +20,10 @@ const STREAK_STEP := 0.25
 const CUSTOMERS_PER_INFLATION := 5
 const INFLATION_INGREDIENT_STEP := 1
 const INFLATION_DRINK_STEP := 1
-const START_PATIENCE := 15.0
+## Patience only runs while you're at the bar (grabbing the cup, scrolling, shaking).
+const START_PATIENCE := 24.0
 const PATIENCE_STEP := 1.0
-const MIN_PATIENCE := 7.0
+const MIN_PATIENCE := 12.0
 ## Seconds of patience the Vibecoder loses each time you ask a clarifying question.
 const ASK_PATIENCE_COST := 3.0
 

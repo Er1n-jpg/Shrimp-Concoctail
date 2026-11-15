@@ -6,7 +6,7 @@
 script = ExtResource("1_script")
 id = "toronto_guy"
 display_name = "Toronto Guy"
-order_lines = PackedStringArray("ayo fam lemme get a diet coke wit cheetos in it, ya dun know", "crodie i'm mad thirsty. diet coke and cheetos fam. no wasabi ting")
+conversations = PackedStringArray("ayo fam\nshrimp: hi! what can i get you?\nlemme get a diet coke wit cheetos in it, ya dun know", "crodie i'm mad thirsty\nshrimp: say less. what'll it be?\ndiet coke and cheetos fam. no wasabi ting")
 required = PackedStringArray("diet_coke", "cheetos")
 hated = PackedStringArray("wasabi")
 reviews = PackedStringArray("on my word fam you're such a WASTE YUTE my fam u got me mad cheesin with this you GERBERT", "nize this fam im telling my fam to NEVER come here u desops naun", "three threes my peepees", "two twos my word i'll come back fam", "ur welcome in the 6ix come to my crib anytime crodie")

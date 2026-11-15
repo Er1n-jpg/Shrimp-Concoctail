@@ -7,15 +7,32 @@ You're a shrimp bartender at a hackathon. Devs order drinks and you throw togeth
 ## Core Loop
 
 ```
-Customer arrives → says order → you click ingredients into the cup → serve
-→ 1–5★ rating + review → paid (base price × star multiplier) → next customer
+TALK    customer walks up, they and the shrimp chat (no bar on screen)
+  ↓  camera pans down (0.6s)
+BAR     grab a cup → pick ingredients along the scrollable bar → hold SHAKE → SERVE
+  ↓  camera pans back up
+REVIEW  customer reacts, 1–5★ review, paid (base price × star multiplier) → next customer
 ```
 
-- Everything is on one screen: customer and order bubble on top, counter below. No camera pans, breaks or summary screens.
-- The order bubble shows the funny line plus an **order ticket** with icons for the required ingredients. Liked and hated ingredients stay hidden and are hinted at in the dialogue.
-- The cup is already on the counter. **One click = one pour.**
-- **Keyboard:** Space/Enter = serve (or skip the review), X/Backspace = trash, Q = ask the Vibecoder.
-- **Trash button** dumps the cup. The money spent on it is lost.
+**Talk view** (top): the customer on the left talks in the tailed bubble, and the shrimp answers in its own box. Click or Space advances, Tab skips straight to the bar. Each customer has a few conversations (picked at random); the last line is the order.
+
+**Bar view** (below): 3840px wide (2 screens), scrolls with A/D, arrow keys, mouse wheel, dragging empty space, or resting the mouse at a screen edge. A scroll bar shows where you are. Left to right: cup stack + ice chest → cans → jars/bowls → coffee & matcha machine → dairy → sauces, with **distractor liquor bottles** on the back shelf.
+
+Pinned on screen while at the bar:
+- **Order ticket** (top-right): recipe icons, the Vibecoder's Ask button, and the **patience bar**. Patience only runs at the bar.
+- **Cup tray** (bottom-left): the cup, icons of what's in it, cup cost vs. 5★ payout, and Shake / Serve / Trash.
+
+Steps:
+1. **Grab a cup** from the stack (free, one per customer). Ingredients are locked until you do.
+2. **Pick ingredients.** Each click pours one (paid immediately); the item flies into the cup. Optional free **ice** from the ice chest (looks only, not scored).
+3. **Shake:** hold SHAKE (or S) for 1s. The cup wiggles with a shaker lid and splashes, then the liquid blends into the mix color. Adding anything after shaking means shaking again.
+4. **Serve.** Only allowed once shaken.
+
+The cup shows fill level (empty / 35% / 65% / full), ice, and a sugar rim (sugar in a full drink), with the liquid tinted to the last thing poured, then to the blended mix once shaken.
+
+**Keyboard:** Space/Enter = next line / serve / skip review, Tab = skip talk, C = grab cup, S (hold) = shake, X/Backspace = trash, Q = ask (Vibecoder), A/D or arrows = scroll.
+
+**Trash** dumps the cup's contents (the money is lost) but keeps the cup.
 
 ## Lose Condition
 
@@ -66,7 +83,7 @@ Every **5 customers served**:
 
 ## Patience
 
-- Starts at **15s**, drops 1s per inflation step, never below **7s**.
+- Only runs while you're at the bar. Starts at **24s**, drops 1s per inflation step, never below **12s**.
 - If patience runs out, the customer leaves a **1★** review and pays nothing. The money already poured is gone.
 
 ## Ingredients
@@ -125,9 +142,9 @@ The star rating picks the review line and sets the multiplier.
 
 **Spawning:** weighted random, never the same customer twice in a row.
 
-### Order lines
+### Conversations
 
-TODO: the placeholder lines in `data/customers/*.tres` are first drafts. Replace them with your own (2–3 per customer).
+Each customer has 2 conversations in `data/customers/*.tres` (`conversations`), one line per row; rows starting with `shrimp:` are the shrimp's lines. The shrimp lines are first drafts. Edit freely.
 
 ### Reviews
 
@@ -193,16 +210,19 @@ TODO: the placeholder lines in `data/customers/*.tres` are first drafts. Replace
 
 **Data (`.tres`, edit in the inspector)**
 - `IngredientData`: id, name, price, liquid color, tags, brew time
-- `CustomerData`: name, order lines, required/liked/hated, rule, hidden recipe, 5 reviews, spawn weight, price multiplier, cooldown, greyscale
+- `CustomerData`: name, conversations, required/liked/hated, rule, hidden recipe, 5 reviews, spawn weight, price multiplier, cooldown, greyscale
 
 **Scenes (`scenes/`)**
 - `main.tscn` + `scripts/main.gd`: the customer loop, pours, serving, reviews, broke check
 - `hud.tscn`: top stats bar
 - `customer.tscn`: portrait, name, patience bar
-- `order_bubble.tscn`: order line + ingredient ticket + Ask button
+- `speech_bubble.tscn` / `shrimp_box.tscn`: dialogue boxes (typewriter text)
+- `order_ticket.tscn`: pinned recipe ticket + Ask button + patience bar
+- `cup_tray.tscn`: pinned cup + contents + Shake/Serve/Trash
+- `pickup_button.gd`: cup stack and ice chest
 - `review_popup.tscn`: stars, review line, payout breakdown
-- `cup.tscn`: liquid layers + cup cost
-- `dispenser.tscn`: one clickable ingredient with its price tag (15 placed under `World/Shelf` in main)
+- `cup.tscn`: fill-level cup sprite with tinted liquid, ice, sugar rim, shake animation
+- `dispenser.tscn`: one clickable ingredient with its price tag (15 ingredients + 6 distractors under `World/BarView/Shelf` in main)
 - `game_over.tscn`: survived count, best, retry
 - Greyscale: a CanvasLayer in main with `shaders/greyscale.gdshader`
 

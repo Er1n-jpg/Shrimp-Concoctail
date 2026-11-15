@@ -24,6 +24,15 @@ func ingredient(id: String) -> IngredientData:
 	return ingredients.get(id)
 
 
+## Ingredient ids that can appear in a random (Vibecoder) recipe: no distractors.
+func recipe_ingredient_ids() -> Array:
+	var ids := []
+	for ing: IngredientData in ingredients.values():
+		if not ing.has_tag("distractor"):
+			ids.append(ing.id)
+	return ids
+
+
 func cheapest_base_price() -> int:
 	var cheapest := 999999
 	for ing: IngredientData in ingredients.values():
@@ -51,5 +60,5 @@ func _check_data() -> void:
 					push_warning("Customer '%s' uses unknown ingredient '%s'" % [c.id, id])
 		if c.reviews.size() != 5:
 			push_warning("Customer '%s' should have exactly 5 reviews (has %d)" % [c.id, c.reviews.size()])
-		if c.order_lines.is_empty():
-			push_warning("Customer '%s' has no order lines" % c.id)
+		if c.conversations.is_empty():
+			push_warning("Customer '%s' has no conversations" % c.id)

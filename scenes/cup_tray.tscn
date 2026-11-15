@@ -1,0 +1,108 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/cup_tray.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/cup.tscn" id="2_cup"]
+[ext_resource type="Script" path="res://scripts/ui/art_slot.gd" id="3_art"]
+
+[node name="CupTray" type="Control"]
+offset_right = 550.0
+offset_bottom = 430.0
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Slot" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 44.0
+offset_top = 34.0
+offset_right = 260.0
+offset_bottom = 270.0
+mouse_filter = 2
+script = ExtResource("3_art")
+placeholder_color = Color(0.671, 0.631, 0.573, 0.6)
+placeholder_text = "no cup"
+placeholder_font_size = 30
+outline_only = true
+
+[node name="Cup" parent="." instance=ExtResource("2_cup")]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 280.0
+offset_bottom = 280.0
+
+[node name="Icons" type="GridContainer" parent="."]
+offset_left = 300.0
+offset_top = 24.0
+offset_right = 530.0
+offset_bottom = 164.0
+mouse_filter = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="Hint" type="Label" parent="."]
+offset_left = 296.0
+offset_top = 168.0
+offset_right = 534.0
+offset_bottom = 282.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 1)
+theme_override_font_sizes/font_size = 29
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ShakeBar" type="ProgressBar" parent="."]
+offset_left = 34.0
+offset_top = 286.0
+offset_right = 270.0
+offset_bottom = 304.0
+mouse_filter = 2
+show_percentage = false
+
+[node name="CostLabel" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 306.0
+offset_right = 534.0
+offset_bottom = 342.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+offset_left = 16.0
+offset_top = 346.0
+offset_right = 534.0
+offset_bottom = 414.0
+theme_override_constants/separation = 10
+
+[node name="Shake" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 26
+text = "SHAKE [S]"
+
+[node name="Serve" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ServeButton"
+theme_override_font_sizes/font_size = 26
+text = "SERVE [Spc]"
+
+[node name="Trash" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_type_variation = &"TrashButton"
+theme_override_font_sizes/font_size = 26
+text = "TRASH [X]"

@@ -3,12 +3,12 @@
 Drop files here with these **exact names** and the game picks them up automatically. You don't need to edit any code or scene.
 Until a file exists, the game shows a colored placeholder box in its place.
 
-- Images: `.png`, `.webp`, `.jpg` or `.svg` (transparent PNG recommended)
+- Images: `.png`, `.webp`, `.jpg` or `.svg` (transparent PNG recommended). Everything uses pixel-sharp filtering.
 - Sounds: `.ogg`, `.wav` or `.mp3`
-- Sizes below are how big each image shows on the 1920×1080 screen. Make art at that size or 2× that size.
+- Sizes below are how big each image shows on the 1920×1080 screen. 64×64 pixel art works great for items and characters.
 - If an image doesn't show up, focus the Godot editor once so it imports the new file.
 
-## `ingredients/` (15 files, about 140×120, shown with the name + price under it)
+## `ingredients/` (64×64 art, shown at 2× = 128px with name + price under it)
 
 | File | Ingredient |
 |---|---|
@@ -28,9 +28,12 @@ Until a file exists, the game shows a colored placeholder box in its place.
 | `soy_sauce.png` | Soy Sauce |
 | `pickle_juice.png` | Pickle Juice |
 
-The same images also show up small (76×76) on the order ticket.
+**Distractor bottles** on the back shelf (pickable, cost money, nobody ordered them):
+`mystery_gin.png`, `cheap_vodka.png`, `expired_rum.png`, `tequila.png`, `absinthe.png`, `red_wine.png`
 
-## `customers/` (about 360×390, portrait facing right)
+The same images show up at 64×64 on the order ticket and in the cup tray.
+
+## `customers/` (64×64 art, shown at 8× = 512px in the talk view)
 
 | File | Customer |
 |---|---|
@@ -44,17 +47,35 @@ The same images also show up small (76×76) on the order ticket.
 
 **Optional reaction swaps:** add `<name>_happy.png` (shown after a 4–5 star drink) and/or `<name>_mad.png` (shown after 1–2 stars), e.g. `toronto_guy_mad.png`.
 
+## `cup/` (64×64 art, shown at 4× = 256px in the cup tray)
+
+| File | When |
+|---|---|
+| `stack.png` | The stack of cups on the bar you grab from (drawn with a white outline) |
+| `empty.png` | Cup grabbed, nothing in it |
+| `35.png` | 1–2 pours |
+| `65.png` | 3–4 pours |
+| `full.png` | 5–6 pours |
+| `<level>_ice.png` | Ice added, e.g. `65_ice.png` (falls back to the plain level if missing) |
+| `<level>_sugar_rim.png` | Sugar in the drink, e.g. `full_sugar_rim.png` |
+| `<level>_ice_sugar_rim.png` | Both |
+| `shaker_lid.png` | Optional: the cap shown while shaking (about 36×18 art px) |
+
+**Draw the liquid in neutral grey** (like the current cups). The game tints any grey pixel to the drink's color and keeps your shading. The outline and white glass stay as drawn.
+
 ## `ui/`
 
 | File | What | Shown at |
 |---|---|---|
-| `background.png` | Bar / hackathon backdrop (stretched to fill). Until then, a code-drawn back bar with shelves, lamps and a neon sign shows instead | 1920×1080 |
-| `counter.png` | Counter the ingredients sit on (stretched). Until then, a code-drawn wooden counter shows. **The shrimp stands behind it, so the top edge must be solid** | 1920×520, bottom of screen |
-| `shrimp.png` | The shrimp bartender (pixel-sharp filtering, so pixel art stays crisp) | 384×384, right side, bottom hidden behind the counter |
-| `cup.png` | The cup. **Make the body see-through:** liquid layers draw behind it | 300×250 |
-| `coffee_machine.png` | Coffee & matcha maker behind Espresso/Matcha (stretched) | 370×232 |
-| `speech_bubble.png` | Customer's order bubble. 9-sliced at 5× (corners + tail stay crisp, edges stretch); tail goes bottom-left toward the customer | 860×330 (172×66 art px) |
-| `review_card.png` | Review card shown after serving. 9-sliced at 5× | 860×330 (172×66 art px) |
+| `background.png` | Talk-view backdrop (stretched). Until then, a code-drawn back bar with shelves, lamps and a neon sign | 1920×1080 |
+| `counter.png` | Talk-view counter in front of the shrimp (stretched). **The shrimp stands behind it, so the top edge must be solid** | 1920×320, bottom of screen |
+| `bar_background.png` | Bar-view back wall (stretched). Until then, code-drawn shelves and lamps | 3840×1080 (2 screens wide, scrolls) |
+| `bar_counter.png` | Bar-view counter the ingredients stand on (stretched) | 3840×440 |
+| `shrimp.png` | The shrimp bartender | 512×512, right side, bottom behind the counter |
+| `coffee_machine.png` | Coffee & matcha maker behind Espresso/Matcha (stretched) | 380×232 |
+| `ice_chest.png` | Ice chest on the bar (click for free ice) | 128×128 |
+| `speech_bubble.png` | Customer's dialogue bubble + review card. 9-sliced at 5× (corners + tail stay crisp, edges stretch); tail goes bottom-left toward the customer | 860×330 (172×66 art px) |
+| `shrimp_box.png` | Shrimp's dialogue box + the order ticket. 9-sliced at 5× | 860×240 and 470×215 |
 | `hud_bar.png` | Top stats bar background (stretched) | 1920×64 |
 
 ## `fonts/`
@@ -69,15 +90,20 @@ The same images also show up small (76×76) on the order ticket.
 
 | File | Plays when |
 |---|---|
+| `customer_in.ogg` | A new customer walks up |
+| `talk.ogg` / `talk_shrimp.ogg` | A customer / shrimp line appears |
+| `whoosh.ogg` | Camera pans between the talk view and the bar |
+| `cup.ogg` | You grab a cup |
+| `ice.ogg` | You toggle ice |
 | `pour.ogg` | You pour an ingredient |
 | `brew_done.ogg` | Espresso/Matcha finishes brewing |
-| `denied.ogg` | Can't pour (broke or cup full) |
+| `shake.ogg` / `shake_done.ogg` | You start shaking / the drink is mixed |
+| `denied.ogg` | Can't pour (no cup, broke, or cup full) |
 | `trash.ogg` | You dump the cup |
 | `serve.ogg` | You serve a drink |
 | `cash.ogg` | Customer pays |
 | `bad.ogg` | 1-star drink |
 | `ask.ogg` | You ask the Vibecoder a clarifying question |
-| `customer_in.ogg` | A new customer walks up |
 | `inflation.ogg` | Prices go up |
 | `game_over.ogg` | You go broke |
 
@@ -87,4 +113,5 @@ The palette lives in `scripts/palette.gd`; button and panel styles live in `ui/t
 
 ## Moving things around
 
-Positions live in `scenes/main.tscn`. Open it in Godot and drag any node (ingredients are under `World/Shelf`) to line them up with your counter art.
+Positions live in `scenes/main.tscn`. Open it in Godot and drag nodes around:
+the talk view is `World/TalkView`, the bar is `World/BarView` (ingredients and shelf bottles are under `World/BarView/Shelf`).

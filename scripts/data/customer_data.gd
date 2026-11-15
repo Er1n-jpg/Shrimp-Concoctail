@@ -14,8 +14,10 @@ enum Rule {
 
 @export var id: String = ""
 @export var display_name: String = ""
-## One is picked at random when they order. Use \n for multi-line dialogue.
-@export var order_lines: PackedStringArray = []
+## One conversation is picked at random each visit. Each entry is a whole
+## conversation, one line per row (\n). Rows starting with "shrimp:" are said by
+## the shrimp; every other row is said by the customer. End on the order.
+@export var conversations: PackedStringArray = []
 
 @export_group("Recipe")
 ## Ingredient ids that must be in the drink.

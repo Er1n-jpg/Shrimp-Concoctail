@@ -8,6 +8,8 @@ extends Control
 @export var lamp_xs: PackedFloat32Array = PackedFloat32Array([70.0, 565.0, 1472.0])
 @export var shelf_ys: PackedFloat32Array = PackedFloat32Array([250.0, 395.0, 540.0])
 @export var bottle_seed: int = 7
+## Only the top N shelves get code-drawn bottles (-1 = all). Lower shelves stay clear for real items.
+@export var bottle_shelves: int = -1
 
 const BOTTLE_COLORS := [Palette.MAROON, Palette.GREEN, Palette.RUST, Palette.ORANGE, Palette.TAUPE, Palette.SLATE, Palette.PINK, Palette.BUTTER]
 
@@ -43,10 +45,13 @@ func _draw_shelves() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = bottle_seed
 	var prev_y := 70.0
+	var shelf_index := 0
 	for shelf_y in shelf_ys:
 		var max_h := minf(shelf_y - prev_y - 14.0, 100.0)
 		var x := 14.0 + rng.randf_range(0.0, 20.0)
-		while x < size.x - 30.0:
+		var with_bottles := bottle_shelves < 0 or shelf_index < bottle_shelves
+		shelf_index += 1
+		while with_bottles and x < size.x - 30.0:
 			var w := rng.randf_range(18.0, 32.0)
 			var h := rng.randf_range(max_h * 0.45, max_h)
 			var color: Color = BOTTLE_COLORS[rng.randi() % BOTTLE_COLORS.size()]

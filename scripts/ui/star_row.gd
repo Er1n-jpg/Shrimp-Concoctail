@@ -6,7 +6,7 @@ extends Control
 	set(value):
 		stars = value
 		queue_redraw()
-@export var filled_color: Color = Palette.BUTTER
+@export var filled_color: Color = Palette.ORANGE
 @export var empty_color: Color = Color(Palette.TAUPE, 0.35)
 @export var outline_color: Color = Palette.DARK_BROWN
 

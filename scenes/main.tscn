@@ -3,15 +3,19 @@
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/ui/art_slot.gd" id="2_art"]
 [ext_resource type="PackedScene" path="res://scenes/customer.tscn" id="3_customer"]
-[ext_resource type="PackedScene" path="res://scenes/order_bubble.tscn" id="4_bubble"]
-[ext_resource type="PackedScene" path="res://scenes/review_popup.tscn" id="5_review"]
-[ext_resource type="PackedScene" path="res://scenes/cup.tscn" id="6_cup"]
+[ext_resource type="PackedScene" path="res://scenes/speech_bubble.tscn" id="4_bubble"]
+[ext_resource type="PackedScene" path="res://scenes/shrimp_box.tscn" id="5_shrimpbox"]
+[ext_resource type="PackedScene" path="res://scenes/review_popup.tscn" id="6_review"]
 [ext_resource type="PackedScene" path="res://scenes/dispenser.tscn" id="7_dispenser"]
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="8_hud"]
 [ext_resource type="PackedScene" path="res://scenes/game_over.tscn" id="9_game_over"]
 [ext_resource type="Shader" path="res://shaders/greyscale.gdshader" id="10_greyscale"]
 [ext_resource type="Script" path="res://scripts/ui/bar_backdrop.gd" id="11_backdrop"]
 [ext_resource type="Script" path="res://scripts/ui/counter_backdrop.gd" id="12_counter"]
+[ext_resource type="PackedScene" path="res://scenes/order_ticket.tscn" id="13_ticket"]
+[ext_resource type="PackedScene" path="res://scenes/cup_tray.tscn" id="14_tray"]
+[ext_resource type="Script" path="res://scripts/ui/pickup_button.gd" id="15_pickup"]
+[ext_resource type="Script" path="res://scripts/ui/bar_scroller.gd" id="16_scroller"]
 [ext_resource type="Resource" path="res://data/ingredients/white_monster.tres" id="ing_white_monster"]
 [ext_resource type="Resource" path="res://data/ingredients/diet_coke.tres" id="ing_diet_coke"]
 [ext_resource type="Resource" path="res://data/ingredients/ringtone_ball.tres" id="ing_ringtone_ball"]
@@ -27,6 +31,12 @@
 [ext_resource type="Resource" path="res://data/ingredients/ice_cream.tres" id="ing_ice_cream"]
 [ext_resource type="Resource" path="res://data/ingredients/soy_sauce.tres" id="ing_soy_sauce"]
 [ext_resource type="Resource" path="res://data/ingredients/pickle_juice.tres" id="ing_pickle_juice"]
+[ext_resource type="Resource" path="res://data/ingredients/mystery_gin.tres" id="ing_mystery_gin"]
+[ext_resource type="Resource" path="res://data/ingredients/cheap_vodka.tres" id="ing_cheap_vodka"]
+[ext_resource type="Resource" path="res://data/ingredients/expired_rum.tres" id="ing_expired_rum"]
+[ext_resource type="Resource" path="res://data/ingredients/tequila.tres" id="ing_tequila"]
+[ext_resource type="Resource" path="res://data/ingredients/absinthe.tres" id="ing_absinthe"]
+[ext_resource type="Resource" path="res://data/ingredients/red_wine.tres" id="ing_red_wine"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_greyscale"]
 shader = ExtResource("10_greyscale")
@@ -42,16 +52,24 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_main")
 
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+
 [node name="World" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 3840.0
+offset_bottom = 2160.0
 mouse_filter = 2
 
-[node name="Backdrop" type="Control" parent="World"]
+[node name="TalkView" type="Control" parent="World"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Backdrop" type="Control" parent="World/TalkView"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,8 +78,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("11_backdrop")
+neon_rect = Rect2(70, 96, 400, 150)
+shelf_ys = PackedFloat32Array(330, 520, 710)
+lamp_xs = PackedFloat32Array(560, 960, 1340)
 
-[node name="Background" type="Control" parent="World"]
+[node name="Background" type="Control" parent="World/TalkView"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,32 +96,31 @@ placeholder_color = Color(0, 0, 0, 0)
 placeholder_border_width = 0
 stretch = 0
 
-[node name="Shrimp" type="Control" parent="World"]
+[node name="Shrimp" type="Control" parent="World/TalkView"]
 anchors_preset = 0
-offset_left = 1490.0
-offset_top = 260.0
-offset_right = 1874.0
-offset_bottom = 644.0
+offset_left = 1360.0
+offset_top = 360.0
+offset_right = 1872.0
+offset_bottom = 872.0
 mouse_filter = 2
-texture_filter = 1
 script = ExtResource("2_art")
 art_path = "res://assets/ui/shrimp"
-placeholder_color = Color(1, 0.55, 0.45, 1)
-placeholder_text = "Shrimp bartender
-(shrimp.png)"
-placeholder_font_size = 39
+placeholder_color = Color(0.918, 0.416, 0.208, 1)
+placeholder_text = "Shrimp"
 
-[node name="CounterBackdrop" type="Control" parent="World"]
+[node name="CounterBackdrop" type="Control" parent="World/TalkView"]
 anchors_preset = 0
-offset_top = 560.0
+offset_left = 0.0
+offset_top = 760.0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
 script = ExtResource("12_counter")
 
-[node name="Counter" type="Control" parent="World"]
+[node name="Counter" type="Control" parent="World/TalkView"]
 anchors_preset = 0
-offset_top = 560.0
+offset_left = 0.0
+offset_top = 760.0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
@@ -110,12 +130,108 @@ placeholder_color = Color(0, 0, 0, 0)
 placeholder_border_width = 0
 stretch = 0
 
-[node name="CoffeeMachine" type="Control" parent="World"]
+[node name="Customer" parent="World/TalkView" instance=ExtResource("3_customer")]
+offset_left = 140.0
+offset_top = 568.0
+offset_right = 652.0
+offset_bottom = 1080.0
+
+[node name="CustomerBubble" parent="World/TalkView" instance=ExtResource("4_bubble")]
+offset_left = 600.0
+offset_top = 150.0
+offset_right = 1460.0
+offset_bottom = 480.0
+
+[node name="ShrimpBox" parent="World/TalkView" instance=ExtResource("5_shrimpbox")]
+offset_left = 980.0
+offset_top = 100.0
+offset_right = 1840.0
+offset_bottom = 340.0
+
+[node name="ReviewPopup" parent="World/TalkView" instance=ExtResource("6_review")]
+offset_left = 600.0
+offset_top = 150.0
+offset_right = 1460.0
+offset_bottom = 480.0
+
+[node name="TalkHint" type="Label" parent="World/TalkView"]
+offset_left = 700.0
+offset_top = 1020.0
+offset_right = 1900.0
+offset_bottom = 1066.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 0.85)
+theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "click / space: next      tab: skip to the bar"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BarView" type="Control" parent="World"]
+offset_left = 0.0
+offset_top = 1080.0
+offset_right = 3840.0
+offset_bottom = 2160.0
+mouse_filter = 2
+
+[node name="Backdrop" type="Control" parent="World/BarView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_backdrop")
+neon_text = ""
+shelf_ys = PackedFloat32Array(170, 390)
+bottle_shelves = 1
+lamp_xs = PackedFloat32Array(300, 1100, 1900, 2700, 3500)
+bottle_seed = 21
+
+[node name="Background" type="Control" parent="World/BarView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_art")
+art_path = "res://assets/ui/bar_background"
+placeholder_color = Color(0, 0, 0, 0)
+placeholder_border_width = 0
+stretch = 0
+
+[node name="CounterBackdrop" type="Control" parent="World/BarView"]
 anchors_preset = 0
-offset_left = 430.0
-offset_top = 808.0
-offset_right = 800.0
-offset_bottom = 1040.0
+offset_left = 0.0
+offset_top = 640.0
+offset_right = 3840.0
+offset_bottom = 1080.0
+mouse_filter = 2
+script = ExtResource("12_counter")
+
+[node name="Counter" type="Control" parent="World/BarView"]
+anchors_preset = 0
+offset_left = 0.0
+offset_top = 640.0
+offset_right = 3840.0
+offset_bottom = 1080.0
+mouse_filter = 2
+script = ExtResource("2_art")
+art_path = "res://assets/ui/bar_counter"
+placeholder_color = Color(0, 0, 0, 0)
+placeholder_border_width = 0
+stretch = 0
+
+[node name="CoffeeMachine" type="Control" parent="World/BarView"]
+anchors_preset = 0
+offset_left = 2140.0
+offset_top = 420.0
+offset_right = 2520.0
+offset_bottom = 652.0
 mouse_filter = 2
 script = ExtResource("2_art")
 art_path = "res://assets/ui/coffee_machine"
@@ -125,35 +241,30 @@ placeholder_corner_radius = 20
 placeholder_shadow = 10
 stretch = 0
 
-[node name="Cup" parent="World" instance=ExtResource("6_cup")]
-offset_left = 70.0
-offset_top = 590.0
-offset_right = 370.0
-offset_bottom = 890.0
-
-[node name="ServeButton" type="Button" parent="World"]
+[node name="CupStack" type="Button" parent="World/BarView"]
 offset_left = 60.0
-offset_top = 905.0
-offset_right = 205.0
-offset_bottom = 1010.0
-mouse_default_cursor_shape = 2
-theme_type_variation = &"ServeButton"
-theme_override_font_sizes/font_size = 31
-text = "SERVE
-[Space]"
+offset_top = 410.0
+offset_right = 270.0
+offset_bottom = 640.0
+script = ExtResource("15_pickup")
+art_path = "res://assets/cup/stack"
+label_text = "Cups (free)"
+art_size = Vector2(128, 128)
+outline_color = Color(1, 1, 1, 1)
 
-[node name="TrashButton" type="Button" parent="World"]
-offset_left = 225.0
-offset_top = 905.0
-offset_right = 370.0
-offset_bottom = 1010.0
-mouse_default_cursor_shape = 2
-theme_type_variation = &"TrashButton"
-theme_override_font_sizes/font_size = 31
-text = "TRASH
-[X]"
+[node name="IceChest" type="Button" parent="World/BarView"]
+offset_left = 300.0
+offset_top = 440.0
+offset_right = 480.0
+offset_bottom = 640.0
+script = ExtResource("15_pickup")
+art_path = "res://assets/ui/ice_chest"
+placeholder_color = Color(0.973, 0.843, 0.843, 1)
+placeholder_text = "ICE"
+label_text = "Ice (free)"
+art_size = Vector2(128, 128)
 
-[node name="Shelf" type="Control" parent="World"]
+[node name="Shelf" type="Control" parent="World/BarView"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,133 +273,167 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="WhiteMonster" parent="World/Shelf" instance=ExtResource("7_dispenser")]
+[node name="MysteryGin" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
 offset_left = 440.0
-offset_top = 585.0
+offset_top = 190.0
 offset_right = 600.0
-offset_bottom = 785.0
+offset_bottom = 390.0
+ingredient = ExtResource("ing_mystery_gin")
+
+[node name="CheapVodka" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 1000.0
+offset_top = 190.0
+offset_right = 1160.0
+offset_bottom = 390.0
+ingredient = ExtResource("ing_cheap_vodka")
+
+[node name="ExpiredRum" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 1640.0
+offset_top = 190.0
+offset_right = 1800.0
+offset_bottom = 390.0
+ingredient = ExtResource("ing_expired_rum")
+
+[node name="Tequila" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 2300.0
+offset_top = 190.0
+offset_right = 2460.0
+offset_bottom = 390.0
+ingredient = ExtResource("ing_tequila")
+
+[node name="Absinthe" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 2900.0
+offset_top = 190.0
+offset_right = 3060.0
+offset_bottom = 390.0
+ingredient = ExtResource("ing_absinthe")
+
+[node name="RedWine" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 3150.0
+offset_top = 190.0
+offset_right = 3310.0
+offset_bottom = 390.0
+ingredient = ExtResource("ing_red_wine")
+
+[node name="WhiteMonster" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 560.0
+offset_top = 440.0
+offset_right = 720.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_white_monster")
 
-[node name="DietCoke" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 620.0
-offset_top = 585.0
-offset_right = 780.0
-offset_bottom = 785.0
+[node name="DietCoke" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 740.0
+offset_top = 440.0
+offset_right = 900.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_diet_coke")
 
-[node name="RingtoneBall" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 800.0
-offset_top = 585.0
-offset_right = 960.0
-offset_bottom = 785.0
+[node name="RingtoneBall" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 920.0
+offset_top = 440.0
+offset_right = 1080.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_ringtone_ball")
 
-[node name="BudDarks" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 980.0
-offset_top = 585.0
-offset_right = 1140.0
-offset_bottom = 785.0
+[node name="BudDarks" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 1100.0
+offset_top = 440.0
+offset_right = 1260.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_bud_darks")
 
-[node name="Sugar" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 1160.0
-offset_top = 585.0
-offset_right = 1320.0
-offset_bottom = 785.0
+[node name="Sugar" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 1360.0
+offset_top = 440.0
+offset_right = 1520.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_sugar")
 
-[node name="Wasabi" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 1340.0
-offset_top = 585.0
-offset_right = 1500.0
-offset_bottom = 785.0
+[node name="Wasabi" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 1540.0
+offset_top = 440.0
+offset_right = 1700.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_wasabi")
 
-[node name="Cheetos" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 1520.0
-offset_top = 585.0
-offset_right = 1680.0
-offset_bottom = 785.0
+[node name="Cheetos" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 1720.0
+offset_top = 440.0
+offset_right = 1880.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_cheetos")
 
-[node name="Mayo" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 1700.0
-offset_top = 585.0
-offset_right = 1860.0
-offset_bottom = 785.0
+[node name="Mayo" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 1900.0
+offset_top = 440.0
+offset_right = 2060.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_mayo")
 
-[node name="Espresso" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 445.0
-offset_top = 822.0
-offset_right = 605.0
-offset_bottom = 1022.0
+[node name="Espresso" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 2160.0
+offset_top = 440.0
+offset_right = 2320.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_espresso")
 
-[node name="Matcha" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 625.0
-offset_top = 822.0
-offset_right = 785.0
-offset_bottom = 1022.0
+[node name="Matcha" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 2340.0
+offset_top = 440.0
+offset_right = 2500.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_matcha")
 
-[node name="Milk" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 840.0
-offset_top = 822.0
-offset_right = 1000.0
-offset_bottom = 1022.0
+[node name="Milk" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 2640.0
+offset_top = 440.0
+offset_right = 2800.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_milk")
 
-[node name="ProteinShake" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 1020.0
-offset_top = 822.0
-offset_right = 1180.0
-offset_bottom = 1022.0
+[node name="ProteinShake" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 2820.0
+offset_top = 440.0
+offset_right = 2980.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_protein_shake")
 
-[node name="IceCream" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 1200.0
-offset_top = 822.0
-offset_right = 1360.0
-offset_bottom = 1022.0
+[node name="IceCream" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 3000.0
+offset_top = 440.0
+offset_right = 3160.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_ice_cream")
 
-[node name="SoySauce" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 1380.0
-offset_top = 822.0
-offset_right = 1540.0
-offset_bottom = 1022.0
+[node name="SoySauce" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 3260.0
+offset_top = 440.0
+offset_right = 3420.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_soy_sauce")
 
-[node name="PickleJuice" parent="World/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 1560.0
-offset_top = 822.0
-offset_right = 1720.0
-offset_bottom = 1022.0
+[node name="PickleJuice" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+offset_left = 3440.0
+offset_top = 440.0
+offset_right = 3600.0
+offset_bottom = 640.0
 ingredient = ExtResource("ing_pickle_juice")
 
-[node name="Customer" parent="World" instance=ExtResource("3_customer")]
-offset_left = 180.0
-offset_top = 96.0
-offset_right = 540.0
-offset_bottom = 556.0
+[node name="FxWorld" type="Control" parent="World"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 3840.0
+offset_bottom = 2160.0
+mouse_filter = 2
 
-[node name="OrderBubble" parent="World" instance=ExtResource("4_bubble")]
-offset_left = 590.0
-offset_top = 100.0
-offset_right = 1450.0
-offset_bottom = 430.0
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 5
 
-[node name="ReviewPopup" parent="World" instance=ExtResource("5_review")]
-offset_left = 590.0
-offset_top = 100.0
-offset_right = 1450.0
-offset_bottom = 430.0
-
-[node name="HUD" parent="." instance=ExtResource("8_hud")]
+[node name="HUD" parent="UI" instance=ExtResource("8_hud")]
 layout_mode = 1
 
-[node name="Fx" type="Control" parent="."]
+[node name="BarUI" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -297,17 +442,60 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Toast" type="Label" parent="."]
+[node name="Ticket" parent="UI/BarUI" instance=ExtResource("13_ticket")]
+offset_left = 1432.0
+offset_top = 76.0
+offset_right = 1902.0
+offset_bottom = 291.0
+
+[node name="CupTray" parent="UI/BarUI" instance=ExtResource("14_tray")]
+offset_left = 16.0
+offset_top = 634.0
+offset_right = 566.0
+offset_bottom = 1064.0
+
+[node name="Scroller" type="Control" parent="UI/BarUI"]
+offset_left = 600.0
+offset_top = 1030.0
+offset_right = 1900.0
+offset_bottom = 1060.0
+script = ExtResource("16_scroller")
+
+[node name="ScrollHint" type="Label" parent="UI/BarUI"]
+offset_left = 600.0
+offset_top = 984.0
+offset_right = 1900.0
+offset_bottom = 1026.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 0.85)
+theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "A / D, arrow keys, mouse wheel or drag to move along the bar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Toast" type="Label" parent="UI"]
 offset_left = 360.0
 offset_top = 466.0
 offset_right = 1560.0
 offset_bottom = 540.0
+mouse_filter = 2
 theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 1)
 theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 57
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FxUI" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="GreyscaleLayer" type="CanvasLayer" parent="."]
 layer = 10

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IngredientData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ingredient_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "mystery_gin"
+display_name = "Mystery Gin"
+price = 3
+color = Color(0.910, 0.886, 0.839, 1)
+tags = PackedStringArray("alcohol", "distractor")
+brew_time = 0.0

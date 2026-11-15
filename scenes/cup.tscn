@@ -1,39 +1,47 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/cup.gd" id="1_script"]
-[ext_resource type="Script" path="res://scripts/ui/art_slot.gd" id="2_art"]
+[ext_resource type="Shader" path="res://shaders/liquid_tint.gdshader" id="2_tint"]
+[ext_resource type="Script" path="res://scripts/ui/art_slot.gd" id="3_art"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tint"]
+resource_local_to_scene = true
+shader = ExtResource("2_tint")
+shader_parameter/tint = Color(0.41, 0.41, 0.41, 1)
+shader_parameter/base_value = 0.415
 
 [node name="Cup" type="Control"]
-offset_right = 300.0
-offset_bottom = 300.0
+custom_minimum_size = Vector2(256, 256)
+offset_right = 256.0
+offset_bottom = 256.0
 mouse_filter = 2
 script = ExtResource("1_script")
 
-[node name="Liquid" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 40.0
-offset_top = 30.0
-offset_right = 260.0
-offset_bottom = 240.0
+[node name="Sprite" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_tint")
+offset_right = 256.0
+offset_bottom = 256.0
 mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Art" type="Control" parent="."]
+[node name="Lid" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 300.0
-offset_bottom = 250.0
+offset_left = 56.0
+offset_top = -26.0
+offset_right = 200.0
+offset_bottom = 46.0
 mouse_filter = 2
-script = ExtResource("2_art")
-art_path = "res://assets/ui/cup"
-placeholder_color = Color(0.973, 0.843, 0.843, 1)
-outline_only = true
+script = ExtResource("3_art")
+art_path = "res://assets/cup/shaker_lid"
+placeholder_color = Color(0.671, 0.631, 0.573, 1)
+placeholder_border_color = Color(0.051, 0.016, 0.008, 1)
+placeholder_corner_radius = 18
+placeholder_text = "SHAKE"
+placeholder_font_size = 26
 
-[node name="CostLabel" type="Label" parent="."]
-offset_left = -20.0
-offset_top = 254.0
-offset_right = 320.0
-offset_bottom = 298.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Fx" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
