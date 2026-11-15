@@ -1,9 +1,11 @@
-[gd_scene format=3]
+[gd_scene load_steps=3 format=3 uid="uid://ct0arcyrbpdbw"]
 
-[ext_resource type="Script" path="res://scripts/ui/speech_bubble.gd" id="1_script"]
-[ext_resource type="Script" path="res://scripts/ui/art_slot.gd" id="2_art"]
+[ext_resource type="Script" uid="uid://cololkjdktq2q" path="res://scripts/ui/speech_bubble.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://ggjkq1f4r1v4" path="res://scripts/ui/art_slot.gd" id="2_art"]
 
 [node name="SpeechBubble" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 860.0
 offset_bottom = 330.0
 mouse_filter = 2
@@ -29,21 +31,21 @@ nine_patch_margins = Vector4i(17, 8, 8, 8)
 pixel_scale = 5
 
 [node name="Name" type="Label" parent="."]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 22.0
 offset_right = 700.0
 offset_bottom = 62.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.369, 0.325, 0.294, 1)
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 52
 vertical_alignment = 1
 
 [node name="Text" type="Label" parent="."]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 64.0
 offset_right = 824.0
 offset_bottom = 270.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.176, 0.059, 0.016, 1)
 theme_override_font_sizes/font_size = 42
 vertical_alignment = 1
