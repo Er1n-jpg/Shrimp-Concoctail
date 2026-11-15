@@ -6,7 +6,7 @@ extends Control
 signal ask_pressed
 
 const TICKET_ICON_SIZE := Vector2(76, 76)
-const HIDDEN_COLOR := Color(0.35, 0.35, 0.42)
+const HIDDEN_COLOR := Palette.SLATE
 
 @onready var _text: Label = $Text
 @onready var _ticket: HBoxContainer = $Ticket
@@ -38,11 +38,11 @@ func set_ticket(required: PackedStringArray, revealed: int, hidden: bool) -> voi
 	for i in required.size():
 		var slot := ArtSlot.new()
 		slot.custom_minimum_size = TICKET_ICON_SIZE
-		slot.placeholder_font_size = 14
+		slot.placeholder_font_size = 18
 		var ing := Database.ingredient(required[i])
 		if (hidden and i >= revealed) or ing == null:
 			slot.set_art("", HIDDEN_COLOR, "?")
-			slot.placeholder_font_size = 40
+			slot.placeholder_font_size = 52
 		else:
 			slot.set_art(Art.ingredient(ing.id), ing.color, ing.display_name)
 		_ticket.add_child(slot)

@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="8_hud"]
 [ext_resource type="PackedScene" path="res://scenes/game_over.tscn" id="9_game_over"]
 [ext_resource type="Shader" path="res://shaders/greyscale.gdshader" id="10_greyscale"]
+[ext_resource type="Script" path="res://scripts/ui/bar_backdrop.gd" id="11_backdrop"]
+[ext_resource type="Script" path="res://scripts/ui/counter_backdrop.gd" id="12_counter"]
 [ext_resource type="Resource" path="res://data/ingredients/white_monster.tres" id="ing_white_monster"]
 [ext_resource type="Resource" path="res://data/ingredients/diet_coke.tres" id="ing_diet_coke"]
 [ext_resource type="Resource" path="res://data/ingredients/ringtone_ball.tres" id="ing_ringtone_ball"]
@@ -49,6 +51,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Backdrop" type="Control" parent="World"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_backdrop")
+
 [node name="Background" type="Control" parent="World"]
 layout_mode = 1
 anchors_preset = 15
@@ -59,7 +71,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_art")
 art_path = "res://assets/ui/background"
-placeholder_color = Color(0.16, 0.12, 0.24, 1)
+placeholder_color = Color(0, 0, 0, 0)
+placeholder_border_width = 0
 stretch = 0
 
 [node name="Shrimp" type="Control" parent="World"]
@@ -75,7 +88,15 @@ art_path = "res://assets/ui/shrimp"
 placeholder_color = Color(1, 0.55, 0.45, 1)
 placeholder_text = "Shrimp bartender
 (shrimp.png)"
-placeholder_font_size = 30
+placeholder_font_size = 39
+
+[node name="CounterBackdrop" type="Control" parent="World"]
+anchors_preset = 0
+offset_top = 560.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+script = ExtResource("12_counter")
 
 [node name="Counter" type="Control" parent="World"]
 anchors_preset = 0
@@ -85,7 +106,8 @@ offset_bottom = 1080.0
 mouse_filter = 2
 script = ExtResource("2_art")
 art_path = "res://assets/ui/counter"
-placeholder_color = Color(0.42, 0.27, 0.16, 1)
+placeholder_color = Color(0, 0, 0, 0)
+placeholder_border_width = 0
 stretch = 0
 
 [node name="CoffeeMachine" type="Control" parent="World"]
@@ -97,7 +119,10 @@ offset_bottom = 1040.0
 mouse_filter = 2
 script = ExtResource("2_art")
 art_path = "res://assets/ui/coffee_machine"
-placeholder_color = Color(0.3, 0.3, 0.34, 1)
+placeholder_color = Color(0.369, 0.325, 0.294, 1)
+placeholder_border_color = Color(0.051, 0.016, 0.008, 1)
+placeholder_corner_radius = 20
+placeholder_shadow = 10
 stretch = 0
 
 [node name="Cup" parent="World" instance=ExtResource("6_cup")]
@@ -112,7 +137,8 @@ offset_top = 905.0
 offset_right = 205.0
 offset_bottom = 1010.0
 mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"ServeButton"
+theme_override_font_sizes/font_size = 31
 text = "SERVE
 [Space]"
 
@@ -122,7 +148,8 @@ offset_top = 905.0
 offset_right = 370.0
 offset_bottom = 1010.0
 mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"TrashButton"
+theme_override_font_sizes/font_size = 31
 text = "TRASH
 [X]"
 
@@ -275,10 +302,10 @@ offset_left = 360.0
 offset_top = 466.0
 offset_right = 1560.0
 offset_bottom = 540.0
-theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 1)
+theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 1)
 theme_override_constants/outline_size = 12
-theme_override_font_sizes/font_size = 44
+theme_override_font_sizes/font_size = 57
 horizontal_alignment = 1
 vertical_alignment = 1
 

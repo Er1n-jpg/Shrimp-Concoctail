@@ -7,6 +7,6 @@ script = ExtResource("1_script")
 id = "diet_coke"
 display_name = "Diet Coke"
 price = 2
-color = Color(0.36, 0.19, 0.1, 1)
+color = Color(0.369, 0.325, 0.294, 1)
 tags = PackedStringArray("caffeine")
 brew_time = 0.0

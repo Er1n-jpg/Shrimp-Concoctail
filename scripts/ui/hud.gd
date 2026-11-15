@@ -24,7 +24,7 @@ func _ready() -> void:
 func _on_money_changed(money: int) -> void:
 	_money.text = "$%d" % money
 	if _last_money >= 0 and money != _last_money:
-		var flash := Color(0.4, 1.0, 0.45) if money > _last_money else Color(1.0, 0.4, 0.4)
+		var flash := Palette.GAIN if money > _last_money else Palette.LOSS
 		_pulse(_money, flash)
 	_last_money = money
 
@@ -34,7 +34,7 @@ func _on_streak_changed(streak: int) -> void:
 		_streak.text = "Streak  -"
 	else:
 		_streak.text = "Streak  %d  (x%.2f)" % [streak, GameState.streak_multiplier()]
-		_pulse(_streak, Color(1.0, 0.6, 0.2))
+		_pulse(_streak, Palette.ORANGE)
 
 
 func _pulse(label: Label, color: Color) -> void:

@@ -102,8 +102,11 @@ func _process(delta: float) -> void:
 func _update_bar() -> void:
 	var ratio := time_left_ratio()
 	_patience_bar.value = ratio * 100.0
-	_fill_style.bg_color = Color(0.9, 0.2, 0.2).lerp(Color(0.3, 0.85, 0.35), ratio)
+	if ratio < 0.5:
+		_fill_style.bg_color = Palette.RUST.lerp(Palette.ORANGE, ratio * 2.0)
+	else:
+		_fill_style.bg_color = Palette.ORANGE.lerp(Palette.LIME, (ratio - 0.5) * 2.0)
 
 
 func _color_for(id: String) -> Color:
-	return Color.from_hsv(float(absi(id.hash()) % 360) / 360.0, 0.35, 0.75)
+	return Palette.CUSTOMER_COLORS[absi(id.hash()) % Palette.CUSTOMER_COLORS.size()]

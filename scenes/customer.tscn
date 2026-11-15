@@ -16,14 +16,16 @@ offset_right = 360.0
 offset_bottom = 460.0
 mouse_filter = 2
 script = ExtResource("2_art")
-placeholder_font_size = 34
+placeholder_font_size = 44
+placeholder_corner_radius = 20
+placeholder_shadow = 10
 
 [node name="NameLabel" type="Label" parent="."]
 offset_right = 360.0
 offset_bottom = 36.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 34
 horizontal_alignment = 1
 vertical_alignment = 1
 

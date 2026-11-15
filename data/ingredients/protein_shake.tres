@@ -7,6 +7,6 @@ script = ExtResource("1_script")
 id = "protein_shake"
 display_name = "Protein Shake"
 price = 4
-color = Color(0.76, 0.62, 0.47, 1)
+color = Color(0.671, 0.631, 0.573, 1)
 tags = PackedStringArray("dairy")
 brew_time = 0.0

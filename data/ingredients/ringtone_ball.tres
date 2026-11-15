@@ -7,6 +7,6 @@ script = ExtResource("1_script")
 id = "ringtone_ball"
 display_name = "Ringtone Ball"
 price = 4
-color = Color(1, 0.42, 0.7, 1)
+color = Color(0.949, 0.663, 0.663, 1)
 tags = PackedStringArray("alcohol", "sweet")
 brew_time = 0.0

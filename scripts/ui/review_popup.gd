@@ -22,7 +22,7 @@ func show_review(customer_name: String, stars: int, text: String, payout: int, d
 	_stars.stars = stars
 	_review.text = "\"%s\"" % text
 	_payout.text = "+$%d" % payout
-	_payout.add_theme_color_override("font_color", Color(0.3, 0.85, 0.35) if payout > 0 else Color(0.9, 0.25, 0.25))
+	_payout.add_theme_color_override("font_color", Palette.GAIN if payout > 0 else Palette.LOSS)
 	_detail.text = detail
 	visible = true
 

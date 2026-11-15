@@ -6,9 +6,9 @@ extends Control
 	set(value):
 		stars = value
 		queue_redraw()
-@export var filled_color: Color = Color(1.0, 0.8, 0.2)
-@export var empty_color: Color = Color(0.0, 0.0, 0.0, 0.15)
-@export var outline_color: Color = Color(0.25, 0.15, 0.05)
+@export var filled_color: Color = Palette.BUTTER
+@export var empty_color: Color = Color(Palette.TAUPE, 0.35)
+@export var outline_color: Color = Palette.DARK_BROWN
 
 const COUNT := 5
 
@@ -22,7 +22,7 @@ func _draw() -> void:
 		var points := _star_points(center, radius)
 		draw_colored_polygon(points, filled_color if i < stars else empty_color)
 		points.append(points[0])
-		draw_polyline(points, outline_color, 2.0, true)
+		draw_polyline(points, outline_color, 3.0, true)
 
 
 func _star_points(center: Vector2, radius: float) -> PackedVector2Array:

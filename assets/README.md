@@ -48,9 +48,9 @@ The same images also show up small (76×76) on the order ticket.
 
 | File | What | Shown at |
 |---|---|---|
-| `background.png` | Bar / hackathon backdrop (stretched to fill) | 1920×1080 |
-| `counter.png` | Counter top the ingredients sit on (stretched) | 1920×520, bottom of screen |
-| `shrimp.png` | The shrimp bartender | 360×440, top right |
+| `background.png` | Bar / hackathon backdrop (stretched to fill). Until then, a code-drawn back bar with shelves, lamps and a neon sign shows instead | 1920×1080 |
+| `counter.png` | Counter the ingredients sit on (stretched). Until then, a code-drawn wooden counter shows. **The shrimp stands behind it, so the top edge must be solid** | 1920×520, bottom of screen |
+| `shrimp.png` | The shrimp bartender (pixel-sharp filtering, so pixel art stays crisp) | 384×384, right side, bottom hidden behind the counter |
 | `cup.png` | The cup. **Make the body see-through:** liquid layers draw behind it | 300×250 |
 | `coffee_machine.png` | Coffee & matcha maker behind Espresso/Matcha (stretched) | 370×232 |
 | `speech_bubble.png` | Order bubble + review card background (stretched) | 860×330 |
@@ -58,7 +58,7 @@ The same images also show up small (76×76) on the order ticket.
 
 ## `fonts/`
 
-`main.ttf` (or `.otf`): used for all text in the game.
+`main.ttf` (or `.otf`): used for all text in the game. Right now it's **Jersey 10** (free, SIL Open Font License, see `OFL.txt`). Replace both files to swap fonts.
 
 ## `music/`
 
@@ -79,6 +79,10 @@ The same images also show up small (76×76) on the order ticket.
 | `customer_in.ogg` | A new customer walks up |
 | `inflation.ogg` | Prices go up |
 | `game_over.ogg` | You go broke |
+
+## Colors
+
+The palette lives in `scripts/palette.gd`; button and panel styles live in `ui/theme.tres`.
 
 ## Moving things around
 

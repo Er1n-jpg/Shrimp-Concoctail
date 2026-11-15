@@ -20,7 +20,11 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_art")
 art_path = "res://assets/ui/speech_bubble"
-placeholder_color = Color(0.97, 0.95, 0.9, 1)
+placeholder_color = Color(1.000, 0.973, 0.847, 1)
+placeholder_border_color = Color(0.176, 0.059, 0.016, 1)
+placeholder_border_width = 5
+placeholder_corner_radius = 22
+placeholder_shadow = 12
 stretch = 0
 
 [node name="Name" type="Label" parent="."]
@@ -28,8 +32,8 @@ offset_left = 36.0
 offset_top = 18.0
 offset_right = 540.0
 offset_bottom = 62.0
-theme_override_colors/font_color = Color(0.35, 0.3, 0.3, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.369, 0.325, 0.294, 1)
+theme_override_font_sizes/font_size = 31
 vertical_alignment = 1
 
 [node name="Stars" type="Control" parent="."]
@@ -46,8 +50,8 @@ offset_left = 36.0
 offset_top = 70.0
 offset_right = 824.0
 offset_bottom = 232.0
-theme_override_colors/font_color = Color(0.1, 0.1, 0.12, 1)
-theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.176, 0.059, 0.016, 1)
+theme_override_font_sizes/font_size = 36
 vertical_alignment = 1
 autowrap_mode = 3
 
@@ -56,9 +60,9 @@ offset_left = 36.0
 offset_top = 236.0
 offset_right = 300.0
 offset_bottom = 312.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.176, 0.059, 0.016, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 52
+theme_override_font_sizes/font_size = 68
 vertical_alignment = 1
 
 [node name="Detail" type="Label" parent="."]
@@ -66,8 +70,8 @@ offset_left = 300.0
 offset_top = 240.0
 offset_right = 824.0
 offset_bottom = 308.0
-theme_override_colors/font_color = Color(0.35, 0.3, 0.3, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.369, 0.325, 0.294, 1)
+theme_override_font_sizes/font_size = 26
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3

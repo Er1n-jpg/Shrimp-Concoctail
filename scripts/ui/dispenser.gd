@@ -7,8 +7,8 @@ signal pour_requested(dispenser: Dispenser)
 ## Emitted when the ingredient actually lands in the cup (after brewing, if it brews).
 signal poured(ingredient: IngredientData)
 
-const AFFORDABLE_COLOR := Color(1.0, 0.85, 0.3)
-const BROKE_COLOR := Color(1.0, 0.35, 0.35)
+const AFFORDABLE_COLOR := Palette.MONEY
+const BROKE_COLOR := Palette.LOSS
 
 @export var ingredient: IngredientData:
 	set(value):
@@ -85,6 +85,8 @@ func _refresh() -> void:
 	if not _built or ingredient == null:
 		return
 	_art.set_art(Art.ingredient(ingredient.id), ingredient.color, "")
+	_art.placeholder_border_color = Palette.TAUPE
+	_art.placeholder_shadow = 6
 	_name_label.text = ingredient.display_name
 	tooltip_text = "%s (%s)" % [ingredient.display_name, ", ".join(ingredient.tags)]
 	_update_price()
@@ -105,7 +107,7 @@ func _on_inflation_changed(level: int) -> void:
 	# Flash the price tag red so the price hike is obvious.
 	_price_label.pivot_offset = _price_label.size / 2.0
 	var tween := create_tween()
-	tween.tween_property(_price_label, "modulate", Color(1, 0.2, 0.2), 0.12)
+	tween.tween_property(_price_label, "modulate", Palette.RUST, 0.12)
 	tween.parallel().tween_property(_price_label, "scale", Vector2(1.35, 1.35), 0.12)
 	tween.tween_property(_price_label, "modulate", Color.WHITE, 0.5)
 	tween.parallel().tween_property(_price_label, "scale", Vector2.ONE, 0.5)
@@ -125,10 +127,10 @@ func _art_home_x() -> float:
 func _apply_styles() -> void:
 	var empty := StyleBoxEmpty.new()
 	var hover := StyleBoxFlat.new()
-	hover.bg_color = Color(1, 1, 1, 0.12)
+	hover.bg_color = Color(Palette.BUTTER, 0.14)
 	hover.set_corner_radius_all(14)
 	var pressed_box := hover.duplicate() as StyleBoxFlat
-	pressed_box.bg_color = Color(1, 1, 1, 0.22)
+	pressed_box.bg_color = Color(Palette.BUTTER, 0.24)
 	add_theme_stylebox_override("normal", empty)
 	add_theme_stylebox_override("hover", hover)
 	add_theme_stylebox_override("pressed", pressed_box)

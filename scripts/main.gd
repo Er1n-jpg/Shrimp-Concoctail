@@ -155,7 +155,7 @@ func _resolve(stars: int, timed_out: bool) -> void:
 
 	if payout > 0:
 		Sfx.play("cash")
-		_float_text("+$%d" % payout, _cup.global_position + Vector2(_cup.size.x / 2.0, 0.0), Color(0.4, 1.0, 0.45))
+		_float_text("+$%d" % payout, _cup.global_position + Vector2(_cup.size.x / 2.0, 0.0), Palette.GAIN)
 	if stars <= 1:
 		Sfx.play("bad")
 		_shake()
@@ -207,7 +207,7 @@ func _on_pour_requested(dispenser: Dispenser) -> void:
 		return
 	_cup.reserve(price, dispenser.ingredient.brew_time > 0.0)
 	Sfx.play("pour")
-	_float_text("-$%d" % price, dispenser.global_position + Vector2(dispenser.size.x / 2.0, 0.0), Color(1.0, 0.4, 0.4))
+	_float_text("-$%d" % price, dispenser.global_position + Vector2(dispenser.size.x / 2.0, 0.0), Palette.LOSS)
 	dispenser.dispense()
 
 
@@ -220,7 +220,7 @@ func _trash() -> void:
 		return
 	_cancel_brews()
 	if _cup.cost > 0:
-		_float_text("Wasted $%d" % _cup.cost, _cup.global_position + Vector2(_cup.size.x / 2.0, 0.0), Color(1.0, 0.4, 0.4))
+		_float_text("Wasted $%d" % _cup.cost, _cup.global_position + Vector2(_cup.size.x / 2.0, 0.0), Palette.LOSS)
 	_cup.clear()
 	Sfx.play("trash")
 	# Nothing left to make a drink with: run's over.
@@ -235,7 +235,7 @@ func _ask() -> void:
 	_customer.spend_patience(GameState.ASK_PATIENCE_COST)
 	_bubble.set_ticket(_required, _revealed, true)
 	Sfx.play("ask")
-	_float_text("-%ds" % int(GameState.ASK_PATIENCE_COST), _customer.global_position + Vector2(_customer.size.x / 2.0, 40.0), Color(1.0, 0.6, 0.3))
+	_float_text("-%ds" % int(GameState.ASK_PATIENCE_COST), _customer.global_position + Vector2(_customer.size.x / 2.0, 40.0), Palette.ORANGE)
 
 
 func _cancel_brews() -> void:
@@ -280,9 +280,9 @@ func _show_toast(text: String) -> void:
 func _float_text(text: String, at: Vector2, color: Color) -> void:
 	var label := Label.new()
 	label.text = text
-	label.add_theme_font_size_override("font_size", 34)
+	label.add_theme_font_size_override("font_size", 44)
 	label.add_theme_color_override("font_color", color)
-	label.add_theme_color_override("font_outline_color", Color.BLACK)
+	label.add_theme_color_override("font_outline_color", Palette.INK)
 	label.add_theme_constant_override("outline_size", 8)
 	label.mouse_filter = MOUSE_FILTER_IGNORE
 	_fx.add_child(label)

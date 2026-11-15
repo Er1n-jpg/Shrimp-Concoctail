@@ -7,6 +7,6 @@ script = ExtResource("1_script")
 id = "wasabi"
 display_name = "Wasabi"
 price = 3
-color = Color(0.55, 0.8, 0.25, 1)
+color = Color(0.812, 0.984, 0.455, 1)
 tags = PackedStringArray("green", "spicy")
 brew_time = 0.0

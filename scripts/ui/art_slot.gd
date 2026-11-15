@@ -15,9 +15,26 @@ extends Control
 	set(value):
 		placeholder_text = value
 		_refresh()
-@export var placeholder_font_size: int = 22:
+@export var placeholder_font_size: int = 28:
 	set(value):
 		placeholder_font_size = value
+		_refresh()
+## Placeholder border. Fully transparent = automatic (a darker shade of placeholder_color).
+@export var placeholder_border_color: Color = Color(0, 0, 0, 0):
+	set(value):
+		placeholder_border_color = value
+		_refresh()
+@export var placeholder_border_width: int = 4:
+	set(value):
+		placeholder_border_width = value
+		_refresh()
+@export var placeholder_corner_radius: int = 14:
+	set(value):
+		placeholder_corner_radius = value
+		_refresh()
+@export var placeholder_shadow: int = 0:
+	set(value):
+		placeholder_shadow = value
 		_refresh()
 ## Only draw an outline when there's no art (the cup uses this so the liquid shows through).
 @export var outline_only: bool = false:
@@ -88,13 +105,20 @@ func _refresh() -> void:
 		return
 
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(placeholder_color, 0.0 if outline_only else 1.0)
-	style.border_color = placeholder_color if outline_only else placeholder_color.darkened(0.35)
-	style.set_border_width_all(4)
-	style.set_corner_radius_all(14)
+	style.bg_color = Color(placeholder_color, 0.0 if outline_only else placeholder_color.a)
+	if placeholder_border_color.a > 0.0:
+		style.border_color = placeholder_border_color
+	else:
+		style.border_color = placeholder_color if outline_only else placeholder_color.darkened(0.35)
+	style.set_border_width_all(placeholder_border_width)
+	style.set_corner_radius_all(placeholder_corner_radius)
+	if placeholder_shadow > 0:
+		style.shadow_color = Color(Palette.INK, 0.55)
+		style.shadow_size = placeholder_shadow
+		style.shadow_offset = Vector2(0, placeholder_shadow * 0.5)
 	_placeholder.add_theme_stylebox_override("panel", style)
 
 	var light_bg := placeholder_color.get_luminance() > 0.55 and not outline_only
 	_label.text = placeholder_text
 	_label.add_theme_font_size_override("font_size", placeholder_font_size)
-	_label.add_theme_color_override("font_color", Color(0.08, 0.08, 0.1) if light_bg else Color.WHITE)
+	_label.add_theme_color_override("font_color", Palette.TEXT_DARK if light_bg else Palette.TEXT_LIGHT)

@@ -85,19 +85,19 @@ func _draw_liquid() -> void:
 	var area := _liquid.size
 	var band := area.y / GameState.CUP_CAPACITY
 	var font := get_theme_default_font()
-	var font_size := 18
+	var font_size := 24
 	var slot := 0
 	for ing in layers:
 		var rect := Rect2(0.0, area.y - band * (slot + 1), area.x, band)
 		_liquid.draw_rect(rect, ing.color)
-		_liquid.draw_rect(rect, Color(0, 0, 0, 0.25), false, 2.0)
-		var text_color := Color(0.08, 0.08, 0.1) if ing.color.get_luminance() > 0.55 else Color.WHITE
+		_liquid.draw_rect(rect, Color(Palette.INK, 0.35), false, 2.0)
+		var text_color := Palette.TEXT_DARK if ing.color.get_luminance() > 0.55 else Palette.TEXT_LIGHT
 		var baseline := rect.position.y + band * 0.5 + font_size * 0.35
 		_liquid.draw_string(font, Vector2(0.0, baseline), ing.display_name, HORIZONTAL_ALIGNMENT_CENTER, area.x, font_size, text_color)
 		slot += 1
 	for i in pending:
 		var rect := Rect2(0.0, area.y - band * (slot + 1), area.x, band)
-		_liquid.draw_rect(rect, Color(1, 1, 1, 0.15))
+		_liquid.draw_rect(rect, Color(Palette.CREAM, 0.15))
 		var baseline := rect.position.y + band * 0.5 + font_size * 0.35
-		_liquid.draw_string(font, Vector2(0.0, baseline), "brewing...", HORIZONTAL_ALIGNMENT_CENTER, area.x, font_size, Color(1, 1, 1, 0.7))
+		_liquid.draw_string(font, Vector2(0.0, baseline), "brewing...", HORIZONTAL_ALIGNMENT_CENTER, area.x, font_size, Color(Palette.CREAM, 0.7))
 		slot += 1

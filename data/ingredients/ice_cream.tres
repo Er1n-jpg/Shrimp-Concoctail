@@ -7,6 +7,6 @@ script = ExtResource("1_script")
 id = "ice_cream"
 display_name = "Ice Cream"
 price = 3
-color = Color(1, 0.9, 0.85, 1)
+color = Color(0.973, 0.843, 0.843, 1)
 tags = PackedStringArray("sweet", "dairy")
 brew_time = 0.0

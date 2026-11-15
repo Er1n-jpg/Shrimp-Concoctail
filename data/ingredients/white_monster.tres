@@ -7,6 +7,6 @@ script = ExtResource("1_script")
 id = "white_monster"
 display_name = "White Monster"
 price = 4
-color = Color(0.86, 0.93, 0.97, 1)
+color = Color(0.910, 0.886, 0.839, 1)
 tags = PackedStringArray("caffeine", "sweet")
 brew_time = 0.0
