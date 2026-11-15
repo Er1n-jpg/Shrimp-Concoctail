@@ -50,12 +50,25 @@ extends Control
 	set(value):
 		flip_h = value
 		_refresh()
+## 9-slice the image (for boxes/bubbles): border sizes in source pixels as
+## (left, top, right, bottom). Corners stay intact, edges and middle stretch.
+## All zero = off (image is just stretched/fit using `stretch`).
+@export var nine_patch_margins: Vector4i = Vector4i.ZERO:
+	set(value):
+		nine_patch_margins = value
+		_refresh()
+## With 9-slicing on: how many screen pixels per art pixel (keeps pixel art crisp).
+@export_range(1, 16) var pixel_scale: int = 1:
+	set(value):
+		pixel_scale = value
+		_refresh()
 
 ## The loaded image, or null while showing the placeholder.
 var texture: Texture2D
 
 var _built := false
 var _texture_rect: TextureRect
+var _nine_patch: NinePatchRect
 var _placeholder: Panel
 var _label: Label
 
@@ -68,6 +81,12 @@ func _ready() -> void:
 	_texture_rect.mouse_filter = MOUSE_FILTER_IGNORE
 	add_child(_texture_rect)
 	_texture_rect.set_anchors_and_offsets_preset(PRESET_FULL_RECT)
+
+	# 9-slice drawn at 1/pixel_scale size, then scaled up so art pixels stay square.
+	_nine_patch = NinePatchRect.new()
+	_nine_patch.mouse_filter = MOUSE_FILTER_IGNORE
+	add_child(_nine_patch)
+	resized.connect(_layout_nine_patch)
 
 	_placeholder = Panel.new()
 	_placeholder.mouse_filter = MOUSE_FILTER_IGNORE
@@ -86,6 +105,14 @@ func _ready() -> void:
 	_refresh()
 
 
+func _layout_nine_patch() -> void:
+	if not _built:
+		return
+	_nine_patch.position = Vector2.ZERO
+	_nine_patch.scale = Vector2(pixel_scale, pixel_scale)
+	_nine_patch.size = size / float(pixel_scale)
+
+
 func set_art(path: String, color: Color, text: String = "") -> void:
 	art_path = path
 	placeholder_color = color
@@ -96,10 +123,18 @@ func _refresh() -> void:
 	if not _built:
 		return
 	texture = Art.load_texture(art_path)
+	var sliced := texture != null and nine_patch_margins != Vector4i.ZERO
 	_texture_rect.texture = texture
 	_texture_rect.stretch_mode = stretch
 	_texture_rect.flip_h = flip_h
-	_texture_rect.visible = texture != null
+	_texture_rect.visible = texture != null and not sliced
+	_nine_patch.texture = texture
+	_nine_patch.patch_margin_left = nine_patch_margins.x
+	_nine_patch.patch_margin_top = nine_patch_margins.y
+	_nine_patch.patch_margin_right = nine_patch_margins.z
+	_nine_patch.patch_margin_bottom = nine_patch_margins.w
+	_nine_patch.visible = sliced
+	_layout_nine_patch()
 	_placeholder.visible = texture == null
 	if texture != null:
 		return

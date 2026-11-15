@@ -53,7 +53,8 @@ The same images also show up small (76×76) on the order ticket.
 | `shrimp.png` | The shrimp bartender (pixel-sharp filtering, so pixel art stays crisp) | 384×384, right side, bottom hidden behind the counter |
 | `cup.png` | The cup. **Make the body see-through:** liquid layers draw behind it | 300×250 |
 | `coffee_machine.png` | Coffee & matcha maker behind Espresso/Matcha (stretched) | 370×232 |
-| `speech_bubble.png` | Order bubble + review card background (stretched) | 860×330 |
+| `speech_bubble.png` | Customer's order bubble. 9-sliced at 5× (corners + tail stay crisp, edges stretch); tail goes bottom-left toward the customer | 860×330 (172×66 art px) |
+| `review_card.png` | Review card shown after serving. 9-sliced at 5× | 860×330 (172×66 art px) |
 | `hud_bar.png` | Top stats bar background (stretched) | 1920×64 |
 
 ## `fonts/`

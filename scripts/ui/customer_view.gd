@@ -79,6 +79,8 @@ func react(stars: int) -> void:
 	if mood != "" and Art.load_texture(Art.customer(data.id, mood)) != null:
 		_portrait.art_path = Art.customer(data.id, mood)
 
+	if stars == 3:
+		return  # neutral: no hop or shake
 	var tween := create_tween()
 	if stars >= 4:
 		tween.tween_property(_portrait, "position:y", _portrait.position.y - 24.0, 0.1)
