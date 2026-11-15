@@ -6,7 +6,6 @@
 script = ExtResource("1_script")
 id = "hensen_juang"
 display_name = "Hensen Juang"
-conversations = PackedStringArray("Hey ;). Wanna come to my hensen party\nshrimp: No.\n i can introduce you to all the new chinese spies in the area and their favorite sauce. I guarantee you’ll meet someone you like if you get a bit more buff ;))))", "Heyyyy ;) I’d open source my weights for you\nshrimp: Yeah no I’m good\n Ok fine but gimme something as strong as my RAM and as bitter as my relationship with my wife", "You probably don’t realize… I’m getting bored of my wife\nshrimp: 是吗？\nOMG you’re SO perfect ;) Just as perfect as a expresso with with some sauce from OUR home <3")
 required = PackedStringArray("espresso", "protein_shake", "soy_sauce")
 reviews = PackedStringArray("this drink is like the nvidia stock", "why couldn't my wife be a bit more open?", "not bad, fellow employee", "man your government sends great spies", "You should be my 5th affair ;)")
 spawn_weight = 0.4

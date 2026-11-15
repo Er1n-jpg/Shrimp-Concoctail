@@ -3,6 +3,8 @@ extends Resource
 ## One customer type.
 ## Art is picked up automatically from res://assets/customers/<id>.png
 ## (optional mood swaps: <id>_happy.png for 4-5 stars, <id>_mad.png for 1-2 stars).
+## What they say lives in a plain text file: res://data/dialogue/<id>.txt
+## (see data/dialogue/README.md).
 
 enum Rule {
 	NONE,
@@ -14,14 +16,9 @@ enum Rule {
 
 @export var id: String = ""
 @export var display_name: String = ""
-## One conversation is picked at random each visit. Each entry is a whole
-## conversation, one line per row (\n). Rows starting with "shrimp:" are said by
-## the shrimp; every other row is said by the customer. Hint at the ingredients
-## ("a beer as dark as my soul") but never name them: players have to work it out.
-@export var conversations: PackedStringArray = []
-
 @export_group("Recipe")
-## Ingredient ids that must be in the drink.
+## Ingredient ids that must be in the drink (3). Each visit's conversation hints
+## at 2 of them; the hint lines are in data/dialogue/<id>.txt.
 @export var required: PackedStringArray = []
 ## Ingredient ids that give a small bonus.
 @export var liked: PackedStringArray = []

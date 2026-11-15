@@ -1,0 +1,41 @@
+# TORONTO GUY
+# Recipe (in toronto_guy.tres): diet_coke, ice_cream, protein_shake
+# Format help: data/dialogue/README.md
+
+[opener]
+WAGWAN two twos my poopoos fam
+shrimp: what
+---
+wagwan my good YUTE make me a drink yo
+shrimp: um
+---
+ayo fam
+shrimp: hi! what can i get you?
+
+[diet_coke]
+the black fizzy ting, zero calories, no cap.
+---
+make me a sweet DRINK fam and i dont want mad calories
+---
+the black soda ting but the zero one, ya dun know
+
+[ice_cream]
+im lactose intolerant two twos my poopoos #gimmedat dessert
+---
+put a cold scoop of the frozen sweet ting in it fam
+---
+make it a float crodie. the creamy cold ting.
+
+[protein_shake]
+im on that cut diet now ahlie. need the gains ting
+---
+gotta hit my macros fam, gimme that gym ting
+---
+the gym bro bottle. mans tryna get diesel for the summer
+
+[followup]
+shrimp: ...and?
+---
+shrimp: i don't speak toronto. anything else?
+---
+shrimp: okay. what else?
