@@ -28,9 +28,6 @@ Until a file exists, the game shows a colored placeholder box in its place.
 | `soy_sauce.png` | Soy Sauce |
 | `pickle_juice.png` | Pickle Juice |
 
-**Distractor bottles** on the back shelf (pickable, cost money, nobody ordered them):
-`mystery_gin.png`, `cheap_vodka.png`, `expired_rum.png`, `tequila.png`, `absinthe.png`, `red_wine.png`
-
 The same images show up at 64×64 on the order ticket and in the cup tray.
 
 ## `customers/` (64×64 art, shown at 8× = 512px in the talk view)
@@ -114,4 +111,4 @@ The palette lives in `scripts/palette.gd`; button and panel styles live in `ui/t
 ## Moving things around
 
 Positions live in `scenes/main.tscn`. Open it in Godot and drag nodes around:
-the talk view is `World/TalkView`, the bar is `World/BarView` (ingredients and shelf bottles are under `World/BarView/Shelf`).
+the talk view is `World/TalkView`, the bar is `World/BarView` (ingredients are under `World/BarView/Shelf`).

@@ -16,7 +16,7 @@ REVIEW  customer reacts, 1–5★ review, paid (base price × star multiplier) �
 
 **Talk view** (top): the customer on the left talks in the tailed bubble, and the shrimp answers in its own box. Click or Space advances, Tab skips straight to the bar. Each customer has a few conversations (picked at random); the last line is the order.
 
-**Bar view** (below): 3840px wide (2 screens), scrolls with A/D, arrow keys, mouse wheel, dragging empty space, or resting the mouse at a screen edge. A scroll bar shows where you are. Left to right: cup stack + ice chest → cans → jars/bowls → coffee & matcha machine → dairy → sauces, with **distractor liquor bottles** on the back shelf.
+**Bar view** (below): 3840px wide (2 screens), scrolls with A/D, arrow keys, mouse wheel, dragging empty space, or resting the mouse at a screen edge. A scroll bar shows where you are. Left to right: cup stack + ice chest → cans → jars/bowls → coffee & matcha machine → dairy → sauces, with decorative bottles on the back shelves.
 
 Pinned on screen while at the bar:
 - **Order ticket** (top-right): recipe icons, the Vibecoder's Ask button, and the **patience bar**. Patience only runs at the bar.
@@ -222,7 +222,7 @@ Each customer has 2 conversations in `data/customers/*.tres` (`conversations`), 
 - `pickup_button.gd`: cup stack and ice chest
 - `review_popup.tscn`: stars, review line, payout breakdown
 - `cup.tscn`: fill-level cup sprite with tinted liquid, ice, sugar rim, shake animation
-- `dispenser.tscn`: one clickable ingredient with its price tag (15 ingredients + 6 distractors under `World/BarView/Shelf` in main)
+- `dispenser.tscn`: one clickable ingredient with its price tag (15 under `World/BarView/Shelf` in main)
 - `game_over.tscn`: survived count, best, retry
 - Greyscale: a CanvasLayer in main with `shaders/greyscale.gdshader`
 

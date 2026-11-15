@@ -31,12 +31,6 @@
 [ext_resource type="Resource" path="res://data/ingredients/ice_cream.tres" id="ing_ice_cream"]
 [ext_resource type="Resource" path="res://data/ingredients/soy_sauce.tres" id="ing_soy_sauce"]
 [ext_resource type="Resource" path="res://data/ingredients/pickle_juice.tres" id="ing_pickle_juice"]
-[ext_resource type="Resource" path="res://data/ingredients/mystery_gin.tres" id="ing_mystery_gin"]
-[ext_resource type="Resource" path="res://data/ingredients/cheap_vodka.tres" id="ing_cheap_vodka"]
-[ext_resource type="Resource" path="res://data/ingredients/expired_rum.tres" id="ing_expired_rum"]
-[ext_resource type="Resource" path="res://data/ingredients/tequila.tres" id="ing_tequila"]
-[ext_resource type="Resource" path="res://data/ingredients/absinthe.tres" id="ing_absinthe"]
-[ext_resource type="Resource" path="res://data/ingredients/red_wine.tres" id="ing_red_wine"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_greyscale"]
 shader = ExtResource("10_greyscale")
@@ -186,7 +180,6 @@ mouse_filter = 2
 script = ExtResource("11_backdrop")
 neon_text = ""
 shelf_ys = PackedFloat32Array(170, 390)
-bottle_shelves = 1
 lamp_xs = PackedFloat32Array(300, 1100, 1900, 2700, 3500)
 bottle_seed = 21
 
@@ -272,48 +265,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="MysteryGin" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 440.0
-offset_top = 190.0
-offset_right = 600.0
-offset_bottom = 390.0
-ingredient = ExtResource("ing_mystery_gin")
-
-[node name="CheapVodka" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 1000.0
-offset_top = 190.0
-offset_right = 1160.0
-offset_bottom = 390.0
-ingredient = ExtResource("ing_cheap_vodka")
-
-[node name="ExpiredRum" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 1640.0
-offset_top = 190.0
-offset_right = 1800.0
-offset_bottom = 390.0
-ingredient = ExtResource("ing_expired_rum")
-
-[node name="Tequila" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 2300.0
-offset_top = 190.0
-offset_right = 2460.0
-offset_bottom = 390.0
-ingredient = ExtResource("ing_tequila")
-
-[node name="Absinthe" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 2900.0
-offset_top = 190.0
-offset_right = 3060.0
-offset_bottom = 390.0
-ingredient = ExtResource("ing_absinthe")
-
-[node name="RedWine" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-offset_left = 3150.0
-offset_top = 190.0
-offset_right = 3310.0
-offset_bottom = 390.0
-ingredient = ExtResource("ing_red_wine")
 
 [node name="WhiteMonster" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
 offset_left = 560.0
