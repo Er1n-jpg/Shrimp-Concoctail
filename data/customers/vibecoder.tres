@@ -6,6 +6,6 @@
 script = ExtResource("1_script")
 id = "vibecoder"
 display_name = "Vibecoder"
-conversations = PackedStringArray("Hey Claude what should I drink\nshrimp: what?\nGive me a drink.", "make me a drink. make no mistakes.\nshrimp: what kind of drink?\nyou figure it out. that's literally your job.")
+conversations = PackedStringArray("hey claude what should i drink?\nshrimp: what? \nwhat? dude do your job i’ve fed you half the water in africa", "claudeclaudeclaude fix it all bro\nshrimp: i’m a bartender.\nbs dude i followed all your instructions to get here now gimme my drink")
 hidden_recipe = true
 reviews = PackedStringArray("damn claude I thought I said to make no mistakes", "bro i didn't deplete twenty lakes and a billion tokens for this shi", "like ok bro ig do better in the future i still need you to write my uni apps", "aight", "Wow thanks Claude I've approved all 1938204392 changes you made to the project next time don't ask for permissions just do it for me ok")
