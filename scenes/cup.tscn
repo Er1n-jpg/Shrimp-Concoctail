@@ -11,34 +11,34 @@ shader_parameter/tint = Color(0.41, 0.41, 0.41, 1)
 shader_parameter/base_value = 0.415
 
 [node name="Cup" type="Control"]
-custom_minimum_size = Vector2(256, 256)
-offset_right = 256.0
-offset_bottom = 256.0
+custom_minimum_size = Vector2(400, 400)
+offset_right = 400.0
+offset_bottom = 400.0
 mouse_filter = 2
 script = ExtResource("1_script")
 
 [node name="Sprite" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_tint")
-offset_right = 256.0
-offset_bottom = 256.0
+offset_right = 400.0
+offset_bottom = 400.0
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Lid" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 56.0
-offset_top = -26.0
-offset_right = 200.0
-offset_bottom = 46.0
+offset_left = 110.0
+offset_top = -33.0
+offset_right = 290.0
+offset_bottom = 58.0
 mouse_filter = 2
 script = ExtResource("3_art")
 art_path = "res://assets/cup/shaker_lid"
 placeholder_color = Color(0.671, 0.631, 0.573, 1)
 placeholder_border_color = Color(0.051, 0.016, 0.008, 1)
-placeholder_corner_radius = 18
+placeholder_corner_radius = 22
 placeholder_text = "SHAKE"
-placeholder_font_size = 26
+placeholder_font_size = 30
 
 [node name="Fx" type="Control" parent="."]
 anchors_preset = 15

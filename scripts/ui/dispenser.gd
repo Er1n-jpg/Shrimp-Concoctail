@@ -1,15 +1,13 @@
 class_name Dispenser
 extends Button
-## One ingredient on the counter. Click to pour.
-## Ingredients that brew (brew_time > 0: Espresso, Matcha) can't be clicked: you
-## pick up the spoon and drag it into the coffee machine instead.
+## One ingredient on the counter. Click it or drag it onto the cup to pour (Main
+## handles the clicking/dragging). Ingredients that brew (brew_time > 0: Espresso,
+## Matcha) can't go straight in: you drag the spoon into the coffee machine instead.
 ## Set `ingredient` in the inspector; art comes from res://assets/ingredients/<id>.png
 
 signal pour_requested(dispenser: Dispenser)
 ## Emitted when the ingredient lands in the cup.
 signal poured(ingredient: IngredientData)
-## Brewed ingredients only: the spoon was grabbed (mouse down).
-signal drag_started(dispenser: Dispenser)
 
 const AFFORDABLE_COLOR := Palette.MONEY
 const BROKE_COLOR := Palette.LOSS
@@ -33,9 +31,6 @@ func _ready() -> void:
 	pressed.connect(func() -> void:
 		if not needs_machine():
 			pour_requested.emit(self))
-	button_down.connect(func() -> void:
-		if needs_machine():
-			drag_started.emit(self))
 	GameState.money_changed.connect(func(_money: int) -> void: _update_price())
 	GameState.inflation_changed.connect(_on_inflation_changed)
 	_built = true
