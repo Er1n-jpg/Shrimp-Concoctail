@@ -19,7 +19,7 @@ REVIEW  customer reacts, 1–5★ review, paid (base price × star multiplier) �
 **Bar view** (below): 3840px wide (2 screens), scrolls with A/D, arrow keys, mouse wheel, dragging empty space, or resting the mouse at a screen edge. A scroll bar shows where you are. Left to right: cup stack → cans → jars/bowls → coffee & matcha machine → dairy → sauces, with decorative bottles on the back shelves.
 
 Pinned on screen while at the bar:
-- **Order ticket** (top-right): what the customer said (never the recipe, so you have to work it out), the Vibecoder's Ask button with what it revealed, and the **patience bar**. Patience only runs at the bar.
+- **Order ticket** (top-right): the customer's hint lines from the conversation (never the recipe, so you have to work it out), the Vibecoder's Ask button with what it revealed, and the **patience bar**. Patience only runs at the bar.
 - **Cup tray** (bottom-left): the cup, icons of what's in it, cup cost vs. 5★ payout, and Shake / Serve / Trash.
 
 Steps:

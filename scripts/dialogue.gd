@@ -16,12 +16,16 @@ const SPECIAL_SECTIONS := ["opener", "followup", "closer"]
 static var _cache: Dictionary = {}
 
 
-## The whole conversation for one visit, one line per row ("shrimp: " rows are
-## the shrimp's), ready for Main to play.
-static func build(customer: CustomerData, required: PackedStringArray) -> String:
+## One visit's conversation:
+##   "text":  the whole thing, one line per row ("shrimp: " rows are the shrimp's),
+##            ready for Main to play.
+##   "hints": just the customer's hint lines, for the order ticket to show as a
+##            reminder. A customer with no hints (Vibecoder) gets their last line.
+static func build(customer: CustomerData, required: PackedStringArray) -> Dictionary:
 	var data := load_file(customer.id)
 	var sections: Dictionary = data.sections
 	var rows: PackedStringArray = []
+	var hints: PackedStringArray = []
 	rows.append_array(_pick(sections.get("opener", [])))
 	if not customer.hidden_recipe:
 		var followups: Array = sections.get("followup", [])
@@ -31,11 +35,16 @@ static func build(customer: CustomerData, required: PackedStringArray) -> String
 		for i in hinted.size():
 			if i > 0:
 				rows.append_array(_pick(followups))
-			rows.append_array(_pick(sections.get(hinted[i], [])))
+			var hint := _pick(sections.get(hinted[i], []))
+			rows.append_array(hint)
+			hints.append_array(_customer_rows(hint))
 	rows.append_array(_pick(sections.get("closer", [])))
 	if rows.is_empty():
 		rows.append("...")
-	return "\n".join(rows)
+	if hints.is_empty():
+		var said := _customer_rows(rows)
+		hints.append(said[said.size() - 1] if not said.is_empty() else "...")
+	return {"text": "\n".join(rows), "hints": hints}
 
 
 ## Which ingredients get hinted this visit: HINTS_PER_VISIT random ones from the
@@ -126,6 +135,15 @@ static func _add_option(sections: Dictionary, section: String, option: PackedStr
 	if section.is_empty() or option.is_empty():
 		return
 	(sections[section] as Array).append(option)
+
+
+## The rows the customer says (not the shrimp's).
+static func _customer_rows(rows: PackedStringArray) -> PackedStringArray:
+	var out: PackedStringArray = []
+	for row in rows:
+		if not row.to_lower().begins_with("shrimp:"):
+			out.append(row)
+	return out
 
 
 static func _pick(options: Array) -> PackedStringArray:

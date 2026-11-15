@@ -26,7 +26,7 @@ func _ready() -> void:
 	_patience.add_theme_stylebox_override("fill", _fill_style)
 
 
-## `what_they_said` is the customer's side of the conversation.
+## `what_they_said` is the customer's hint lines (see Dialogue.build).
 func show_order(customer: CustomerData, what_they_said: String, required: PackedStringArray, revealed: int, hidden: bool, patience: float) -> void:
 	_title.text = "ORDER  -  %s" % customer.display_name
 	_body.text = "\"%s\"" % what_they_said

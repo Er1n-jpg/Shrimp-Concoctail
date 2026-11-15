@@ -347,12 +347,10 @@ func _next_customer() -> void:
 	_last_seen[_customer_data.id] = GameState.served
 	# A fresh conversation every visit: hints for 2 of the 3 ingredients, random
 	# wording (data/dialogue/<customer id>.txt).
-	_lines = _parse_conversation(Dialogue.build(_customer_data, _required))
-	var said: PackedStringArray = []
-	for line in _lines:
-		if not line.shrimp:
-			said.append(line.text)
-	_what_they_said = "  ".join(said)
+	var conversation := Dialogue.build(_customer_data, _required)
+	_lines = _parse_conversation(conversation.text)
+	# The ticket only keeps the hint lines, as a reminder of the order.
+	_what_they_said = "  ".join(conversation.hints)
 	_tray.reset()
 	_tray.max_payout = GameState.max_payout(_customer_data)
 	_set_greyscale(_customer_data.greyscale)
