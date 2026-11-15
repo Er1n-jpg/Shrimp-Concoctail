@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgqw0dy0siq75"
-path="res://.godot/imported/espressomaker.png-f634155edcb02389e3889b10a2446cc5.ctex"
+uid="uid://c2w0qxyfeww2l"
+path="res://.godot/imported/coffee_machine.png-c0afcb96dc43ca16958a670de33e8fab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredients/espressomaker.png"
-dest_files=["res://.godot/imported/espressomaker.png-f634155edcb02389e3889b10a2446cc5.ctex"]
+source_file="res://assets/ui/coffee_machine.png"
+dest_files=["res://.godot/imported/coffee_machine.png-c0afcb96dc43ca16958a670de33e8fab.ctex"]
 
 [params]
 

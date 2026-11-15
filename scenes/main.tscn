@@ -218,10 +218,10 @@ stretch = 0
 
 [node name="CoffeeMachine" type="Control" parent="World/BarView"]
 anchors_preset = 0
-offset_left = 2140.0
-offset_top = 420.0
-offset_right = 2520.0
-offset_bottom = 652.0
+offset_left = 2178.0
+offset_top = 384.0
+offset_right = 2434.0
+offset_bottom = 640.0
 mouse_filter = 2
 script = ExtResource("2_art")
 art_path = "res://assets/ui/coffee_machine"
@@ -229,7 +229,6 @@ placeholder_color = Color(0.369, 0.325, 0.294, 1)
 placeholder_border_color = Color(0.051, 0.016, 0.008, 1)
 placeholder_corner_radius = 20
 placeholder_shadow = 10
-stretch = 0
 
 [node name="CupStack" type="Button" parent="World/BarView"]
 layout_mode = 0
@@ -321,17 +320,17 @@ ingredient = ExtResource("ing_mayo")
 
 [node name="Espresso" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
 layout_mode = 0
-offset_left = 2160.0
+offset_left = 1995.0
 offset_top = 440.0
-offset_right = 2320.0
+offset_right = 2155.0
 offset_bottom = 640.0
 ingredient = ExtResource("ing_espresso")
 
 [node name="Matcha" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
 layout_mode = 0
-offset_left = 2340.0
+offset_left = 2457.0
 offset_top = 440.0
-offset_right = 2500.0
+offset_right = 2617.0
 offset_bottom = 640.0
 ingredient = ExtResource("ing_matcha")
 

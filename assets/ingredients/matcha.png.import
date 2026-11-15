@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bekg26pfsn5yx"
-path="res://.godot/imported/spoon-matcha.png-58d8763acb91d5ad89bae389b2a8e050.ctex"
+uid="uid://dwuem8y4yeej5"
+path="res://.godot/imported/matcha.png-ba66275baf5c538617a3756699e78bbc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredients/spoon-matcha.png"
-dest_files=["res://.godot/imported/spoon-matcha.png-58d8763acb91d5ad89bae389b2a8e050.ctex"]
+source_file="res://assets/ingredients/matcha.png"
+dest_files=["res://.godot/imported/matcha.png-ba66275baf5c538617a3756699e78bbc.ctex"]
 
 [params]
 

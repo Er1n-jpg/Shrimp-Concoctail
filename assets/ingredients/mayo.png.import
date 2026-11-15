@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b66v1q7cpyvok"
-path="res://.godot/imported/toronto_dude_ig.png-c9686420259ba5197f5741a493b27eb6.ctex"
+uid="uid://c0rshrij20yk4"
+path="res://.godot/imported/mayo.png-c0c22676d119b9f4d9f4ac9cde65338c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/customers/toronto_dude_ig.png"
-dest_files=["res://.godot/imported/toronto_dude_ig.png-c9686420259ba5197f5741a493b27eb6.ctex"]
+source_file="res://assets/ingredients/mayo.png"
+dest_files=["res://.godot/imported/mayo.png-c0c22676d119b9f4d9f4ac9cde65338c.ctex"]
 
 [params]
 

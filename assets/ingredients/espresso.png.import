@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6bdg2xj7nn0c"
-path="res://.godot/imported/mayonnaise.png-ccfe8ce1cd15bb574eac6422c7614bde.ctex"
+uid="uid://fipaer3jxi6p"
+path="res://.godot/imported/espresso.png-db2d17de975cadaca7b23852d980c2ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredients/mayonnaise.png"
-dest_files=["res://.godot/imported/mayonnaise.png-ccfe8ce1cd15bb574eac6422c7614bde.ctex"]
+source_file="res://assets/ingredients/espresso.png"
+dest_files=["res://.godot/imported/espresso.png-db2d17de975cadaca7b23852d980c2ed.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cydioyjnxhp06"
-path="res://.godot/imported/LinkedIn_Warrior.png-60ec5eea04a603a30454a3cc54410a95.ctex"
+uid="uid://b6tk4j5yg443r"
+path="res://.godot/imported/project_not_working.png-791baeee612cbe57df8aa81ba75009e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/customers/LinkedIn_Warrior.png"
-dest_files=["res://.godot/imported/LinkedIn_Warrior.png-60ec5eea04a603a30454a3cc54410a95.ctex"]
+source_file="res://assets/customers/project_not_working.png"
+dest_files=["res://.godot/imported/project_not_working.png-791baeee612cbe57df8aa81ba75009e1.ctex"]
 
 [params]
 

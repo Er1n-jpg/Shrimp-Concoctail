@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceu16yiyuf75b"
-path="res://.godot/imported/spoon-espresso.png-29f33943ee3039318a75e1911b995aee.ctex"
+uid="uid://pjuxmnoas8s7"
+path="res://.godot/imported/linkedin_warrior.png-ced7cfc203d85617c5a3145862764386.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingredients/spoon-espresso.png"
-dest_files=["res://.godot/imported/spoon-espresso.png-29f33943ee3039318a75e1911b995aee.ctex"]
+source_file="res://assets/customers/linkedin_warrior.png"
+dest_files=["res://.godot/imported/linkedin_warrior.png-ced7cfc203d85617c5a3145862764386.ctex"]
 
 [params]
 
