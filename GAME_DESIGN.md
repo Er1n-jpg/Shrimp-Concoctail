@@ -19,7 +19,7 @@ REVIEW  customer reacts, 1–5★ review, paid (base price × star multiplier) �
 **Bar view** (below): 3840px wide (2 screens), scrolls with A/D, arrow keys, mouse wheel, dragging empty space, or resting the mouse at a screen edge. A scroll bar shows where you are. Left to right: cup stack + ice chest → cans → jars/bowls → coffee & matcha machine → dairy → sauces, with decorative bottles on the back shelves.
 
 Pinned on screen while at the bar:
-- **Order ticket** (top-right): recipe icons, the Vibecoder's Ask button, and the **patience bar**. Patience only runs at the bar.
+- **Order ticket** (top-right): what the customer said (never the recipe, so you have to work it out), the Vibecoder's Ask button with what it revealed, and the **patience bar**. Patience only runs at the bar.
 - **Cup tray** (bottom-left): the cup, icons of what's in it, cup cost vs. 5★ payout, and Shake / Serve / Trash.
 
 Steps:
@@ -144,7 +144,9 @@ The star rating picks the review line and sets the multiplier.
 
 ### Conversations
 
-Each customer has 2 conversations in `data/customers/*.tres` (`conversations`), one line per row; rows starting with `shrimp:` are the shrimp's lines. The shrimp lines are first drafts. Edit freely.
+Each customer has 2 conversations in `data/customers/*.tres` (`conversations`), one line per row; rows starting with `shrimp:` are the shrimp's lines.
+
+**Customers never name ingredients.** They hint ("a beer as dark as my soul", "the salty black sauce from the sushi place", "a frozen scoop of dessert") and players infer the recipe. Liked and hated ingredients get hints too. The only exception is the Vibecoder: asking a clarifying question reveals a real ingredient name. All lines are first drafts. Edit freely.
 
 ### Reviews
 

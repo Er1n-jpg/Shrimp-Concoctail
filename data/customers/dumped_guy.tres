@@ -6,7 +6,7 @@
 script = ExtResource("1_script")
 id = "dumped_guy"
 display_name = "Dumped Guy"
-conversations = PackedStringArray("she left me.\nshrimp: oof. what can i get you?\nRingtone Ball. Bud Darks. make it sweet. make me forget her name.", "pregaming the rest of my life.\nshrimp: that's... a lot of pregaming.\nRingtone Ball and Bud Darks. and if i see ANYTHING green i'm leaving.")
+conversations = PackedStringArray("she left me.\nshrimp: oof. what can i get you?\nsomething pink in a can that gets me buzzing. and a beer as dark as my soul.\nshrimp: anything else?\nmake it sweet. like she used to be.", "pregaming the rest of my life.\nshrimp: that's... a lot of pregaming.\nthat round pink can of regret. and the darkest beer you've got.\nand if i see anything green and healthy i'm leaving.")
 required = PackedStringArray("ringtone_ball", "bud_darks")
 liked = PackedStringArray("ice_cream", "sugar")
 hated = PackedStringArray("matcha")

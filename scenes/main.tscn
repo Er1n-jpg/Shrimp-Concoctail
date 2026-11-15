@@ -394,10 +394,10 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Ticket" parent="UI/BarUI" instance=ExtResource("13_ticket")]
-offset_left = 1432.0
+offset_left = 1324.0
 offset_top = 76.0
-offset_right = 1902.0
-offset_bottom = 291.0
+offset_right = 1904.0
+offset_bottom = 361.0
 
 [node name="CupTray" parent="UI/BarUI" instance=ExtResource("14_tray")]
 offset_left = 16.0

@@ -6,7 +6,7 @@
 script = ExtResource("1_script")
 id = "performative_guy"
 display_name = "Performative Guy"
-conversations = PackedStringArray("matcha, but make it spicy.\nshrimp: spicy... matcha?\nwasabi. only green things, obviously. my labubu is watching.", "i need more green in my life.\nshrimp: have you considered touching grass?\nmatcha and wasabi. everything green. it's for my letterboxd.")
+conversations = PackedStringArray("i only drink things that match my tote bag.\nshrimp: ...which is?\ngreen. the fancy whisked tea. but spicy, like sushi spicy.\nshrimp: anything else?\nonly green things, obviously. my labubu is watching.", "i need more green in my life.\nshrimp: have you considered touching grass?\nthe ceremonial tea powder. and that green paste that clears your sinuses.\nsomething briny and green would be a bonus. it's for my letterboxd.")
 required = PackedStringArray("matcha", "wasabi")
 liked = PackedStringArray("pickle_juice")
 rule = 1

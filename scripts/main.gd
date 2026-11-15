@@ -33,6 +33,8 @@ var _revealed := 0
 ## [{ "shrimp": bool, "text": String }]
 var _lines: Array[Dictionary] = []
 var _line_index := 0
+## The customer's side of the conversation, shown on the ticket at the bar.
+var _what_they_said := ""
 var _scroll_x := 0.0
 var _dragging := false
 var _review_timer: SceneTreeTimer
@@ -198,6 +200,11 @@ func _next_customer() -> void:
 	_last_seen[_customer_data.id] = GameState.served
 	var convos := _customer_data.conversations
 	_lines = _parse_conversation(convos[randi() % convos.size()] if not convos.is_empty() else "...")
+	var said: PackedStringArray = []
+	for line in _lines:
+		if not line.shrimp:
+			said.append(line.text)
+	_what_they_said = "  ".join(said)
 	_tray.reset()
 	_tray.max_payout = GameState.max_payout(_customer_data)
 	_ice_chest.set_label(ICE_LABEL_OFF)
@@ -259,7 +266,7 @@ func _go_to_bar() -> void:
 	_bubble.hide_bubble()
 	_shrimp_box.hide_bubble()
 	_talk_hint.visible = false
-	_ticket.show_order(_customer_data, _required, _revealed, _customer_data.hidden_recipe, GameState.patience())
+	_ticket.show_order(_customer_data, _what_they_said, _required, _revealed, _customer_data.hidden_recipe, GameState.patience())
 	_scroll_x = 0.0
 	_scroller.ratio = 0.0
 	_set_bar_ui(true)
@@ -341,7 +348,7 @@ func _ask() -> void:
 		return
 	_revealed += 1
 	_ticket.spend(GameState.ASK_PATIENCE_COST)
-	_ticket.set_icons(_required, _revealed, true)
+	_ticket.set_revealed(_required, _revealed, true)
 	Sfx.play("ask")
 	_float_text(_fx_ui, "-%ds" % int(GameState.ASK_PATIENCE_COST), _ticket.global_position + Vector2(_ticket.size.x / 2.0, _ticket.size.y + 40.0), Palette.ORANGE)
 

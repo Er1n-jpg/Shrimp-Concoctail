@@ -16,7 +16,8 @@ enum Rule {
 @export var display_name: String = ""
 ## One conversation is picked at random each visit. Each entry is a whole
 ## conversation, one line per row (\n). Rows starting with "shrimp:" are said by
-## the shrimp; every other row is said by the customer. End on the order.
+## the shrimp; every other row is said by the customer. Hint at the ingredients
+## ("a beer as dark as my soul") but never name them: players have to work it out.
 @export var conversations: PackedStringArray = []
 
 @export_group("Recipe")

@@ -1,13 +1,11 @@
 class_name OrderTicket
 extends Control
-## Pinned top-right while you're at the bar: who ordered, the recipe icons,
-## the Vibecoder's Ask button, and the patience bar (which only runs at the bar).
+## Pinned top-right while you're at the bar: who ordered and what they SAID (never the
+## recipe itself, so players have to work it out), the Vibecoder's Ask button with
+## whatever it revealed, and the patience bar (which only runs at the bar).
 
 signal patience_ran_out
 signal ask_pressed
-
-const ICON_SIZE := Vector2(64, 64)
-const HIDDEN_COLOR := Palette.SLATE
 
 var _total := 1.0
 var _left := 0.0
@@ -15,7 +13,8 @@ var _running := false
 var _fill_style := StyleBoxFlat.new()
 
 @onready var _title: Label = $Title
-@onready var _icons: HBoxContainer = $Icons
+@onready var _body: Label = $Body
+@onready var _clues: Label = $Clues
 @onready var _ask_button: Button = $AskButton
 @onready var _patience: ProgressBar = $Patience
 
@@ -27,33 +26,34 @@ func _ready() -> void:
 	_patience.add_theme_stylebox_override("fill", _fill_style)
 
 
-func show_order(customer: CustomerData, required: PackedStringArray, revealed: int, hidden: bool, patience: float) -> void:
+## `what_they_said` is the customer's side of the conversation.
+func show_order(customer: CustomerData, what_they_said: String, required: PackedStringArray, revealed: int, hidden: bool, patience: float) -> void:
 	_title.text = "ORDER  -  %s" % customer.display_name
-	set_icons(required, revealed, hidden)
+	_body.text = "\"%s\"" % what_they_said
+	set_revealed(required, revealed, hidden)
 	_total = patience
 	_left = patience
 	_running = false
 	_update_bar()
 
 
-func set_icons(required: PackedStringArray, revealed: int, hidden: bool) -> void:
-	for child in _icons.get_children():
-		child.queue_free()
-	for i in required.size():
-		var slot := ArtSlot.new()
-		slot.custom_minimum_size = ICON_SIZE
-		slot.placeholder_font_size = 15
-		slot.placeholder_corner_radius = 8
-		slot.placeholder_border_width = 3
-		var ing := Database.ingredient(required[i])
-		if (hidden and i >= revealed) or ing == null:
-			slot.set_art("", HIDDEN_COLOR, "?")
-			slot.placeholder_font_size = 40
-		else:
-			slot.set_art(Art.ingredient(ing.id), ing.color, ing.display_name)
-			slot.tooltip_text = ing.display_name
-		_icons.add_child(slot)
+## Hidden recipes (Vibecoder): show the ingredients revealed by asking so far.
+func set_revealed(required: PackedStringArray, revealed: int, hidden: bool) -> void:
+	_clues.visible = hidden
 	_ask_button.visible = hidden and revealed < required.size()
+	if not hidden:
+		return
+	var names: PackedStringArray = []
+	for i in mini(revealed, required.size()):
+		var ing := Database.ingredient(required[i])
+		names.append(ing.display_name if ing != null else required[i])
+	var left := required.size() - revealed
+	if names.is_empty():
+		_clues.text = "No idea what they want. Ask?"
+	elif left > 0:
+		_clues.text = "Clarified: %s  (+%d more)" % [", ".join(names), left]
+	else:
+		_clues.text = "Clarified: %s" % ", ".join(names)
 
 
 func can_ask() -> bool:

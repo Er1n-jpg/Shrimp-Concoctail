@@ -28,7 +28,7 @@ Until a file exists, the game shows a colored placeholder box in its place.
 | `soy_sauce.png` | Soy Sauce |
 | `pickle_juice.png` | Pickle Juice |
 
-The same images show up at 64×64 on the order ticket and in the cup tray.
+The same images show up at 64×64 in the cup tray (what you've poured).
 
 ## `customers/` (64×64 art, shown at 8× = 512px in the talk view)
 

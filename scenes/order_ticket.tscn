@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://scripts/ui/art_slot.gd" id="2_art"]
 
 [node name="OrderTicket" type="Control"]
-offset_right = 470.0
-offset_bottom = 215.0
+offset_right = 580.0
+offset_bottom = 285.0
 mouse_filter = 2
 script = ExtResource("1_script")
 
@@ -31,46 +31,61 @@ pixel_scale = 5
 [node name="Title" type="Label" parent="."]
 offset_left = 24.0
 offset_top = 12.0
-offset_right = 446.0
-offset_bottom = 50.0
+offset_right = 556.0
+offset_bottom = 48.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.176, 0.059, 0.016, 1)
 theme_override_font_sizes/font_size = 31
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Icons" type="HBoxContainer" parent="."]
+[node name="Body" type="Label" parent="."]
 offset_left = 24.0
-offset_top = 56.0
-offset_right = 320.0
-offset_bottom = 120.0
+offset_top = 50.0
+offset_right = 556.0
+offset_bottom = 176.0
 mouse_filter = 2
-theme_override_constants/separation = 8
+theme_override_colors/font_color = Color(0.176, 0.059, 0.016, 1)
+theme_override_font_sizes/font_size = 24
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 3
+
+[node name="Clues" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 178.0
+offset_right = 420.0
+offset_bottom = 224.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.773, 0.243, 0.133, 1)
+theme_override_font_sizes/font_size = 24
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="AskButton" type="Button" parent="."]
-offset_left = 326.0
-offset_top = 58.0
-offset_right = 446.0
-offset_bottom = 120.0
-theme_override_font_sizes/font_size = 26
+offset_left = 428.0
+offset_top = 176.0
+offset_right = 556.0
+offset_bottom = 226.0
+theme_override_font_sizes/font_size = 24
 text = "Ask [Q]"
 
 [node name="PatienceLabel" type="Label" parent="."]
 offset_left = 24.0
-offset_top = 128.0
-offset_right = 446.0
-offset_bottom = 158.0
+offset_top = 226.0
+offset_right = 556.0
+offset_bottom = 252.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.369, 0.325, 0.294, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
 text = "Patience"
 vertical_alignment = 1
 
 [node name="Patience" type="ProgressBar" parent="."]
 offset_left = 24.0
-offset_top = 160.0
-offset_right = 446.0
-offset_bottom = 186.0
+offset_top = 252.0
+offset_right = 556.0
+offset_bottom = 274.0
 mouse_filter = 2
 value = 100.0
 show_percentage = false
