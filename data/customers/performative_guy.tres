@@ -6,8 +6,6 @@
 script = ExtResource("1_script")
 id = "performative_guy"
 display_name = "Performative Guy"
-conversations = PackedStringArray("have you read the newest feminist literature? it’s just so wonderful.\nshrimp: i’m. i’m afraid not.\nlabubu, really? i fear you’re not indie enough for me! i will say though, if you could get me something to match my green tote bag, I might reconsider that.", "guess what i’ve got playing in my wired earbuds? clairo, of course! i don’t know how people can listen to anything else.\nshrimp: have you actually talked with anyone in the last decade?\nwoah there, i’m too soft to understand what you’re saying. it almost sounds like you’re telling me to touch grass, but all i need is the grass in my drink.")
-required = PackedStringArray("matcha", "wasabi")
-liked = PackedStringArray("pickle_juice")
+required = PackedStringArray("matcha", "wasabi", "pickle_juice")
 rule = 1
 reviews = PackedStringArray("i wish period cramps existed", "im going to get period cramps from this", "this drink doesn't belong in my tote bag", "oh man you definitely read feminist literature", "put more matcha! put more matcha! put more matcha!")

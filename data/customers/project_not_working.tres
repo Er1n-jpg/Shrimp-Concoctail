@@ -6,6 +6,5 @@
 script = ExtResource("1_script")
 id = "project_not_working"
 display_name = "Project Not Working"
-conversations = PackedStringArray("git commit \“OMD WHY DOESN’T IT WORK\”\nshrimp: Tried pulling from origin? \nHow about I pull a suspiciously dark, definitely not alcoholic beverage and a white can of BS from YOUR origin", "404 not down to existence how about I 404 my will to live\nshrimp: 401 Unauthorized. #IDGAF sorry bro\n418 but instead of a teapot just load it up some dark alcoholic beverage and like a white caffeinated drink.",”Im about to jump off a cliff why isn’t my code compiling\nshrimp: Hi i’m about to jump off a cliff. Idk bro\nOk well gimme like idk a concoction to wreck my arteries, something white to bring me up and something dark to bring me down that cliff :D”)
-liked = PackedStringArray("espresso")
+required = PackedStringArray("white_monster", "bud_darks", "espresso")
 reviews = PackedStringArray("maybe it's time to vibe code it all", "bomboclat", "ummmmmmm", "will you pray for my project thanks", "tyty i've just gained the energy to refactor my entire codebase and rewrite all of my functions one hour before the deadline.")

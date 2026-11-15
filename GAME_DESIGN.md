@@ -131,21 +131,25 @@ The star rating picks the review line and sets the multiplier.
 
 | Customer | Required | Liked | Hated | Rule / Gimmick |
 |---|---|---|---|---|
-| **Dumped Guy** (pre-gamer) | Ringtone Ball, Bud Darks | Ice cream, Sugar | Matcha | Whole screen goes **greyscale** while he's there. +0.5 per extra alcohol pour beyond required (max +1) |
-| **Project Not Working** | White Monster, Bud Darks | Espresso | — | Panicked order |
-| **Performative Guy** (Matcha Labubu) | Matcha, Wasabi | Pickle Juice | — | **Green ingredients only**: −1 per non-green ingredient |
-| **LinkedIn Warrior** | Espresso, Milk, Soy Sauce, Ice cream | — | Bud Darks | Orders by reciting a LinkedIn post |
+| **Dumped Guy** (pre-gamer) | Ringtone Ball, Bud Darks, Sugar | Ice cream | Matcha | Whole screen goes **greyscale** while he's there. +0.5 per extra alcohol pour beyond required (max +1) |
+| **Project Not Working** | White Monster, Bud Darks, Espresso | — | — | Panicked order |
+| **Performative Guy** (Matcha Labubu) | Matcha, Wasabi, Pickle Juice | — | — | **Green ingredients only**: −1 per non-green ingredient |
+| **LinkedIn Warrior** | Espresso, Soy Sauce, Ice cream | Milk | Bud Darks | Orders by reciting a LinkedIn post |
 | **Vibecoder** | 2–3 random (hidden) | — | — | Order: "Hey Claude what should I drink" → "what?" → "Give me a drink." The **Ask clarifying question** button reveals one ingredient and costs 3s of patience |
-| **Toronto Guy** | Diet Coke, Ice cream | — | Wasabi | Slang order |
+| **Toronto Guy** | Diet Coke, Ice cream, Protein Shake | — | Wasabi | Slang order |
 | **Hensen Juang** | Espresso, Protein Shake, Soy Sauce | — | — | **Rare** (at most once every 10 customers). Base price ×2 |
 
 **Spawning:** weighted random, never the same customer twice in a row.
 
 ### Conversations
 
-Each customer has 2 conversations in `data/customers/*.tres` (`conversations`), one line per row; rows starting with `shrimp:` are the shrimp's lines.
+Every recipe is a fixed 3 ingredients, and every visit gets a freshly assembled conversation: a random opener, then hints for **2 of the 3** ingredients (which 2 is random, and so is the wording), with a shrimp follow-up in between, then an optional closer. Players only ever hear about two; since the recipe never changes, regulars can remember the third.
 
-**Customers never name ingredients.** They hint ("a beer as dark as my soul", "the salty black sauce from the sushi place", "a frozen scoop of dessert") and players infer the recipe. Liked and hated ingredients get hints too. The only exception is the Vibecoder: asking a clarifying question reveals a real ingredient name. All lines are first drafts. Edit freely.
+The lines live in plain text files, one per customer: `data/dialogue/<customer id>.txt`. The format is explained in `data/dialogue/README.md`. In short: `[opener]`, `[followup]`, `[closer]` and one `[ingredient_id]` section of hint lines per ingredient, with options separated by `---`. An optional `signature: <ingredient>` line makes one ingredient a never-hinted "usual". The game warns at startup about typos or missing hints.
+
+**Customers never name ingredients.** They hint ("a beer as dark as my soul", "the salty black sauce from the sushi place", "a frozen scoop of dessert") and players infer the recipe. The only exception is the Vibecoder: random hidden recipe, openers only, and asking a clarifying question reveals a real ingredient name.
+
+**Exporting:** the dialogue files are `.txt`, which Godot doesn't pack by default. In the export preset, add `*.txt` under Resources → "Filters to export non-resource files/folders".
 
 ### Reviews
 

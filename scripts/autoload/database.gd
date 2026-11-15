@@ -60,5 +60,5 @@ func _check_data() -> void:
 					push_warning("Customer '%s' uses unknown ingredient '%s'" % [c.id, id])
 		if c.reviews.size() != 5:
 			push_warning("Customer '%s' should have exactly 5 reviews (has %d)" % [c.id, c.reviews.size()])
-		if c.conversations.is_empty():
-			push_warning("Customer '%s' has no conversations" % c.id)
+		for problem in Dialogue.problems(c):
+			push_warning("Dialogue for '%s': %s" % [c.id, problem])

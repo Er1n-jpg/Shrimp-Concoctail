@@ -6,9 +6,8 @@
 script = ExtResource("1_script")
 id = "dumped_guy"
 display_name = "Dumped Guy"
-conversations = PackedStringArray("she. she just left! didn’t even hesitate… all i have left of her is a red exclamation mark…\nshrimp: i’m sorry for your loss…?\nwhERE DID YOU GOOOOOO… i need to drown my sorrows. please. make me forget her.", "she blocked me EVERYwhere. no, i’m thinking of this all wrong, that just means she wants to see me in person!\nshrimp: i don’t think it does…\nnono, i just need to build up my courage. help me! i need to face her, i can’t be afraid!")
-required = PackedStringArray("ringtone_ball", "bud_darks")
-liked = PackedStringArray("ice_cream", "sugar")
+required = PackedStringArray("ringtone_ball", "bud_darks", "sugar")
+liked = PackedStringArray("ice_cream")
 hated = PackedStringArray("matcha")
 rule = 2
 reviews = PackedStringArray("your drink had even fewer warning signs than our breakup... how could she do this to me?", "were we doomed from the start? was my love all a dream?", "plain. like my life after she's left me", "i should reach out to her. maybe she blocked me by accident.", "BRO BRO BRO BRO SHE TEXTED ME BACK nvm that's my mom")

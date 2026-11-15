@@ -1,0 +1,13 @@
+# The shrimp's default lines, used by every customer whose file has no
+# [followup] section of its own. Options are separated by ---
+
+[followup]
+shrimp: anything else?
+---
+shrimp: and?
+---
+shrimp: ...okay. what else?
+---
+shrimp: is that it?
+---
+shrimp: go on.

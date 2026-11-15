@@ -1,0 +1,34 @@
+# PROJECT NOT WORKING
+# Recipe (in project_not_working.tres): white_monster, bud_darks, espresso
+# Format help: data/dialogue/README.md
+
+[opener]
+git commit "OMD WHY DOESN'T IT WORK"
+shrimp: Tried pulling from origin?
+---
+404 not down to existence how about I 404 my will to live
+shrimp: 401 Unauthorized. #IDGAF sorry bro
+---
+Im about to jump off a cliff why isn't my code compiling
+shrimp: Hi i'm about to jump off a cliff. Idk bro
+
+[white_monster]
+How about I pull a white can of BS from YOUR origin
+---
+just load it up with like a white caffeinated drink.
+---
+something white to bring me up. the can with the claw marks.
+
+[bud_darks]
+and a suspiciously dark, definitely not alcoholic beverage.
+---
+418 but instead of a teapot just load it up with some dark alcoholic beverage.
+---
+something dark to bring me down that cliff :D
+
+[espresso]
+and a shot of the bean juice if you love me.
+---
+the tiny dark shot from the machine. i have 9 hours of debugging left.
+---
+something out of that machine that hits like a segfault.
