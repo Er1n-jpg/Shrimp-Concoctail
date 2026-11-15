@@ -2,14 +2,20 @@ class_name BarBackdrop
 extends Control
 ## Cozy speakeasy back wall drawn in code: bottle shelves, pendant lamps and a neon sign.
 ## Hides itself once res://assets/ui/background.png exists.
+## The sign shows res://assets/ui/logo.png when it exists (neon_text is the fallback).
 
 @export_multiline var neon_text: String = "SHRIMP\nCOCKTAIL"
 @export var neon_rect: Rect2 = Rect2(1505, 92, 360, 150)
+## Swap the neon text for the logo image when there is one.
+@export var use_logo: bool = true
 @export var lamp_xs: PackedFloat32Array = PackedFloat32Array([70.0, 565.0, 1472.0])
 @export var shelf_ys: PackedFloat32Array = PackedFloat32Array([250.0, 395.0, 540.0])
 @export var bottle_seed: int = 7
 ## Only the top N shelves get code-drawn bottles (-1 = all). Lower shelves stay clear for real items.
 @export var bottle_shelves: int = -1
+
+## Kept on the node: a texture only referenced inside _draw() gets freed and draws white.
+var _logo: Texture2D
 
 const BOTTLE_COLORS := [Palette.MAROON, Palette.GREEN, Palette.RUST, Palette.ORANGE, Palette.TAUPE, Palette.SLATE, Palette.PINK, Palette.BUTTER]
 
@@ -17,6 +23,7 @@ const BOTTLE_COLORS := [Palette.MAROON, Palette.GREEN, Palette.RUST, Palette.ORA
 func _ready() -> void:
 	mouse_filter = MOUSE_FILTER_IGNORE
 	visible = Art.load_texture(Art.ui("background")) == null
+	_logo = Art.load_texture(Art.ui("logo")) if use_logo else null
 	resized.connect(queue_redraw)
 
 
@@ -110,6 +117,9 @@ func _draw_lamps() -> void:
 func _draw_neon() -> void:
 	if neon_text.is_empty():
 		return
+	if _logo != null:
+		_draw_logo(_logo)
+		return
 	# Backing board with a pink glow edge
 	draw_rect(neon_rect, Color(Palette.INK, 0.7))
 	for i in 4:
@@ -126,3 +136,11 @@ func _draw_neon() -> void:
 		for glow in [18, 10]:
 			draw_string_outline(font, pos, lines[i], HORIZONTAL_ALIGNMENT_CENTER, neon_rect.size.x, font_size, glow, Color(Palette.PINK, 0.18))
 		draw_string(font, pos, lines[i], HORIZONTAL_ALIGNMENT_CENTER, neon_rect.size.x, font_size, Palette.BLUSH)
+
+
+## The logo at the biggest whole-number scale that fits the sign's width, centered on it.
+func _draw_logo(logo: Texture2D) -> void:
+	var zoom := maxf(floorf(neon_rect.size.x / logo.get_width()), 1.0)
+	var logo_size := logo.get_size() * zoom
+	var pos := (neon_rect.get_center() - logo_size / 2.0).round()
+	draw_texture_rect(logo, Rect2(pos, logo_size), false)
