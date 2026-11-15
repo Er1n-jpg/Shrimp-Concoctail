@@ -12,17 +12,16 @@ script = ExtResource("1_script")
 
 [node name="Art" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 10.0
-offset_top = 4.0
-offset_right = 150.0
-offset_bottom = 124.0
+offset_left = 16.0
+offset_right = 144.0
+offset_bottom = 128.0
 mouse_filter = 2
 script = ExtResource("2_art")
 
 [node name="NameLabel" type="Label" parent="."]
-offset_top = 124.0
+offset_top = 127.0
 offset_right = 160.0
-offset_bottom = 154.0
+offset_bottom = 156.0
 theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 26
@@ -30,9 +29,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PriceLabel" type="Label" parent="."]
-offset_top = 152.0
+offset_top = 154.0
 offset_right = 160.0
-offset_bottom = 198.0
+offset_bottom = 200.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 44

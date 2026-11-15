@@ -5,7 +5,7 @@ extends Control
 
 signal ask_pressed
 
-const TICKET_ICON_SIZE := Vector2(76, 76)
+const TICKET_ICON_SIZE := Vector2(64, 64)
 const HIDDEN_COLOR := Palette.SLATE
 
 @onready var _text: Label = $Text
