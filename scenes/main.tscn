@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c0r4bhukfbwkl"]
+[gd_scene format=3 uid="uid://c0r4bhukfbwkl"]
 
 [ext_resource type="Script" uid="uid://c6ga5kbuh80wq" path="res://scripts/main.gd" id="1_main"]
 [ext_resource type="Script" uid="uid://ggjkq1f4r1v4" path="res://scripts/ui/art_slot.gd" id="2_art"]
@@ -13,9 +13,13 @@
 [ext_resource type="Script" uid="uid://ldxv8p1dq15x" path="res://scripts/ui/bar_backdrop.gd" id="11_backdrop"]
 [ext_resource type="Script" uid="uid://wbv5jcxbwio7" path="res://scripts/ui/counter_backdrop.gd" id="12_counter"]
 [ext_resource type="PackedScene" uid="uid://wymdd3r62orr" path="res://scenes/order_ticket.tscn" id="13_ticket"]
-[ext_resource type="PackedScene" path="res://scenes/cup_tray.tscn" id="14_tray"]
+[ext_resource type="PackedScene" uid="uid://8pjdcwwjy4w2" path="res://scenes/cup_tray.tscn" id="14_tray"]
 [ext_resource type="Script" uid="uid://b1bip84evftjm" path="res://scripts/ui/pickup_button.gd" id="15_pickup"]
 [ext_resource type="Script" uid="uid://do62epcpdywva" path="res://scripts/ui/bar_scroller.gd" id="16_scroller"]
+[ext_resource type="Script" uid="uid://bqvjo06jpbuf2" path="res://scripts/ui/station_arrow.gd" id="17_arrow"]
+[ext_resource type="Script" uid="uid://bnxm68j26obnx" path="res://scripts/ui/station_progress.gd" id="18_dots"]
+[ext_resource type="Script" uid="uid://casq2vtv01kr8" path="res://scripts/ui/station_dividers.gd" id="19_dividers"]
+[ext_resource type="Script" uid="uid://3k377sbtxkwf" path="res://scripts/ui/soft_shadow.gd" id="20_shadow"]
 [ext_resource type="Resource" path="res://data/ingredients/bud_darks.tres" id="ing_bud_darks"]
 [ext_resource type="Resource" path="res://data/ingredients/diet_coke.tres" id="ing_diet_coke"]
 [ext_resource type="Resource" path="res://data/ingredients/espresso.tres" id="ing_espresso"]
@@ -30,12 +34,13 @@
 [ext_resource type="Resource" path="res://data/ingredients/sugar.tres" id="ing_sugar"]
 [ext_resource type="Resource" path="res://data/ingredients/wasabi.tres" id="ing_wasabi"]
 [ext_resource type="Resource" path="res://data/ingredients/white_monster.tres" id="ing_white_monster"]
+[ext_resource type="Script" path="res://scripts/ui/coffee_machine.gd" id="21_machine"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_greyscale"]
 shader = ExtResource("10_greyscale")
 shader_parameter/amount = 0.0
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=1981058670]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,22 +50,22 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_main")
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="." unique_id=1198776722]
 anchor_mode = 0
 
-[node name="World" type="Control" parent="."]
+[node name="World" type="Control" parent="." unique_id=1671906458]
 anchors_preset = 0
-offset_right = 3840.0
+offset_right = 7680.0
 offset_bottom = 2160.0
 mouse_filter = 2
 
-[node name="TalkView" type="Control" parent="World"]
+[node name="TalkView" type="Control" parent="World" unique_id=1128755693]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
 
-[node name="Backdrop" type="Control" parent="World/TalkView"]
+[node name="Backdrop" type="Control" parent="World/TalkView" unique_id=1807783412]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,7 +78,7 @@ neon_rect = Rect2(70, 96, 400, 150)
 lamp_xs = PackedFloat32Array(560, 960, 1340)
 shelf_ys = PackedFloat32Array(330, 520, 710)
 
-[node name="Background" type="Control" parent="World/TalkView"]
+[node name="Background" type="Control" parent="World/TalkView" unique_id=1249584408]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,7 +92,7 @@ placeholder_color = Color(0, 0, 0, 0)
 placeholder_border_width = 0
 stretch = 0
 
-[node name="Shrimp" type="Control" parent="World/TalkView"]
+[node name="Shrimp" type="Control" parent="World/TalkView" unique_id=75572187]
 anchors_preset = 0
 offset_left = 1360.0
 offset_top = 360.0
@@ -99,7 +104,7 @@ art_path = "res://assets/ui/shrimp"
 placeholder_color = Color(0.918, 0.416, 0.208, 1)
 placeholder_text = "Shrimp"
 
-[node name="CounterBackdrop" type="Control" parent="World/TalkView"]
+[node name="CounterBackdrop" type="Control" parent="World/TalkView" unique_id=1986718924]
 anchors_preset = 0
 offset_top = 760.0
 offset_right = 1920.0
@@ -107,7 +112,7 @@ offset_bottom = 1080.0
 mouse_filter = 2
 script = ExtResource("12_counter")
 
-[node name="Counter" type="Control" parent="World/TalkView"]
+[node name="Counter" type="Control" parent="World/TalkView" unique_id=1732791469]
 anchors_preset = 0
 offset_top = 760.0
 offset_right = 1920.0
@@ -119,35 +124,35 @@ placeholder_color = Color(0, 0, 0, 0)
 placeholder_border_width = 0
 stretch = 0
 
-[node name="Customer" parent="World/TalkView" instance=ExtResource("3_customer")]
+[node name="Customer" parent="World/TalkView" unique_id=711789785 instance=ExtResource("3_customer")]
 anchors_preset = 0
 offset_left = 140.0
 offset_top = 568.0
 offset_right = 652.0
 offset_bottom = 1080.0
 
-[node name="CustomerBubble" parent="World/TalkView" instance=ExtResource("4_bubble")]
+[node name="CustomerBubble" parent="World/TalkView" unique_id=838447304 instance=ExtResource("4_bubble")]
 layout_mode = 0
 offset_left = 600.0
 offset_top = 150.0
 offset_right = 1460.0
 offset_bottom = 480.0
 
-[node name="ShrimpBox" parent="World/TalkView" instance=ExtResource("5_shrimpbox")]
+[node name="ShrimpBox" parent="World/TalkView" unique_id=287160200 instance=ExtResource("5_shrimpbox")]
 layout_mode = 0
 offset_left = 980.0
 offset_top = 100.0
 offset_right = 1840.0
 offset_bottom = 340.0
 
-[node name="ReviewPopup" parent="World/TalkView" instance=ExtResource("6_review")]
+[node name="ReviewPopup" parent="World/TalkView" unique_id=1706122524 instance=ExtResource("6_review")]
 anchors_preset = 0
 offset_left = 600.0
 offset_top = 150.0
 offset_right = 1460.0
 offset_bottom = 480.0
 
-[node name="TalkHint" type="Label" parent="World/TalkView"]
+[node name="TalkHint" type="Label" parent="World/TalkView" unique_id=382077333]
 layout_mode = 0
 offset_left = 700.0
 offset_top = 1020.0
@@ -161,14 +166,14 @@ text = "click / space: next      tab: skip to the bar"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="BarView" type="Control" parent="World"]
+[node name="BarView" type="Control" parent="World" unique_id=747738565]
 anchors_preset = 0
 offset_top = 1080.0
-offset_right = 3840.0
+offset_right = 7680.0
 offset_bottom = 2160.0
 mouse_filter = 2
 
-[node name="Backdrop" type="Control" parent="World/BarView"]
+[node name="Backdrop" type="Control" parent="World/BarView" unique_id=20423857]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -178,11 +183,11 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("11_backdrop")
 neon_text = ""
-lamp_xs = PackedFloat32Array(300, 1100, 1900, 2700, 3500)
+lamp_xs = PackedFloat32Array(300, 1100, 1900, 2700, 3500, 4300, 5100, 5900, 6700, 7500)
 shelf_ys = PackedFloat32Array(170, 390)
 bottle_seed = 21
 
-[node name="Background" type="Control" parent="World/BarView"]
+[node name="Background" type="Control" parent="World/BarView" unique_id=1101625951]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -196,18 +201,18 @@ placeholder_color = Color(0, 0, 0, 0)
 placeholder_border_width = 0
 stretch = 0
 
-[node name="CounterBackdrop" type="Control" parent="World/BarView"]
+[node name="CounterBackdrop" type="Control" parent="World/BarView" unique_id=1074394673]
 anchors_preset = 0
-offset_top = 640.0
-offset_right = 3840.0
+offset_top = 540.0
+offset_right = 7680.0
 offset_bottom = 1080.0
 mouse_filter = 2
 script = ExtResource("12_counter")
 
-[node name="Counter" type="Control" parent="World/BarView"]
+[node name="Counter" type="Control" parent="World/BarView" unique_id=1410859125]
 anchors_preset = 0
-offset_top = 640.0
-offset_right = 3840.0
+offset_top = 540.0
+offset_right = 7680.0
 offset_bottom = 1080.0
 mouse_filter = 2
 script = ExtResource("2_art")
@@ -216,44 +221,103 @@ placeholder_color = Color(0, 0, 0, 0)
 placeholder_border_width = 0
 stretch = 0
 
-[node name="CoffeeMachine" type="Control" parent="World/BarView"]
+[node name="StationDividers" type="Control" parent="World/BarView" unique_id=778327384]
 anchors_preset = 0
-offset_left = 2178.0
-offset_top = 384.0
-offset_right = 2434.0
+offset_right = 7680.0
+offset_bottom = 1080.0
+mouse_filter = 2
+script = ExtResource("19_dividers")
+boundaries = PackedFloat32Array(1920, 3840, 5760)
+top_y = 96.0
+counter_y = 548.0
+
+[node name="StationSign1" type="Label" parent="World/BarView" unique_id=1274588714]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 200.0
+offset_right = 1220.0
+offset_bottom = 250.0
+theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 0.62)
+theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 0.9)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 34
+text = "CUPS ONLY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StationSign2" type="Label" parent="World/BarView" unique_id=1213785929]
+layout_mode = 0
+offset_left = 2700.0
+offset_top = 200.0
+offset_right = 3220.0
+offset_bottom = 250.0
+theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 0.62)
+theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 0.9)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 34
+text = "COLD CANS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StationSign3" type="Label" parent="World/BarView" unique_id=1106479192]
+layout_mode = 0
+offset_left = 4740.0
+offset_top = 200.0
+offset_right = 5260.0
+offset_bottom = 250.0
+theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 0.62)
+theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 0.9)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 34
+text = "BREW & CREAM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StationSign4" type="Label" parent="World/BarView" unique_id=593049016]
+layout_mode = 0
+offset_left = 6660.0
+offset_top = 200.0
+offset_right = 7180.0
+offset_bottom = 250.0
+theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 0.62)
+theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 0.9)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 34
+text = "JARS & SAUCES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoffeeShadow" type="Control" parent="World/BarView" unique_id=1314900049]
+anchors_preset = 0
+offset_left = 3955.0
+offset_top = 596.0
+offset_right = 4245.0
+offset_bottom = 648.0
+mouse_filter = 2
+script = ExtResource("20_shadow")
+
+[node name="CoffeeMachine" type="Control" parent="World/BarView" unique_id=1702523901]
+anchors_preset = 0
+offset_left = 3940.0
+offset_top = 320.0
+offset_right = 4260.0
 offset_bottom = 640.0
 mouse_filter = 2
-script = ExtResource("2_art")
-art_path = "res://assets/ui/coffee_machine"
-placeholder_color = Color(0.369, 0.325, 0.294, 1)
-placeholder_border_color = Color(0.051, 0.016, 0.008, 1)
-placeholder_corner_radius = 20
-placeholder_shadow = 10
+script = ExtResource("21_machine")
 
-[node name="CupStack" type="Button" parent="World/BarView"]
+[node name="CupStack" type="Button" parent="World/BarView" unique_id=1860432518]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 410.0
-offset_right = 270.0
-offset_bottom = 640.0
+offset_left = 800.0
+offset_top = 340.0
+offset_right = 1080.0
+offset_bottom = 700.0
 script = ExtResource("15_pickup")
 art_path = "res://assets/cup/stack"
 label_text = "Cups (free)"
+art_size = Vector2(200, 200)
 outline_color = Color(1, 1, 1, 1)
 
-[node name="IceChest" type="Button" parent="World/BarView"]
-layout_mode = 0
-offset_left = 300.0
-offset_top = 440.0
-offset_right = 480.0
-offset_bottom = 640.0
-script = ExtResource("15_pickup")
-art_path = "res://assets/ui/ice_chest"
-placeholder_color = Color(0.973, 0.843, 0.843, 1)
-placeholder_text = "ICE"
-label_text = "Ice (free)"
-
-[node name="Shelf" type="Control" parent="World/BarView"]
+[node name="Shelf" type="Control" parent="World/BarView" unique_id=954560321]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -262,130 +326,130 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="WhiteMonster" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+[node name="WhiteMonster" parent="World/BarView/Shelf" unique_id=786706161 instance=ExtResource("7_dispenser")]
 layout_mode = 0
-offset_left = 560.0
-offset_top = 440.0
-offset_right = 720.0
-offset_bottom = 640.0
+offset_left = 2420.0
+offset_top = 420.0
+offset_right = 2660.0
+offset_bottom = 720.0
 ingredient = ExtResource("ing_white_monster")
 
-[node name="DietCoke" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+[node name="DietCoke" parent="World/BarView/Shelf" unique_id=357917403 instance=ExtResource("7_dispenser")]
 layout_mode = 0
-offset_left = 740.0
-offset_top = 440.0
-offset_right = 900.0
-offset_bottom = 640.0
+offset_left = 2700.0
+offset_top = 420.0
+offset_right = 2940.0
+offset_bottom = 720.0
 ingredient = ExtResource("ing_diet_coke")
 
-[node name="RingtoneBall" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+[node name="RingtoneBall" parent="World/BarView/Shelf" unique_id=94098182 instance=ExtResource("7_dispenser")]
 layout_mode = 0
-offset_left = 920.0
-offset_top = 440.0
-offset_right = 1080.0
-offset_bottom = 640.0
+offset_left = 2980.0
+offset_top = 420.0
+offset_right = 3220.0
+offset_bottom = 720.0
 ingredient = ExtResource("ing_ringtone_ball")
 
-[node name="BudDarks" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-layout_mode = 0
-offset_left = 1100.0
-offset_top = 440.0
-offset_right = 1260.0
-offset_bottom = 640.0
-ingredient = ExtResource("ing_bud_darks")
-
-[node name="Sugar" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-layout_mode = 0
-offset_left = 1450.0
-offset_top = 440.0
-offset_right = 1610.0
-offset_bottom = 640.0
-ingredient = ExtResource("ing_sugar")
-
-[node name="Wasabi" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-layout_mode = 0
-offset_left = 1630.0
-offset_top = 440.0
-offset_right = 1790.0
-offset_bottom = 640.0
-ingredient = ExtResource("ing_wasabi")
-
-[node name="Mayo" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-layout_mode = 0
-offset_left = 1810.0
-offset_top = 440.0
-offset_right = 1970.0
-offset_bottom = 640.0
-ingredient = ExtResource("ing_mayo")
-
-[node name="Espresso" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-layout_mode = 0
-offset_left = 1995.0
-offset_top = 440.0
-offset_right = 2155.0
-offset_bottom = 640.0
-ingredient = ExtResource("ing_espresso")
-
-[node name="Matcha" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-layout_mode = 0
-offset_left = 2457.0
-offset_top = 440.0
-offset_right = 2617.0
-offset_bottom = 640.0
-ingredient = ExtResource("ing_matcha")
-
-[node name="Milk" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-layout_mode = 0
-offset_left = 2640.0
-offset_top = 440.0
-offset_right = 2800.0
-offset_bottom = 640.0
-ingredient = ExtResource("ing_milk")
-
-[node name="ProteinShake" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-layout_mode = 0
-offset_left = 2820.0
-offset_top = 440.0
-offset_right = 2980.0
-offset_bottom = 640.0
-ingredient = ExtResource("ing_protein_shake")
-
-[node name="IceCream" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
-layout_mode = 0
-offset_left = 3000.0
-offset_top = 440.0
-offset_right = 3160.0
-offset_bottom = 640.0
-ingredient = ExtResource("ing_ice_cream")
-
-[node name="SoySauce" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+[node name="BudDarks" parent="World/BarView/Shelf" unique_id=1217195786 instance=ExtResource("7_dispenser")]
 layout_mode = 0
 offset_left = 3260.0
-offset_top = 440.0
-offset_right = 3420.0
-offset_bottom = 640.0
+offset_top = 420.0
+offset_right = 3500.0
+offset_bottom = 720.0
+ingredient = ExtResource("ing_bud_darks")
+
+[node name="Sugar" parent="World/BarView/Shelf" unique_id=49036115 instance=ExtResource("7_dispenser")]
+layout_mode = 0
+offset_left = 6240.0
+offset_top = 420.0
+offset_right = 6480.0
+offset_bottom = 720.0
+ingredient = ExtResource("ing_sugar")
+
+[node name="Wasabi" parent="World/BarView/Shelf" unique_id=417071064 instance=ExtResource("7_dispenser")]
+layout_mode = 0
+offset_left = 6520.0
+offset_top = 420.0
+offset_right = 6760.0
+offset_bottom = 720.0
+ingredient = ExtResource("ing_wasabi")
+
+[node name="Mayo" parent="World/BarView/Shelf" unique_id=2130747155 instance=ExtResource("7_dispenser")]
+layout_mode = 0
+offset_left = 6800.0
+offset_top = 420.0
+offset_right = 7040.0
+offset_bottom = 720.0
+ingredient = ExtResource("ing_mayo")
+
+[node name="Espresso" parent="World/BarView/Shelf" unique_id=1567953218 instance=ExtResource("7_dispenser")]
+layout_mode = 0
+offset_left = 4320.0
+offset_top = 420.0
+offset_right = 4560.0
+offset_bottom = 720.0
+ingredient = ExtResource("ing_espresso")
+
+[node name="Matcha" parent="World/BarView/Shelf" unique_id=827027904 instance=ExtResource("7_dispenser")]
+layout_mode = 0
+offset_left = 4600.0
+offset_top = 420.0
+offset_right = 4840.0
+offset_bottom = 720.0
+ingredient = ExtResource("ing_matcha")
+
+[node name="Milk" parent="World/BarView/Shelf" unique_id=1642476063 instance=ExtResource("7_dispenser")]
+layout_mode = 0
+offset_left = 4880.0
+offset_top = 420.0
+offset_right = 5120.0
+offset_bottom = 720.0
+ingredient = ExtResource("ing_milk")
+
+[node name="ProteinShake" parent="World/BarView/Shelf" unique_id=1044087949 instance=ExtResource("7_dispenser")]
+layout_mode = 0
+offset_left = 5160.0
+offset_top = 420.0
+offset_right = 5400.0
+offset_bottom = 720.0
+ingredient = ExtResource("ing_protein_shake")
+
+[node name="IceCream" parent="World/BarView/Shelf" unique_id=1558266245 instance=ExtResource("7_dispenser")]
+layout_mode = 0
+offset_left = 5440.0
+offset_top = 420.0
+offset_right = 5680.0
+offset_bottom = 720.0
+ingredient = ExtResource("ing_ice_cream")
+
+[node name="SoySauce" parent="World/BarView/Shelf" unique_id=1239910225 instance=ExtResource("7_dispenser")]
+layout_mode = 0
+offset_left = 7080.0
+offset_top = 420.0
+offset_right = 7320.0
+offset_bottom = 720.0
 ingredient = ExtResource("ing_soy_sauce")
 
-[node name="PickleJuice" parent="World/BarView/Shelf" instance=ExtResource("7_dispenser")]
+[node name="PickleJuice" parent="World/BarView/Shelf" unique_id=67247558 instance=ExtResource("7_dispenser")]
 layout_mode = 0
-offset_left = 3440.0
-offset_top = 440.0
-offset_right = 3600.0
-offset_bottom = 640.0
+offset_left = 7360.0
+offset_top = 420.0
+offset_right = 7600.0
+offset_bottom = 720.0
 ingredient = ExtResource("ing_pickle_juice")
 
-[node name="FxWorld" type="Control" parent="World"]
+[node name="FxWorld" type="Control" parent="World" unique_id=520732964]
 anchors_preset = 0
-offset_right = 3840.0
+offset_right = 7680.0
 offset_bottom = 2160.0
 mouse_filter = 2
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=618302245]
 layer = 5
 
-[node name="HUD" parent="UI" instance=ExtResource("8_hud")]
+[node name="HUD" parent="UI" unique_id=1976576950 instance=ExtResource("8_hud")]
 
-[node name="BarUI" type="Control" parent="UI"]
+[node name="BarUI" type="Control" parent="UI" unique_id=1770120359]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -394,43 +458,81 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Ticket" parent="UI/BarUI" instance=ExtResource("13_ticket")]
+[node name="Ticket" parent="UI/BarUI" unique_id=1225477544 instance=ExtResource("13_ticket")]
 layout_mode = 0
 offset_left = 1211.0
 offset_top = 85.0
 offset_right = 1904.0
 offset_bottom = 382.0
 
-[node name="CupTray" parent="UI/BarUI" instance=ExtResource("14_tray")]
-anchors_preset = 0
-offset_left = 16.0
-offset_top = 634.0
-offset_right = 566.0
-offset_bottom = 1064.0
+[node name="CupTray" parent="UI/BarUI" unique_id=1864009584 instance=ExtResource("14_tray")]
+layout_mode = 1
 
-[node name="Scroller" type="Control" parent="UI/BarUI"]
-anchors_preset = 0
-offset_left = 600.0
-offset_top = 1030.0
-offset_right = 1900.0
-offset_bottom = 1060.0
-script = ExtResource("16_scroller")
-
-[node name="ScrollHint" type="Label" parent="UI/BarUI"]
+[node name="StationTitle" type="Label" parent="UI/BarUI" unique_id=635002147]
 layout_mode = 0
-offset_left = 600.0
-offset_top = 984.0
-offset_right = 1900.0
-offset_bottom = 1026.0
-theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 0.85)
+offset_left = 500.0
+offset_top = 72.0
+offset_right = 1200.0
+offset_bottom = 124.0
+theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 1)
 theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 26
-text = "A / D, arrow keys, mouse wheel or drag to move along the bar"
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 40
+text = "STATION 1 / 4   ·   CUPS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Toast" type="Label" parent="UI"]
+[node name="StationSubtitle" type="Label" parent="UI/BarUI" unique_id=1335511801]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 126.0
+offset_right = 1180.0
+offset_bottom = 156.0
+theme_override_colors/font_color = Color(0.984, 0.937, 0.557, 0.72)
+theme_override_colors/font_outline_color = Color(0.051, 0.016, 0.008, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+text = "pick a cup · cups only"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StationDots" type="Control" parent="UI/BarUI" unique_id=921289287]
+anchors_preset = 0
+offset_left = 750.0
+offset_top = 158.0
+offset_right = 950.0
+offset_bottom = 186.0
+mouse_filter = 2
+script = ExtResource("18_dots")
+count = 4
+
+[node name="ArrowLeft" type="Button" parent="UI/BarUI" unique_id=916579186]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 410.0
+offset_right = 128.0
+offset_bottom = 538.0
+script = ExtResource("17_arrow")
+direction = -1
+key_hint = "A"
+
+[node name="ArrowRight" type="Button" parent="UI/BarUI" unique_id=445336982]
+layout_mode = 0
+offset_left = 1792.0
+offset_top = 410.0
+offset_right = 1896.0
+offset_bottom = 538.0
+script = ExtResource("17_arrow")
+
+[node name="Scroller" type="Control" parent="UI/BarUI" unique_id=1749419944]
+anchors_preset = 0
+offset_left = 660.0
+offset_top = 1040.0
+offset_right = 1260.0
+offset_bottom = 1062.0
+script = ExtResource("16_scroller")
+
+[node name="Toast" type="Label" parent="UI" unique_id=1476446542]
 offset_left = 360.0
 offset_top = 466.0
 offset_right = 1560.0
@@ -442,7 +544,7 @@ theme_override_font_sizes/font_size = 57
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FxUI" type="Control" parent="UI"]
+[node name="FxUI" type="Control" parent="UI" unique_id=1632503833]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -451,10 +553,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="GreyscaleLayer" type="CanvasLayer" parent="."]
+[node name="GreyscaleLayer" type="CanvasLayer" parent="." unique_id=1173523502]
 layer = 10
 
-[node name="Greyscale" type="ColorRect" parent="GreyscaleLayer"]
+[node name="Greyscale" type="ColorRect" parent="GreyscaleLayer" unique_id=878884161]
 material = SubResource("ShaderMaterial_greyscale")
 anchors_preset = 15
 anchor_right = 1.0
@@ -463,7 +565,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="GameOverLayer" type="CanvasLayer" parent="."]
+[node name="GameOverLayer" type="CanvasLayer" parent="." unique_id=1678708860]
 layer = 20
 
-[node name="GameOver" parent="GameOverLayer" instance=ExtResource("9_game_over")]
+[node name="GameOver" parent="GameOverLayer" unique_id=1570212365 instance=ExtResource("9_game_over")]

@@ -19,8 +19,8 @@ Until a file exists, the game shows a colored placeholder box in its place.
 | `sugar.png` | Sugar |
 | `wasabi.png` | Wasabi |
 | `mayo.png` | Mayo |
-| `espresso.png` | Espresso (sits on the coffee machine) |
-| `matcha.png` | Matcha (sits on the coffee machine) |
+| `espresso.png` | Espresso spoon (drag it into the coffee machine) |
+| `matcha.png` | Matcha spoon (drag it into the coffee machine) |
 | `milk.png` | Milk |
 | `protein_shake.png` | Protein Shake |
 | `ice_cream.png` | Ice Cream |
@@ -52,9 +52,7 @@ The same images show up at 64×64 in the cup tray (what you've poured).
 | `35.png` | 1–2 pours |
 | `65.png` | 3–4 pours |
 | `full.png` | 5–6 pours |
-| `<level>_ice.png` | Ice added, e.g. `65_ice.png` (falls back to the plain level if missing) |
-| `<level>_sugar_rim.png` | Sugar in the drink, e.g. `full_sugar_rim.png` |
-| `<level>_ice_sugar_rim.png` | Both |
+| `<level>_sugar_rim.png` | Sugar in the drink, e.g. `full_sugar_rim.png` (falls back to the plain level if missing) |
 | `shaker_lid.png` | Optional: the cap shown while shaking (about 36×18 art px) |
 
 **Draw the liquid in neutral grey** (like the current cups). The game tints any grey pixel to the drink's color and keeps your shading. The outline and white glass stay as drawn.
@@ -68,8 +66,7 @@ The same images show up at 64×64 in the cup tray (what you've poured).
 | `bar_background.png` | Bar-view back wall (stretched). Until then, code-drawn shelves and lamps | 3840×1080 (2 screens wide, scrolls) |
 | `bar_counter.png` | Bar-view counter the ingredients stand on (stretched) | 3840×440 |
 | `shrimp.png` | The shrimp bartender | 512×512, right side, bottom behind the counter |
-| `coffee_machine.png` | Coffee & matcha maker behind Espresso/Matcha (stretched) | 380×232 |
-| `ice_chest.png` | Ice chest on the bar (click for free ice) | 128×128 |
+| `coffee_machine.png` | Coffee & matcha maker, between the two spoons. Shown at 4×; if the art changes, the group head / screen / drip tray spots are constants at the top of `scripts/ui/coffee_machine.gd` | 64×64 |
 | `speech_bubble.png` | Customer's dialogue bubble + review card. 9-sliced at 5× (corners + tail stay crisp, edges stretch); tail goes bottom-left toward the customer | 860×330 (172×66 art px) |
 | `shrimp_box.png` | Shrimp's dialogue box + the order ticket. 9-sliced at 5× | 860×240 and 470×215 |
 | `hud_bar.png` | Top stats bar background (stretched) | 1920×64 |
@@ -90,8 +87,9 @@ The same images show up at 64×64 in the cup tray (what you've poured).
 | `talk.ogg` / `talk_shrimp.ogg` | A customer / shrimp line appears |
 | `whoosh.ogg` | Camera pans between the talk view and the bar |
 | `cup.ogg` | You grab a cup |
-| `ice.ogg` | You toggle ice |
 | `pour.ogg` | You pour an ingredient |
+| `spoon.ogg` | You pick up the Espresso/Matcha spoon |
+| `brew.ogg` | The spoon locks into the machine and it starts brewing |
 | `brew_done.ogg` | Espresso/Matcha finishes brewing |
 | `shake.ogg` / `shake_done.ogg` | You start shaking / the drink is mixed |
 | `denied.ogg` | Can't pour (no cup, broke, or cup full) |

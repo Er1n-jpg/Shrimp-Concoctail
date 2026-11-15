@@ -1,7 +1,7 @@
 class_name Cup
 extends Control
 ## The drink in the cup tray, drawn with the cup sprites in res://assets/cup/:
-##   empty, 35, 65, full  (+ optional _ice and _sugar_rim variants, e.g. full_ice_sugar_rim)
+##   empty, 35, 65, full  (+ optional _sugar_rim variants, e.g. full_sugar_rim)
 ## Missing variants fall back to the closest one. The grey liquid in the art is tinted
 ## to the drink's color by shaders/liquid_tint.gdshader: the last thing poured until
 ## it's shaken, then the blended mix.
@@ -11,6 +11,8 @@ signal changed
 ## Pours at or below each count use that fill sprite.
 const FILL_LEVELS := [[0, "empty"], [2, "35"], [4, "65"], [999, "full"]]
 const UNMIXED_GREY := Color(0.41, 0.41, 0.41)
+## Resting y offset of the shaker lid, above the top of the cup.
+const LID_REST_Y := -33.0
 
 ## Whether there's a cup in the tray at all (you grab one from the stack first).
 var present: bool = false:
@@ -23,10 +25,10 @@ var layers: Array[IngredientData] = []
 var cost: int = 0
 ## Pours that are paid for but still brewing.
 var pending: int = 0
-var ice: bool = false
 var shaken: bool = false
 
 var _tint_tween: Tween
+var _highlight_tween: Tween
 var _droplet_timer := 0.0
 var _shake_time := 0.0
 
@@ -81,13 +83,7 @@ func clear() -> void:
 	layers.clear()
 	cost = 0
 	pending = 0
-	ice = false
 	shaken = false
-	_changed()
-
-
-func set_ice(on: bool) -> void:
-	ice = on
 	_changed()
 
 
@@ -111,10 +107,18 @@ func mix_color() -> Color:
 func shake_step(delta: float, progress: float) -> void:
 	_lid.visible = true
 	_shake_time += delta
-	var strength := lerpf(0.5, 1.0, progress)
-	rotation = sin(_shake_time * 38.0) * 0.22 * strength
-	_sprite.position.y = absf(sin(_shake_time * 19.0)) * -14.0 * strength
-	_lid.position.y = _sprite.position.y - 26.0
+	var strength := lerpf(0.55, 1.0, progress)
+	rotation = sin(_shake_time * 38.0) * 0.24 * strength
+	_sprite.position.y = absf(sin(_shake_time * 19.0)) * -17.0 * strength
+	_lid.position.y = _sprite.position.y + LID_REST_Y
+	# The drink visibly blends while the cup is being shaken.
+	if _tint_tween != null:
+		_tint_tween.kill()
+		_tint_tween = null
+	var mat := _sprite.material as ShaderMaterial
+	if mat != null and not layers.is_empty():
+		var base: Color = layers.back().color
+		mat.set_shader_parameter("tint", base.lerp(mix_color(), clampf(progress * 1.45, 0.0, 1.0)))
 	_droplet_timer -= delta
 	if _droplet_timer <= 0.0:
 		_droplet_timer = 0.05
@@ -126,7 +130,17 @@ func stop_shake() -> void:
 	var tween := create_tween().set_parallel()
 	tween.tween_property(self, "rotation", 0.0, 0.12)
 	tween.tween_property(_sprite, "position:y", 0.0, 0.12)
-	tween.tween_property(_lid, "position:y", -26.0, 0.12)
+	tween.tween_property(_lid, "position:y", LID_REST_Y, 0.12)
+
+
+## Highlight the cup while a dragged ingredient is hovering over it.
+func set_drop_highlight(on: bool) -> void:
+	if not present:
+		return
+	if _highlight_tween != null:
+		_highlight_tween.kill()
+	_highlight_tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_highlight_tween.tween_property(self, "scale", Vector2(1.045, 1.045) if on else Vector2.ONE, 0.14)
 
 
 func finish_shake() -> void:
@@ -134,12 +148,12 @@ func finish_shake() -> void:
 	shaken = true
 	# Lid pops off, sparkles, and the liquid blends into the mix color.
 	var lid_tween := create_tween()
-	lid_tween.tween_property(_lid, "position:y", -110.0, 0.18).set_ease(Tween.EASE_OUT)
+	lid_tween.tween_property(_lid, "position:y", LID_REST_Y - 84.0, 0.18).set_ease(Tween.EASE_OUT)
 	lid_tween.parallel().tween_property(_lid, "modulate:a", 0.0, 0.25)
 	lid_tween.tween_callback(func() -> void:
 		_lid.visible = false
 		_lid.modulate.a = 1.0
-		_lid.position.y = -26.0)
+		_lid.position.y = LID_REST_Y)
 	for i in 14:
 		_spawn_droplet(Palette.BUTTER, 1.6)
 	_changed()
@@ -185,13 +199,8 @@ func _pick_texture() -> Texture2D:
 			break
 	var has_sugar := contents().has("sugar")
 	var candidates: Array[String] = []
-	if level != "empty":
-		if ice and has_sugar:
-			candidates.append(level + "_ice_sugar_rim")
-		if has_sugar:
-			candidates.append(level + "_sugar_rim")
-		if ice:
-			candidates.append(level + "_ice")
+	if level != "empty" and has_sugar:
+		candidates.append(level + "_sugar_rim")
 	candidates.append(level)
 	for name in candidates:
 		var tex := Art.load_texture(Art.ROOT + "cup/" + name)
