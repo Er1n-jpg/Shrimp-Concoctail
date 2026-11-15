@@ -34,6 +34,7 @@
 [ext_resource type="Resource" path="res://data/ingredients/sugar.tres" id="ing_sugar"]
 [ext_resource type="Resource" path="res://data/ingredients/wasabi.tres" id="ing_wasabi"]
 [ext_resource type="Resource" path="res://data/ingredients/white_monster.tres" id="ing_white_monster"]
+[ext_resource type="Script" path="res://scripts/ui/coffee_machine.gd" id="21_machine"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_greyscale"]
 shader = ExtResource("10_greyscale")
@@ -297,17 +298,12 @@ script = ExtResource("20_shadow")
 
 [node name="CoffeeMachine" type="Control" parent="World/BarView" unique_id=1702523901]
 anchors_preset = 0
-offset_left = 3930.0
-offset_top = 260.0
-offset_right = 4270.0
+offset_left = 3940.0
+offset_top = 320.0
+offset_right = 4260.0
 offset_bottom = 640.0
 mouse_filter = 2
-script = ExtResource("2_art")
-art_path = "res://assets/ui/coffee_machine"
-placeholder_color = Color(0.369, 0.325, 0.294, 1)
-placeholder_border_color = Color(0.051, 0.016, 0.008, 1)
-placeholder_corner_radius = 20
-placeholder_shadow = 10
+script = ExtResource("21_machine")
 
 [node name="CupStack" type="Button" parent="World/BarView" unique_id=1860432518]
 layout_mode = 0

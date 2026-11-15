@@ -16,7 +16,7 @@ REVIEW  customer reacts, 1–5★ review, paid (base price × star multiplier) �
 
 **Talk view** (top): the customer on the left talks in the tailed bubble, and the shrimp answers in its own box. Click or Space advances, Tab skips straight to the bar. Each customer has a few conversations (picked at random); the last line is the order.
 
-**Bar view** (below): 3840px wide (2 screens), scrolls with A/D, arrow keys, mouse wheel, dragging empty space, or resting the mouse at a screen edge. A scroll bar shows where you are. Left to right: cup stack + ice chest → cans → jars/bowls → coffee & matcha machine → dairy → sauces, with decorative bottles on the back shelves.
+**Bar view** (below): 3840px wide (2 screens), scrolls with A/D, arrow keys, mouse wheel, dragging empty space, or resting the mouse at a screen edge. A scroll bar shows where you are. Left to right: cup stack → cans → jars/bowls → coffee & matcha machine → dairy → sauces, with decorative bottles on the back shelves.
 
 Pinned on screen while at the bar:
 - **Order ticket** (top-right): what the customer said (never the recipe, so you have to work it out), the Vibecoder's Ask button with what it revealed, and the **patience bar**. Patience only runs at the bar.
@@ -24,11 +24,11 @@ Pinned on screen while at the bar:
 
 Steps:
 1. **Drag a cup** out of the stack down to the holder (free, one per customer). Ingredients are locked until you do.
-2. **Pick ingredients.** Each click pours one (paid immediately); the item flies into the cup. Optional free **ice** from the ice chest (looks only, not scored).
+2. **Pick ingredients.** Each click pours one (paid immediately); the item flies into the cup. Click it, or drag it onto the cup. Espresso and Matcha are different: drag the spoon into the coffee machine (see below).
 3. **Shake:** hold SHAKE (or S) for 1s. The cup wiggles with a shaker lid and splashes, then the liquid blends into the mix color. Adding anything after shaking means shaking again.
 4. **Serve.** Only allowed once shaken.
 
-The cup shows fill level (empty / 35% / 65% / full), ice, and a sugar rim (sugar in a full drink), with the liquid tinted to the last thing poured, then to the blended mix once shaken.
+The cup shows fill level (empty / 35% / 65% / full) and a sugar rim (sugar in a full drink), with the liquid tinted to the last thing poured, then to the blended mix once shaken.
 
 **Keyboard:** Space/Enter = next line / serve / skip review, Tab = skip talk, S (hold) = shake, X/Backspace = trash, Q = ask (Vibecoder), A/D or arrows = scroll.
 
@@ -105,11 +105,11 @@ Every **5 customers served**:
 | Espresso ☕ | $4 | caffeine (from machine) |
 | Matcha 🍵 | $5 | green, caffeine (from machine) |
 
-**Coffee & Matcha Maker:** Espresso and Matcha are two buttons sitting on the machine. Each one brews for 1s before it lands in the cup.
+**Coffee & Matcha Maker:** Espresso and Matcha are spoons (portafilters) on either side of the machine. You can't click them: grab one and drag it into the machine. You pay when it goes in, the spoon locks in under the group head, and the screen on the front fills while it brews (`brew_time`, 1s). Then the shot drips into your cup and the spoon goes back on the counter. The machine makes one shot at a time. Trashing the cup mid-brew cancels the shot and the money is gone.
 
 ### Counter layout (left → right, from the sketch)
 
-Cup → ice chest (cans: White Monster, Diet Coke, Ringtone Ball, Bud Darks) → jars (Sugar, Wasabi, Mayo) → Coffee & Matcha Maker → Milk, Protein Shake → Ice cream → Soy Sauce, Pickle Juice
+Cup → ice chest (cans: White Monster, Diet Coke, Ringtone Ball, Bud Darks) → jars (Sugar, Wasabi, Mayo) → Espresso spoon, Coffee & Matcha Maker, Matcha spoon → Milk, Protein Shake → Ice cream → Soy Sauce, Pickle Juice
 
 ## Scoring (`DrinkJudge`)
 
@@ -220,9 +220,9 @@ Each customer has 2 conversations in `data/customers/*.tres` (`conversations`), 
 - `speech_bubble.tscn` / `shrimp_box.tscn`: dialogue boxes (typewriter text)
 - `order_ticket.tscn`: pinned recipe ticket + Ask button + patience bar
 - `cup_tray.tscn`: pinned cup + contents + Shake/Serve/Trash
-- `pickup_button.gd`: cup stack and ice chest
+- `pickup_button.gd`: cup stack
 - `review_popup.tscn`: stars, review line, payout breakdown
-- `cup.tscn`: fill-level cup sprite with tinted liquid, ice, sugar rim, shake animation
+- `cup.tscn`: fill-level cup sprite with tinted liquid, sugar rim, shake animation
 - `dispenser.tscn`: one clickable ingredient with its price tag (15 under `World/BarView/Shelf` in main)
 - `game_over.tscn`: survived count, best, retry
 - Greyscale: a CanvasLayer in main with `shaders/greyscale.gdshader`
